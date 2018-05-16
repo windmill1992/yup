@@ -1,0 +1,1456 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="712ba97b-f0aa-4d96-847b-6af86b892aeb" name="Default" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="case.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/api/case.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="15" lean-forward="false" selection-start-line="6" selection-start-column="15" selection-end-line="6" selection-end-column="15" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="baseUrl.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/api/baseUrl.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" column="28" lean-forward="false" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="case.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/views/view/case.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="9885">
+              <caret line="673" column="0" lean-forward="false" selection-start-line="673" selection-start-column="0" selection-end-line="673" selection-end-column="0" />
+              <folding>
+                <marker date="1510102404000" expanded="true" signature="6888:7683" ph="..." />
+                <marker date="1510102404000" expanded="true" signature="8315:24348" ph="{...}" />
+                <marker date="1510102404000" expanded="true" signature="9982:24251" ph="{...}" />
+                <marker date="1510102404000" expanded="true" signature="17080:17930" ph="{...}" />
+                <marker date="1510102404000" expanded="true" signature="17644:17915" ph="{&quot;name&quot;: '事件'...}" />
+                <marker date="1510102404000" expanded="true" signature="17783:17897" ph="/*...*/" />
+                <marker date="1510102404000" expanded="true" signature="17991:18766" ph="{...}" />
+                <marker date="1510102404000" expanded="true" signature="18052:18279" ph="{&quot;dossierName&quot;: ''...}" />
+                <marker date="1510102404000" expanded="true" signature="18421:18750" ph="{...}" />
+                <marker date="1510102404000" expanded="true" signature="18472:18638" ph="{...}" />
+                <marker date="1510102404000" expanded="true" signature="18793:19523" ph="{...}" />
+                <marker date="1510102404000" expanded="true" signature="18822:19036" ph="{&quot;dossierName&quot;: ''...}" />
+                <marker date="1510102404000" expanded="true" signature="19178:19507" ph="{...}" />
+                <marker date="1510102404000" expanded="true" signature="19229:19395" ph="{...}" />
+                <marker date="1510102404000" expanded="true" signature="19588:19787" ph="{...}" />
+                <marker date="1510102404000" expanded="true" signature="19858:20700" ph="{...}" />
+                <marker date="1510102404000" expanded="true" signature="19909:19964" ph="{&quot;type&quot;: 'warning'...}" />
+                <marker date="1510102404000" expanded="true" signature="19977:20650" ph="{...}" />
+                <marker date="1510102404000" expanded="true" signature="20197:20629" ph="{...}" />
+                <marker date="1510102404000" expanded="true" signature="20251:20607" ph="{...}" />
+                <marker date="1510102404000" expanded="true" signature="20404:20532" ph="{&quot;message&quot;: '删除成功'...}" />
+                <marker date="1510102404000" expanded="true" signature="20664:20684" ph="{...}" />
+                <marker date="1510102404000" expanded="true" signature="20776:20943" ph="{...}" />
+                <marker date="1510102404000" expanded="true" signature="21018:21387" ph="{...}" />
+                <marker date="1510102404000" expanded="true" signature="21198:21372" ph="{&quot;categoryId&quot;: ''...}" />
+                <marker date="1510102404000" expanded="true" signature="21449:22448" ph="{...}" />
+                <marker date="1510102404000" expanded="true" signature="21510:22432" ph="{...}" />
+                <marker date="1510102404000" expanded="true" signature="21543:22414" ph="{...}" />
+                <marker date="1510102404000" expanded="true" signature="21614:22390" ph="{...}" />
+                <marker date="1510102404000" expanded="true" signature="21839:22070" ph="{...}" />
+                <marker date="1510102404000" expanded="true" signature="21942:22038" ph="{...}" />
+                <marker date="1510102404000" expanded="true" signature="22075:22364" ph="{...}" />
+                <marker date="1510102404000" expanded="true" signature="22235:22331" ph="{...}" />
+                <marker date="1510102404000" expanded="true" signature="22491:23064" ph="{...}" />
+                <marker date="1510102404000" expanded="true" signature="22580:23050" ph="{...}" />
+                <marker date="1510102404000" expanded="true" signature="22713:22890" ph="{&quot;caseId&quot;: ''...}" />
+                <marker date="1510102404000" expanded="true" signature="22926:23030" ph="{&quot;message&quot;: '提交成功'...}" />
+                <marker date="1510102404000" expanded="true" signature="23065:24240" ph="//..." />
+                <marker date="1510102404000" expanded="true" signature="24271:24342" ph="{...}" />
+                <marker date="1510102404000" expanded="true" signature="24374:24917" ph="..." />
+                <marker date="1510102404000" expanded="true" signature="24390:24420" ph="{...}" />
+                <marker date="1510102404000" expanded="true" signature="24434:24573" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="detail.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/views/view/detail.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="6465">
+              <caret line="435" column="44" lean-forward="false" selection-start-line="435" selection-start-column="44" selection-end-line="435" selection-end-column="44" />
+              <folding>
+                <marker date="1510107924000" expanded="true" signature="11508:11534" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="11508:11586" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="11508:11604" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="11508:11619" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="11508:19767" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="11508:20054" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="11508:20064" ph="..." />
+                <marker date="1510107924000" expanded="true" signature="11605:11619" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="11668:12132" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="11722:12116" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="11773:11855" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="11859:12049" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="11899:12025" ph="{&quot;message&quot;: res.data.resultMsg...}" />
+                <marker date="1510107924000" expanded="true" signature="12196:13019" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="12247:12302" ph="{&quot;type&quot;: 'warning'...}" />
+                <marker date="1510107924000" expanded="true" signature="12315:12969" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="12524:12948" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="12578:12926" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="12724:12852" ph="{&quot;message&quot;: '删除成功'...}" />
+                <marker date="1510107924000" expanded="true" signature="12983:13003" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="13088:13298" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="13356:14078" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="13447:13700" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="13545:13652" ph="{&quot;message&quot;: '请选择卷书名称'...}" />
+                <marker date="1510107924000" expanded="true" signature="13863:14062" ph="{&quot;dossierId&quot;: dossierId...}" />
+                <marker date="1510107924000" expanded="true" signature="14133:15252" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="14191:15236" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="14224:15218" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="14295:15194" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="14512:14735" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="14614:14703" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="14740:15108" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="14774:14923" ph="//..." />
+                <marker date="1510107924000" expanded="true" signature="14986:15075" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="15292:15401" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="15437:15927" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="15526:15913" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="15652:15753" ph="{&quot;detailId&quot;: ''...}" />
+                <marker date="1510107924000" expanded="true" signature="15789:15893" ph="{&quot;message&quot;: '提交成功'...}" />
+                <marker date="1510107924000" expanded="true" signature="15969:16018" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="16076:17036" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="16320:16375" ph="{&quot;type&quot;: 'warning'...}" />
+                <marker date="1510107924000" expanded="true" signature="16388:16986" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="16540:16964" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="16594:16942" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="16740:16868" ph="{&quot;message&quot;: '删除成功'...}" />
+                <marker date="1510107924000" expanded="true" signature="17000:17020" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="17085:18004" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="17114:17264" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="17282:17345" ph="//..." />
+                <marker date="1510107924000" expanded="true" signature="17401:17988" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="17452:17881" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="17903:17970" ph="//..." />
+                <marker date="1510107924000" expanded="true" signature="18038:18108" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="18156:18215" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="18268:18785" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="18365:18594" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="18401:18507" ph="{&quot;message&quot;: '文件上传成功'...}" />
+                <marker date="1510107924000" expanded="true" signature="18598:18770" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="18635:18749" ph="{&quot;message&quot;: response.resultMsg...}" />
+                <marker date="1510107924000" expanded="true" signature="18830:19052" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="18896:18991" ph="{&quot;message&quot;: err.message...}" />
+                <marker date="1510107924000" expanded="true" signature="19084:19134" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="19186:19757" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="19188:19381" ph="//..." />
+                <marker date="1510107924000" expanded="true" signature="19787:20048" ph="{...}" />
+                <marker date="1510107924000" expanded="true" signature="20080:20090" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="upload.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/views/view/upload.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="38" lean-forward="false" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="detail.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/api/detail.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="28" column="40" lean-forward="false" selection-start-line="28" selection-start-column="40" selection-end-line="28" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dossier.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/api/dossier.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="category.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/api/category.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="18" column="44" lean-forward="false" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="category.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/views/view/category.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="420">
+              <caret line="28" column="56" lean-forward="false" selection-start-line="28" selection-start-column="56" selection-end-line="28" selection-end-column="56" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>getCase</find>
+      <find>getCategoryListPage</find>
+      <find>caseName</find>
+      <find>caseId</find>
+      <find>Cases</find>
+      <find>Categorys</find>
+      <find>Case</find>
+      <find>handleAddhandleAddhandleAdd</find>
+      <find>handleAdd</find>
+      <find>addCase</find>
+      <find>deleteBatchCase</find>
+      <find>deleteCase</find>
+      <find>getDossier</find>
+      <find>300</find>
+      <find>detailName</find>
+      <find>500</find>
+      <find>getCategory</find>
+      <find>getDossierListPage</find>
+      <find>Dossiers</find>
+      <find>dossierFormdossierForm</find>
+      <find>listLoading</find>
+      <find>dossierForm</find>
+      <find>fi</find>
+      <find>file</find>
+      <find>file-</find>
+      <find>file-up</find>
+      <find>file-upl</find>
+      <find>file-uplo</find>
+      <find>file-uploa</find>
+      <find>file-upload</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>getCategory</replace>
+      <replace>categoryName</replace>
+      <replace>categoryId</replace>
+      <replace>Category</replace>
+      <replace>400</replace>
+      <replace>detailTitle</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/views/view/category.vue" />
+        <option value="$PROJECT_DIR$/src/api/category.js" />
+        <option value="$PROJECT_DIR$/src/api/detail.js" />
+        <option value="$PROJECT_DIR$/src/api/case.js" />
+        <option value="$PROJECT_DIR$/src/views/view/case.vue" />
+        <option value="$PROJECT_DIR$/src/views/view/upload.vue" />
+        <option value="$PROJECT_DIR$/src/views/view/detail.vue" />
+        <option value="$PROJECT_DIR$/src/api/baseUrl.js" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/node_modules" />
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="width" value="1440" />
+    <option name="height" value="900" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jxjsjfront" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jxjsjfront" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jxjsjfront" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jxjsjfront" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jxjsjfront" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jxjsjfront" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jxjsjfront" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jxjsjfront" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jxjsjfront" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jxjsjfront" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="api" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="add_unversioned_files" value="true" />
+    <property name="FullScreen" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/api" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
+    <configuration default="true" type="DartTestRunConfigurationType" factoryName="Dart Test">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerJest" factoryName="Jest">
+      <node-interpreter value="project" />
+      <working-dir value="" />
+      <envs />
+      <scope-kind value="ALL" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" working-dir="">
+      <method />
+    </configuration>
+    <configuration default="true" type="cucumber.js" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" value="" />
+      <option name="executablePath" />
+      <option name="filePath" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <working-directory />
+      <pass-parent-env>true</pass-parent-env>
+      <envs />
+      <ui />
+      <extra-mocha-options />
+      <test-kind>DIRECTORY</test-kind>
+      <test-directory />
+      <recursive>false</recursive>
+      <method />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="712ba97b-f0aa-4d96-847b-6af86b892aeb" name="Default" comment="" />
+      <created>1508854313775</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1508854313775</updated>
+      <workItem from="1508854315417" duration="3853000" />
+      <workItem from="1508859085059" duration="29000" />
+      <workItem from="1508859117736" duration="36000" />
+      <workItem from="1508859156396" duration="4086000" />
+      <workItem from="1508899159199" duration="13386000" />
+      <workItem from="1508985214478" duration="18000" />
+      <workItem from="1509095159230" duration="1322000" />
+      <workItem from="1509108887284" duration="1495000" />
+      <workItem from="1509265795205" duration="233000" />
+      <workItem from="1509333474499" duration="624000" />
+      <workItem from="1509369633690" duration="1541000" />
+      <workItem from="1509415414703" duration="755000" />
+      <workItem from="1509436646435" duration="611000" />
+      <workItem from="1509438575628" duration="565000" />
+      <workItem from="1510015065908" duration="463000" />
+      <workItem from="1510059061144" duration="385000" />
+      <workItem from="1510102384111" duration="1392000" />
+    </task>
+    <task id="LOCAL-00001" summary="add gitignore">
+      <created>1508859134709</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1508859134709</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add category">
+      <created>1508860552715</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1508860552715</updated>
+    </task>
+    <task id="LOCAL-00003" summary="add category">
+      <created>1508863334994</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1508863334994</updated>
+    </task>
+    <task id="LOCAL-00004" summary="add dossier">
+      <created>1508907402665</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1508907402665</updated>
+    </task>
+    <task id="LOCAL-00005" summary="add detail">
+      <created>1508912105852</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1508912105852</updated>
+    </task>
+    <task id="LOCAL-00006" summary="add detail">
+      <created>1508912668900</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1508912668900</updated>
+    </task>
+    <task id="LOCAL-00007" summary="detal table bind">
+      <created>1508913936574</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1508913936574</updated>
+    </task>
+    <task id="LOCAL-00008" summary="commit">
+      <created>1508923764076</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1508923764076</updated>
+    </task>
+    <task id="LOCAL-00009" summary="绑定caseID">
+      <created>1509372909668</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1509372909668</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="30890000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33333334" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292683" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22636816" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="BPMNPalette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="processedProjectFiles" value="true" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add gitignore" />
+    <MESSAGE value="add category" />
+    <MESSAGE value="add dossier" />
+    <MESSAGE value="add detail" />
+    <MESSAGE value="detal table bind" />
+    <MESSAGE value="commit" />
+    <MESSAGE value="绑定caseID" />
+    <option name="LAST_COMMIT_MESSAGE" value="绑定caseID" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/api/case.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="55" lean-forward="false" selection-start-line="23" selection-start-column="55" selection-end-line="23" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/http/http.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="11" lean-forward="false" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/view/case.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2715">
+          <caret line="181" column="77" lean-forward="false" selection-start-line="181" selection-start-column="77" selection-end-line="181" selection-end-column="77" />
+          <folding>
+            <marker date="1510102404000" expanded="true" signature="6888:7683" ph="..." />
+            <marker date="1510102404000" expanded="true" signature="8315:24348" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="9982:24251" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="17080:17930" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="17644:17915" ph="{&quot;name&quot;: '事件'...}" />
+            <marker date="1510102404000" expanded="true" signature="17783:17897" ph="/*...*/" />
+            <marker date="1510102404000" expanded="true" signature="17991:18766" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="18052:18279" ph="{&quot;dossierName&quot;: ''...}" />
+            <marker date="1510102404000" expanded="true" signature="18421:18750" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="18472:18638" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="18793:19523" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="18822:19036" ph="{&quot;dossierName&quot;: ''...}" />
+            <marker date="1510102404000" expanded="true" signature="19178:19507" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="19229:19395" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="19588:19787" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="19858:20700" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="19909:19964" ph="{&quot;type&quot;: 'warning'...}" />
+            <marker date="1510102404000" expanded="true" signature="19977:20650" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="20197:20629" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="20251:20607" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="20404:20532" ph="{&quot;message&quot;: '删除成功'...}" />
+            <marker date="1510102404000" expanded="true" signature="20664:20684" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="20776:20943" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21018:21387" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21198:21372" ph="{&quot;categoryId&quot;: ''...}" />
+            <marker date="1510102404000" expanded="true" signature="21449:22448" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21510:22432" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21543:22414" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21614:22390" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21839:22070" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21942:22038" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22075:22364" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22235:22331" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22491:23064" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22580:23050" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22713:22890" ph="{&quot;caseId&quot;: ''...}" />
+            <marker date="1510102404000" expanded="true" signature="22926:23030" ph="{&quot;message&quot;: '提交成功'...}" />
+            <marker date="1510102404000" expanded="true" signature="23065:24240" ph="//..." />
+            <marker date="1510102404000" expanded="true" signature="24271:24342" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="24374:24917" ph="..." />
+            <marker date="1510102404000" expanded="true" signature="24390:24420" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="24434:24573" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="36" column="63" lean-forward="false" selection-start-line="36" selection-start-column="63" selection-end-line="36" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="5" lean-forward="false" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/case.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="55" lean-forward="true" selection-start-line="23" selection-start-column="55" selection-end-line="23" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="1" lean-forward="false" selection-start-line="0" selection-start-column="1" selection-end-line="0" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/http/http.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="9" column="11" lean-forward="false" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/view/case.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2715">
+          <caret line="181" column="77" lean-forward="false" selection-start-line="181" selection-start-column="77" selection-end-line="181" selection-end-column="77" />
+          <folding>
+            <marker date="1510102404000" expanded="true" signature="6888:7683" ph="..." />
+            <marker date="1510102404000" expanded="true" signature="8315:24348" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="9982:24251" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="17080:17930" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="17644:17915" ph="{&quot;name&quot;: '事件'...}" />
+            <marker date="1510102404000" expanded="true" signature="17783:17897" ph="/*...*/" />
+            <marker date="1510102404000" expanded="true" signature="17991:18766" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="18052:18279" ph="{&quot;dossierName&quot;: ''...}" />
+            <marker date="1510102404000" expanded="true" signature="18421:18750" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="18472:18638" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="18793:19523" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="18822:19036" ph="{&quot;dossierName&quot;: ''...}" />
+            <marker date="1510102404000" expanded="true" signature="19178:19507" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="19229:19395" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="19588:19787" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="19858:20700" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="19909:19964" ph="{&quot;type&quot;: 'warning'...}" />
+            <marker date="1510102404000" expanded="true" signature="19977:20650" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="20197:20629" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="20251:20607" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="20404:20532" ph="{&quot;message&quot;: '删除成功'...}" />
+            <marker date="1510102404000" expanded="true" signature="20664:20684" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="20776:20943" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21018:21387" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21198:21372" ph="{&quot;categoryId&quot;: ''...}" />
+            <marker date="1510102404000" expanded="true" signature="21449:22448" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21510:22432" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21543:22414" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21614:22390" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21839:22070" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21942:22038" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22075:22364" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22235:22331" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22491:23064" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22580:23050" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22713:22890" ph="{&quot;caseId&quot;: ''...}" />
+            <marker date="1510102404000" expanded="true" signature="22926:23030" ph="{&quot;message&quot;: '提交成功'...}" />
+            <marker date="1510102404000" expanded="true" signature="23065:24240" ph="//..." />
+            <marker date="1510102404000" expanded="true" signature="24271:24342" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="24374:24917" ph="..." />
+            <marker date="1510102404000" expanded="true" signature="24390:24420" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="24434:24573" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="36" column="63" lean-forward="false" selection-start-line="36" selection-start-column="63" selection-end-line="36" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="13" lean-forward="false" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/case.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="68" lean-forward="false" selection-start-line="23" selection-start-column="68" selection-end-line="23" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/http/http.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="9" column="11" lean-forward="false" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="34" column="55" lean-forward="false" selection-start-line="34" selection-start-column="55" selection-end-line="34" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/view/case.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2715">
+          <caret line="181" column="77" lean-forward="false" selection-start-line="181" selection-start-column="77" selection-end-line="181" selection-end-column="77" />
+          <folding>
+            <marker date="1510102404000" expanded="true" signature="6888:7683" ph="..." />
+            <marker date="1510102404000" expanded="true" signature="8315:24348" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="9982:24251" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="17080:17930" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="17644:17915" ph="{&quot;name&quot;: '事件'...}" />
+            <marker date="1510102404000" expanded="true" signature="17783:17897" ph="/*...*/" />
+            <marker date="1510102404000" expanded="true" signature="17991:18766" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="18052:18279" ph="{&quot;dossierName&quot;: ''...}" />
+            <marker date="1510102404000" expanded="true" signature="18421:18750" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="18472:18638" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="18793:19523" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="18822:19036" ph="{&quot;dossierName&quot;: ''...}" />
+            <marker date="1510102404000" expanded="true" signature="19178:19507" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="19229:19395" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="19588:19787" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="19858:20700" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="19909:19964" ph="{&quot;type&quot;: 'warning'...}" />
+            <marker date="1510102404000" expanded="true" signature="19977:20650" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="20197:20629" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="20251:20607" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="20404:20532" ph="{&quot;message&quot;: '删除成功'...}" />
+            <marker date="1510102404000" expanded="true" signature="20664:20684" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="20776:20943" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21018:21387" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21198:21372" ph="{&quot;categoryId&quot;: ''...}" />
+            <marker date="1510102404000" expanded="true" signature="21449:22448" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21510:22432" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21543:22414" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21614:22390" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21839:22070" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21942:22038" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22075:22364" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22235:22331" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22491:23064" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22580:23050" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22713:22890" ph="{&quot;caseId&quot;: ''...}" />
+            <marker date="1510102404000" expanded="true" signature="22926:23030" ph="{&quot;message&quot;: '提交成功'...}" />
+            <marker date="1510102404000" expanded="true" signature="23065:24240" ph="//..." />
+            <marker date="1510102404000" expanded="true" signature="24271:24342" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="24374:24917" ph="..." />
+            <marker date="1510102404000" expanded="true" signature="24390:24420" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="24434:24573" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="25" column="13" lean-forward="false" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/case.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="23" column="68" lean-forward="false" selection-start-line="23" selection-start-column="68" selection-end-line="23" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/http/http.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="9" column="11" lean-forward="true" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="34" column="55" lean-forward="false" selection-start-line="34" selection-start-column="55" selection-end-line="34" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/view/case.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3801">
+          <caret line="181" column="77" lean-forward="false" selection-start-line="181" selection-start-column="77" selection-end-line="181" selection-end-column="77" />
+          <folding>
+            <marker date="1510102404000" expanded="true" signature="6888:7683" ph="..." />
+            <marker date="1510102404000" expanded="true" signature="8315:24348" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="9982:24251" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="17080:17930" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="17644:17915" ph="{&quot;name&quot;: '事件'...}" />
+            <marker date="1510102404000" expanded="true" signature="17783:17897" ph="/*...*/" />
+            <marker date="1510102404000" expanded="true" signature="17991:18766" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="18052:18279" ph="{&quot;dossierName&quot;: ''...}" />
+            <marker date="1510102404000" expanded="true" signature="18421:18750" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="18472:18638" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="18793:19523" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="18822:19036" ph="{&quot;dossierName&quot;: ''...}" />
+            <marker date="1510102404000" expanded="true" signature="19178:19507" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="19229:19395" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="19588:19787" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="19858:20700" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="19909:19964" ph="{&quot;type&quot;: 'warning'...}" />
+            <marker date="1510102404000" expanded="true" signature="19977:20650" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="20197:20629" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="20251:20607" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="20404:20532" ph="{&quot;message&quot;: '删除成功'...}" />
+            <marker date="1510102404000" expanded="true" signature="20664:20684" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="20776:20943" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21018:21387" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21198:21372" ph="{&quot;categoryId&quot;: ''...}" />
+            <marker date="1510102404000" expanded="true" signature="21449:22448" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21510:22432" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21543:22414" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21614:22390" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21839:22070" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21942:22038" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22075:22364" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22235:22331" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22491:23064" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22580:23050" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22713:22890" ph="{&quot;caseId&quot;: ''...}" />
+            <marker date="1510102404000" expanded="true" signature="22926:23030" ph="{&quot;message&quot;: '提交成功'...}" />
+            <marker date="1510102404000" expanded="true" signature="23065:24240" ph="//..." />
+            <marker date="1510102404000" expanded="true" signature="24271:24342" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="24374:24917" ph="..." />
+            <marker date="1510102404000" expanded="true" signature="24390:24420" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="24434:24573" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="13" lean-forward="false" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="34" column="55" lean-forward="false" selection-start-line="34" selection-start-column="55" selection-end-line="34" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/http/http.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="9" column="11" lean-forward="false" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/view/case.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="181" column="77" lean-forward="false" selection-start-line="181" selection-start-column="77" selection-end-line="181" selection-end-column="77" />
+          <folding>
+            <marker date="1510102404000" expanded="true" signature="6888:7683" ph="..." />
+            <marker date="1510102404000" expanded="true" signature="8315:24348" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="9982:24251" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="17080:17930" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="17644:17915" ph="{&quot;name&quot;: '事件'...}" />
+            <marker date="1510102404000" expanded="true" signature="17783:17897" ph="/*...*/" />
+            <marker date="1510102404000" expanded="true" signature="17991:18766" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="18052:18279" ph="{&quot;dossierName&quot;: ''...}" />
+            <marker date="1510102404000" expanded="true" signature="18421:18750" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="18472:18638" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="18793:19523" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="18822:19036" ph="{&quot;dossierName&quot;: ''...}" />
+            <marker date="1510102404000" expanded="true" signature="19178:19507" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="19229:19395" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="19588:19787" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="19858:20700" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="19909:19964" ph="{&quot;type&quot;: 'warning'...}" />
+            <marker date="1510102404000" expanded="true" signature="19977:20650" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="20197:20629" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="20251:20607" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="20404:20532" ph="{&quot;message&quot;: '删除成功'...}" />
+            <marker date="1510102404000" expanded="true" signature="20664:20684" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="20776:20943" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21018:21387" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21198:21372" ph="{&quot;categoryId&quot;: ''...}" />
+            <marker date="1510102404000" expanded="true" signature="21449:22448" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21510:22432" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21543:22414" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21614:22390" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21839:22070" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21942:22038" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22075:22364" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22235:22331" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22491:23064" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22580:23050" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22713:22890" ph="{&quot;caseId&quot;: ''...}" />
+            <marker date="1510102404000" expanded="true" signature="22926:23030" ph="{&quot;message&quot;: '提交成功'...}" />
+            <marker date="1510102404000" expanded="true" signature="23065:24240" ph="//..." />
+            <marker date="1510102404000" expanded="true" signature="24271:24342" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="24374:24917" ph="..." />
+            <marker date="1510102404000" expanded="true" signature="24390:24420" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="24434:24573" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/case.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="68" lean-forward="false" selection-start-line="23" selection-start-column="68" selection-end-line="23" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="13" lean-forward="false" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="34" column="55" lean-forward="false" selection-start-line="34" selection-start-column="55" selection-end-line="34" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/http/http.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24">
+          <caret line="9" column="11" lean-forward="true" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/case.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="68" lean-forward="false" selection-start-line="23" selection-start-column="68" selection-end-line="23" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/view/case.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="181" column="77" lean-forward="false" selection-start-line="181" selection-start-column="77" selection-end-line="181" selection-end-column="77" />
+          <folding>
+            <marker date="1510102404000" expanded="true" signature="6888:7683" ph="..." />
+            <marker date="1510102404000" expanded="true" signature="8315:24348" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="9982:24251" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="17080:17930" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="17644:17915" ph="{&quot;name&quot;: '事件'...}" />
+            <marker date="1510102404000" expanded="true" signature="17783:17897" ph="/*...*/" />
+            <marker date="1510102404000" expanded="true" signature="17991:18766" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="18052:18279" ph="{&quot;dossierName&quot;: ''...}" />
+            <marker date="1510102404000" expanded="true" signature="18421:18750" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="18472:18638" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="18793:19523" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="18822:19036" ph="{&quot;dossierName&quot;: ''...}" />
+            <marker date="1510102404000" expanded="true" signature="19178:19507" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="19229:19395" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="19588:19787" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="19858:20700" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="19909:19964" ph="{&quot;type&quot;: 'warning'...}" />
+            <marker date="1510102404000" expanded="true" signature="19977:20650" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="20197:20629" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="20251:20607" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="20404:20532" ph="{&quot;message&quot;: '删除成功'...}" />
+            <marker date="1510102404000" expanded="true" signature="20664:20684" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="20776:20943" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21018:21387" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21198:21372" ph="{&quot;categoryId&quot;: ''...}" />
+            <marker date="1510102404000" expanded="true" signature="21449:22448" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21510:22432" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21543:22414" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21614:22390" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21839:22070" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21942:22038" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22075:22364" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22235:22331" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22491:23064" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22580:23050" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22713:22890" ph="{&quot;caseId&quot;: ''...}" />
+            <marker date="1510102404000" expanded="true" signature="22926:23030" ph="{&quot;message&quot;: '提交成功'...}" />
+            <marker date="1510102404000" expanded="true" signature="23065:24240" ph="//..." />
+            <marker date="1510102404000" expanded="true" signature="24271:24342" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="24374:24917" ph="..." />
+            <marker date="1510102404000" expanded="true" signature="24390:24420" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="24434:24573" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="13" lean-forward="false" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="34" column="55" lean-forward="false" selection-start-line="34" selection-start-column="55" selection-end-line="34" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/api.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/view/case.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="181" column="77" lean-forward="false" selection-start-line="181" selection-start-column="77" selection-end-line="181" selection-end-column="77" />
+          <folding>
+            <marker date="1510102404000" expanded="true" signature="6888:7683" ph="..." />
+            <marker date="1510102404000" expanded="true" signature="8315:24348" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="9982:24251" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="17080:17930" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="17644:17915" ph="{&quot;name&quot;: '事件'...}" />
+            <marker date="1510102404000" expanded="true" signature="17783:17897" ph="/*...*/" />
+            <marker date="1510102404000" expanded="true" signature="17991:18766" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="18052:18279" ph="{&quot;dossierName&quot;: ''...}" />
+            <marker date="1510102404000" expanded="true" signature="18421:18750" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="18472:18638" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="18793:19523" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="18822:19036" ph="{&quot;dossierName&quot;: ''...}" />
+            <marker date="1510102404000" expanded="true" signature="19178:19507" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="19229:19395" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="19588:19787" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="19858:20700" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="19909:19964" ph="{&quot;type&quot;: 'warning'...}" />
+            <marker date="1510102404000" expanded="true" signature="19977:20650" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="20197:20629" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="20251:20607" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="20404:20532" ph="{&quot;message&quot;: '删除成功'...}" />
+            <marker date="1510102404000" expanded="true" signature="20664:20684" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="20776:20943" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21018:21387" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21198:21372" ph="{&quot;categoryId&quot;: ''...}" />
+            <marker date="1510102404000" expanded="true" signature="21449:22448" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21510:22432" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21543:22414" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21614:22390" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21839:22070" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21942:22038" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22075:22364" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22235:22331" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22491:23064" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22580:23050" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22713:22890" ph="{&quot;caseId&quot;: ''...}" />
+            <marker date="1510102404000" expanded="true" signature="22926:23030" ph="{&quot;message&quot;: '提交成功'...}" />
+            <marker date="1510102404000" expanded="true" signature="23065:24240" ph="//..." />
+            <marker date="1510102404000" expanded="true" signature="24271:24342" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="24374:24917" ph="..." />
+            <marker date="1510102404000" expanded="true" signature="24390:24420" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="24434:24573" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/case.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="50" lean-forward="true" selection-start-line="23" selection-start-column="50" selection-end-line="23" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/http/http.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="9" column="11" lean-forward="false" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="13" lean-forward="false" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="36" column="63" lean-forward="false" selection-start-line="36" selection-start-column="63" selection-end-line="36" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/http/http.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="11" lean-forward="false" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="5" lean-forward="true" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/category.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="18" column="44" lean-forward="false" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/dossier.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/view/category.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="56" lean-forward="false" selection-start-line="28" selection-start-column="56" selection-end-line="28" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/detail.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="28" column="40" lean-forward="false" selection-start-line="28" selection-start-column="40" selection-end-line="28" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/view/upload.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="38" lean-forward="false" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/view/detail.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6465">
+          <caret line="435" column="44" lean-forward="false" selection-start-line="435" selection-start-column="44" selection-end-line="435" selection-end-column="44" />
+          <folding>
+            <marker date="1510107924000" expanded="true" signature="11508:11534" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="11508:11586" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="11508:11604" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="11508:11619" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="11508:19767" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="11508:20054" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="11508:20064" ph="..." />
+            <marker date="1510107924000" expanded="true" signature="11605:11619" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="11668:12132" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="11722:12116" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="11773:11855" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="11859:12049" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="11899:12025" ph="{&quot;message&quot;: res.data.resultMsg...}" />
+            <marker date="1510107924000" expanded="true" signature="12196:13019" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="12247:12302" ph="{&quot;type&quot;: 'warning'...}" />
+            <marker date="1510107924000" expanded="true" signature="12315:12969" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="12524:12948" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="12578:12926" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="12724:12852" ph="{&quot;message&quot;: '删除成功'...}" />
+            <marker date="1510107924000" expanded="true" signature="12983:13003" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="13088:13298" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="13356:14078" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="13447:13700" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="13545:13652" ph="{&quot;message&quot;: '请选择卷书名称'...}" />
+            <marker date="1510107924000" expanded="true" signature="13863:14062" ph="{&quot;dossierId&quot;: dossierId...}" />
+            <marker date="1510107924000" expanded="true" signature="14133:15252" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="14191:15236" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="14224:15218" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="14295:15194" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="14512:14735" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="14614:14703" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="14740:15108" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="14774:14923" ph="//..." />
+            <marker date="1510107924000" expanded="true" signature="14986:15075" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="15292:15401" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="15437:15927" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="15526:15913" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="15652:15753" ph="{&quot;detailId&quot;: ''...}" />
+            <marker date="1510107924000" expanded="true" signature="15789:15893" ph="{&quot;message&quot;: '提交成功'...}" />
+            <marker date="1510107924000" expanded="true" signature="15969:16018" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="16076:17036" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="16320:16375" ph="{&quot;type&quot;: 'warning'...}" />
+            <marker date="1510107924000" expanded="true" signature="16388:16986" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="16540:16964" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="16594:16942" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="16740:16868" ph="{&quot;message&quot;: '删除成功'...}" />
+            <marker date="1510107924000" expanded="true" signature="17000:17020" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="17085:18004" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="17114:17264" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="17282:17345" ph="//..." />
+            <marker date="1510107924000" expanded="true" signature="17401:17988" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="17452:17881" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="17903:17970" ph="//..." />
+            <marker date="1510107924000" expanded="true" signature="18038:18108" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="18156:18215" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="18268:18785" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="18365:18594" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="18401:18507" ph="{&quot;message&quot;: '文件上传成功'...}" />
+            <marker date="1510107924000" expanded="true" signature="18598:18770" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="18635:18749" ph="{&quot;message&quot;: response.resultMsg...}" />
+            <marker date="1510107924000" expanded="true" signature="18830:19052" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="18896:18991" ph="{&quot;message&quot;: err.message...}" />
+            <marker date="1510107924000" expanded="true" signature="19084:19134" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="19186:19757" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="19188:19381" ph="//..." />
+            <marker date="1510107924000" expanded="true" signature="19787:20048" ph="{...}" />
+            <marker date="1510107924000" expanded="true" signature="20080:20090" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/api.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="4" lean-forward="false" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/view/case.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9885">
+          <caret line="673" column="0" lean-forward="false" selection-start-line="673" selection-start-column="0" selection-end-line="673" selection-end-column="0" />
+          <folding>
+            <marker date="1510102404000" expanded="true" signature="6888:7683" ph="..." />
+            <marker date="1510102404000" expanded="true" signature="8315:24348" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="9982:24251" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="17080:17930" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="17644:17915" ph="{&quot;name&quot;: '事件'...}" />
+            <marker date="1510102404000" expanded="true" signature="17783:17897" ph="/*...*/" />
+            <marker date="1510102404000" expanded="true" signature="17991:18766" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="18052:18279" ph="{&quot;dossierName&quot;: ''...}" />
+            <marker date="1510102404000" expanded="true" signature="18421:18750" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="18472:18638" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="18793:19523" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="18822:19036" ph="{&quot;dossierName&quot;: ''...}" />
+            <marker date="1510102404000" expanded="true" signature="19178:19507" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="19229:19395" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="19588:19787" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="19858:20700" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="19909:19964" ph="{&quot;type&quot;: 'warning'...}" />
+            <marker date="1510102404000" expanded="true" signature="19977:20650" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="20197:20629" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="20251:20607" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="20404:20532" ph="{&quot;message&quot;: '删除成功'...}" />
+            <marker date="1510102404000" expanded="true" signature="20664:20684" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="20776:20943" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21018:21387" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21198:21372" ph="{&quot;categoryId&quot;: ''...}" />
+            <marker date="1510102404000" expanded="true" signature="21449:22448" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21510:22432" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21543:22414" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21614:22390" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21839:22070" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="21942:22038" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22075:22364" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22235:22331" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22491:23064" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22580:23050" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="22713:22890" ph="{&quot;caseId&quot;: ''...}" />
+            <marker date="1510102404000" expanded="true" signature="22926:23030" ph="{&quot;message&quot;: '提交成功'...}" />
+            <marker date="1510102404000" expanded="true" signature="23065:24240" ph="//..." />
+            <marker date="1510102404000" expanded="true" signature="24271:24342" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="24374:24917" ph="..." />
+            <marker date="1510102404000" expanded="true" signature="24390:24420" ph="{...}" />
+            <marker date="1510102404000" expanded="true" signature="24434:24573" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/case.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="15" lean-forward="false" selection-start-line="6" selection-start-column="15" selection-end-line="6" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/baseUrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="28" lean-forward="false" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
