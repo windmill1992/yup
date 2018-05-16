@@ -71,7 +71,7 @@
 
             //sessionStorage.setItem('user', JSON.stringify(user));
 
-            this.$router.push({ path: '/case' });
+            this.$router.push({ path: '/index' });
 //            requestLogin(loginParams).then(data => {
 //              this.logining = false;
 //              //NProgress.done();

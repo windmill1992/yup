@@ -19,9 +19,29 @@
             <el-table-column prop="originPrice" label="原价"></el-table-column>
             <el-table-column prop="num" width="80" label="数量"></el-table-column>
             <el-table-column prop="applyNum" width="120" label="申请人数"></el-table-column>
-            <el-table-column prop="op" width="120" label="操作"></el-table-column>
-            <el-table-column prop="state" :render-header="renderHeader" width="120" label="状态-"></el-table-column>
+            <el-table-column width="120" label="操作">
+                <template slot-scope="scope">
+                    <a href="javascript:;" class="detail">查看详情</a>
+                </template>
+            </el-table-column>
+            <el-table-column 
+                prop="state" 
+                width="150" 
+                :label="'状态-'+ state" 
+                :filters="stateOpts" 
+                :filter-multiple="false" 
+                :filter-method="filterState">
+            </el-table-column>
           </el-table>
+          <el-pagination class="page" 
+            @current-change="handleCurrentChange"
+            :current-page.sync="currentPage"
+            :page-size="20"
+            layout="total, prev, pager, next" 
+            prev-text="上一页" 
+            next-text="下一页"
+            :total="100">
+          </el-pagination>
       </el-col>
   </el-row>
 </template>
@@ -37,58 +57,54 @@ export default {
           originPrice: "1998.00",
           num: 30,
           applyNum: 100000,
-          op: '<a href="">查看详情</a>',
-          state: "0"
-        }
+          state: "待发布"
+        },
+        {
+          id: 2,
+          title: "supreme最新款卫衣",
+          originPrice: "1998.00",
+          num: 30,
+          applyNum: 100000,
+          state: "待发布"
+        },
+        {
+          id: 3,
+          title: "supreme最新款卫衣",
+          originPrice: "1998.00",
+          num: 30,
+          applyNum: 100000,
+          state: "待开奖"
+        },
+        {
+          id: 4,
+          title: "supreme最新款卫衣",
+          originPrice: "1998.00",
+          num: 30,
+          applyNum: 100000,
+          state: "已结束"
+        },
       ],
       stateOpts: [
-        { label: "全部", value: "all" },
-        { label: "待发布", value: "unpub" },
-        { label: "待开奖", value: "unprize" },
-        { label: "已结束", value: "end" }
+        { text: "全部", value: "全部" },
+        { text: "待发布", value: "待发布" },
+        { text: "待开奖", value: "待开奖" },
+        { text: "已结束", value: "已结束" }
       ],
       state: "全部",
-      loading: false
+      loading: false,
+      currentPage: 1
     };
   },
   methods: {
-    renderHeader(createElement, { _self }) {
-      return createElement(
-        "el-select",
-        {
-            attrs: { "value": this.state },
-            on: { change: this.handleHeader1 },
-            
-        },
-        [
-            createElement(
-                "el-option",
-                {
-                    attrs: { "label": "全部", "value": "all"}
-                }
-            ),
-            createElement(
-                "el-option",
-                {
-                    attrs: { "label": "待发布", "value": "unpub"}
-                }
-            ),
-            createElement(
-                "el-option",
-                {
-                    attrs: { "label": "待开奖", "value": "unprize"}
-                }
-            ),
-            createElement(
-                "el-option",
-                {
-                    attrs: { "label": "已结束", "value": "end"}
-                }
-            ),
-        ]
-      )
+    filterState(value, row) {
+        this.state = value;
+        if(value == '全部'){
+            return true;
+        }else{
+            return row.state === value;
+        }
     },
-    handleHeader1() {
+    handleCurrentChange(val) {
 
     }
   }
@@ -103,5 +119,12 @@ export default {
 .el-input {
   width: auto;
   margin-right: 10px;
+}
+.detail{
+    text-decoration: underline;
+    color: #333;
+}
+.page{
+    margin-top: 20px;
 }
 </style>
