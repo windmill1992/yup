@@ -208,3 +208,16 @@ img[mode='fix']{
 	border-radius: 4px;
 	display: none;
 }
+/* 分页文字 */
+.btn-prev::before{
+    content: '上一页';
+}
+.btn-prev .el-icon{
+    display: none!important;
+}
+.btn-next::before{
+    content: '下一页';
+}
+.btn-next .el-icon{
+    display: none!important;
+}

@@ -13,7 +13,7 @@ import Detail from './views/view/detail.vue'
 import Upload from './views/view/upload.vue'
 import Index0 from './views/view/index.vue'
 import Trial from './views/view/trial.vue'
-import AddTrial from './views/view/addTrial.vue'
+import Feedback from './views/view/feedback.vue'
 
 let routes = [
     {
@@ -35,10 +35,9 @@ let routes = [
         name: '导航',
         iconCls: 'el-icon-message',//图标样式class
         children: [
-            { path: '/index', component: Index0, name: '首页'},
-            { path: '/trial', component: Trial, name: '试用', children: [
-                {path: '/add', component: AddTrial, name: '添加试用'}
-            ]}
+            { path: '/index', component: Index0, name: '首页' },
+            { path: '/trial', component: Trial, name: '试用' },
+            { path: '/feedback', component: Feedback, name: '反馈' },
         ]
         /* children: [
             { path: '/main', component: Main, name: '主页', hidden: true },

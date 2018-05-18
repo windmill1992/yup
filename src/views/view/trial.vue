@@ -22,7 +22,7 @@
             <el-table-column prop="applyNum" width="120" label="申请人数"></el-table-column>
             <el-table-column width="120" label="操作">
                 <template slot-scope="scope">
-                    <a href="javascript:;" class="detail" @click="showDetail(scope.row.id)">查看详情</a>
+                    <a href="javascript:;" class="detail" @click="showDetail(scope.row.id, scope.row.state)">查看详情</a>
                 </template>
             </el-table-column>
             <el-table-column 
@@ -45,8 +45,8 @@
             :total="100">
           </el-pagination>
       </el-col>
-      <el-dialog :title="dialogTitle" :visible.sync="showDialog" width="500" custom-class="edit-dialog">
-        <el-form ref="form" :model="sizeForm" label-width="100px">
+      <el-dialog :title="dialogTitle" :visible.sync="showDialog" width="500" custom-class="edit-dialog" >
+        <el-form ref="form" :model="sizeForm" label-width="100px" :style="{'max-height': maxFormHeight}">
           <p class="label">试用信息</p>
           <el-form-item label="标题">
             <el-input v-if="!read" v-model="sizeForm.title"></el-input>
@@ -129,20 +129,74 @@
               </el-upload>
               <img :src="sizeForm.goodsUrl" v-else class="front-img" alt="">
           </el-form-item>
+          <template v-if="read && dialogState == '已结束'">
+            <p class="label">中奖名单</p>
+            <el-table :data="toLotUsers" highlight-current-row 
+              style="width: 100%;max-height: 200px" border>
+              <el-table-column prop="id" width="70" label="ID"></el-table-column>
+              <el-table-column prop="nick" label="用户昵称"></el-table-column>
+              <el-table-column prop="mobile" label="手机号"></el-table-column>
+              <el-table-column prop="addr" width="380" label="收货地址" show-overflow-tooltip></el-table-column>
+            </el-table>
+            <el-pagination class="page" 
+              @current-change="lotEndCurChange" 
+              :current-page.sync="lotEndCurPage" 
+              :page-size="20" 
+              layout="total, prev, pager, next" 
+              prev-text="上一页" 
+              next-text="下一页" 
+              :total="100">
+            </el-pagination>
+          </template>
         </el-form>
         <template slot="footer" v-if="!read && !edit">
           <el-button type="success">保存</el-button>
-          <el-button type="primary">发布</el-button>
-          <el-button @click="hideDialog">取消</el-button>
+          <el-button type="primary" @click="publish">发布</el-button>
+          <el-button @click="showDialog = false">取消</el-button>
         </template>
-        <template slot="footer" v-if="read">
-          <el-button type="success" @click="editTrial()">编辑</el-button>
-          <el-button type="primary">开奖</el-button>
+        <template slot="footer" v-if="read && dialogState != '已结束'">
+            <el-button type="success" @click="editTrial">编辑</el-button>
+            <el-button type="primary" @click="lottery" v-if="dialogState == '待开奖'">开奖</el-button>
+            <el-button type="primary" @click="publish" v-if="dialogState == '待发布'">发布</el-button>
         </template>
         <template slot="footer" v-if="edit">
-          <el-button @click="hideDialog">取消</el-button>
+          <el-button @click="showDialog = false">取消</el-button>
           <el-button type="success" @click="editTrial()">保存</el-button>
         </template>
+      </el-dialog>
+      <el-dialog :visible.sync="showLotteryDialog" width="500" custom-class="lot-dialog">
+        <template slot="title">
+          <div class="lot-head">
+            <p class="lot-title fl">试用列表-查看详情-开奖 ( {{selectedUser}} / {{userNum}} )</p>
+            <el-input placeholder="搜索用户手机号/用户名" class="fr"></el-input>
+          </div>
+        </template>
+        <el-table :data="toLotUsers" highlight-current-row v-loading="loading" 
+            style="width: 100%;height: 90%" :style="{'max-height': maxFormHeight}" border>
+            <el-table-column prop="id" width="70" label="ID"></el-table-column>
+            <el-table-column prop="nick" label="用户昵称"></el-table-column>
+            <el-table-column prop="mobile" label="手机号"></el-table-column>
+            <el-table-column prop="addr" width="180" label="收货地址" show-overflow-tooltip></el-table-column>
+            <el-table-column prop="trialWord" width="200" label="试用宣言" show-overflow-tooltip></el-table-column>
+            <el-table-column width="120" label="操作" type="selection" @selection-change="selectUser">
+              <!-- <template slot-scope="scope">
+                <span>选中</span>
+              </template> -->
+            </el-table-column>
+          </el-table>
+          <el-pagination class="page" 
+            @current-change="lotCurChange" 
+            :current-page.sync="lotCurPage" 
+            :page-size="20" 
+            layout="total, prev, pager, next" 
+            prev-text="上一页" 
+            next-text="下一页" 
+            :total="100">
+          </el-pagination>
+          <template slot="footer">
+            <el-button @click="showLotteryDialog = false">取消</el-button>
+            <el-button type="success">确定</el-button>
+          </template>
       </el-dialog>
   </el-row>
 </template>
@@ -194,94 +248,126 @@ export default {
       state: "全部",
       loading: false,
       currentPage: 1,
-      dialogTitle: '',
+      dialogTitle: "",
       showDialog: false,
       sizeForm: {
-        title: '',
-        num: '',
-        salePrice: '',
-        frontUrl: '',
-        grounding: '',
-        lottery: '',
-        prizeway: '',
-        rule: '', 
-        color: '',
-        country: '',
-        price: '',
-        brand: '',
-        category: '',
-        material: '',
-        goodsUrl: '',
+        title: "",
+        num: "",
+        salePrice: "",
+        frontUrl: "",
+        grounding: "",
+        lottery: "",
+        prizeway: "",
+        rule: "",
+        color: "",
+        country: "",
+        price: "",
+        brand: "",
+        category: "",
+        material: "",
+        goodsUrl: ""
       },
       read: false,
-      edit: false
+      edit: false,
+      showLotteryDialog: false,
+      toLotUsers: [
+        {
+          id: 1,
+          nick: "那个杯子",
+          mobile: "15972955687",
+          addr: "北京市朝阳区",
+          trialWord: "我要试用，我很爱"
+        },
+        {
+          id: 2,
+          nick: "那个杯子",
+          mobile: "15972955687",
+          addr: "北京市朝阳区",
+          trialWord: "我要试用，我很爱"
+        },
+        {
+          id: 3,
+          nick: "那个杯子",
+          mobile: "15972955687",
+          addr: "北京市朝阳区",
+          trialWord: "我要试用，我很爱"
+        },
+        {
+          id: 4,
+          nick: "那个杯子",
+          mobile: "15972955687",
+          addr: "北京市朝阳区",
+          trialWord: "我要试用，我很爱打电话卡事件回调"
+        }
+      ],
+      userNum: 100,
+      selectedUser: 0,
+      lotCurPage: 1,
+      lotEndCurPage: 1,
+      dialogState: ""
     };
   },
   computed: {
     trialLen() {
       return this.trials.length;
+    },
+    maxFormHeight() {
+      let h = window.innerHeight;
+      return h - 400 + "px";
     }
   },
   methods: {
     filterState(value, row) {
-        this.state = value;
-        if(value == '全部'){
-            return true;
-        }else{
-            return row.state === value;
-        }
+      this.state = value;
+      if (value == "全部") {
+        return true;
+      } else {
+        return row.state === value;
+      }
     },
-    handleCurrentChange(val) {
-
-    },
-    showDetail(id) {
+    handleCurrentChange(val) {},
+    showDetail(id, state) {
       this.read = true;
       this.editId = id;
+      this.dialogState = state;
       this.showDialog = true;
-      this.dialogTitle = '试用列表-查看详情';
+      this.dialogTitle = "试用列表-查看详情";
     },
     addTrial() {
       this.read = false;
       this.edit = false;
       this.showDialog = true;
-      this.dialogTitle = '试用列表-添加试用';
+      this.dialogTitle = "试用列表-添加试用";
       for (const a in this.sizeForm) {
         if (this.sizeForm.hasOwnProperty(a)) {
-          this.sizeForm[a] = '';
+          this.sizeForm[a] = "";
         }
       }
     },
-    editTrial(){
+    editTrial() {
       this.showDialog = true;
       this.edit = true;
       this.read = false;
-      this.dialogTitle = '试用列表-编辑试用';
-      this.sizeForm = {
-
-      };
+      this.dialogTitle = "试用列表-编辑试用";
+      this.sizeForm = {};
     },
-    hideDialog() {
-      this.showDialog = false;
-      this.read = false;
-      this.edit = false;
+    publish() {},
+    frontSuccess() {},
+    frontError() {},
+    goodsSuccess() {},
+    goodsError() {},
+    selectUser() {},
+    lotCurChange() {},
+    lottery() {
+      this.showLotteryDialog = true;
+      // this.showDialog = false;
     },
-    frontSuccess() {
-
-    },
-    frontError() {
-
-    },
-    goodsSuccess() {
-
-    },
-    goodsError() {
-
-    }
+    lotEndCurChange() {}
   }
 };
 </script>
 
 <style>
 @import url(./../../../static/css/base.css);
-@import url(./../../../static/css/trial/trial.css);
+@import url(./../../../static/css/home/trial.css);
 </style>
