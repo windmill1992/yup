@@ -16,7 +16,6 @@ import 'font-awesome/css/font-awesome.min.css'
 
 import axios from './http/http'
 
-
 Vue.prototype.$http = axios;
 
 Vue.use(ElementUI)
