@@ -14,6 +14,7 @@ import Upload from './views/view/upload.vue'
 import Index0 from './views/view/index.vue'
 import Trial from './views/view/trial.vue'
 import Feedback from './views/view/feedback.vue'
+import Users from './views/view/users.vue'
 
 let routes = [
     {
@@ -38,6 +39,7 @@ let routes = [
             { path: '/index', component: Index0, name: '首页' },
             { path: '/trial', component: Trial, name: '试用' },
             { path: '/feedback', component: Feedback, name: '反馈' },
+            { path: '/users', component: Users, name: '用户' },
         ]
         /* children: [
             { path: '/main', component: Main, name: '主页', hidden: true },

@@ -46,9 +46,10 @@
           </el-pagination>
       </el-col>
       <el-dialog :title="dialogTitle" :visible.sync="showDialog" width="500" custom-class="edit-dialog" >
-        <el-form ref="form" :model="sizeForm" label-width="100px" :style="{'max-height': maxFormHeight}">
+        <el-form ref="form" :model="sizeForm" label-width="100px" :rules="rules"	
+          :style="{'max-height': maxFormHeight}" >
           <p class="label">试用信息</p>
-          <el-form-item label="标题">
+          <el-form-item label="标题" prop="title" inline-message>
             <el-input v-if="!read" v-model="sizeForm.title"></el-input>
             <p class="read" v-else>{{sizeForm.title}}</p>
           </el-form-item>
@@ -266,6 +267,13 @@ export default {
         category: "",
         material: "",
         goodsUrl: ""
+      },
+      rules: {
+        title: [
+          { required: true, message: '请输入试用标题', trigger: 'blur' },
+          { min: 1, max: 20, message: '1-20 个字符', trigger: 'blur' }
+        ],
+
       },
       read: false,
       edit: false,

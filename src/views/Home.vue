@@ -24,7 +24,7 @@
 			<aside :class="collapsed?'menu-collapsed':'menu-expanded'">
 				<!--导航菜单-->
 				<el-menu :default-active="$route.path" class="el-menu-vertical-demo" @open="handleopen" @close="handleclose" @select="handleselect"
-					 unique-opened router v-show="!collapsed" style="width: auto;">
+					 unique-opened router v-show="!collapsed">
 					<template v-for="(item,index) in $router.options.routes" v-if="!item.hidden">
 						<el-submenu :index="index+''" v-if="!item.leaf" :key="index">
 							<template slot="title"><i :class="item.iconCls"></i>{{item.name}}</template>
@@ -117,6 +117,7 @@ export default {
     //折叠导航栏
     collapse: function() {
       this.collapsed = !this.collapsed;
+      $('.el-menu-vertical-demo').eq(0).css({width: 'auto'});
     },
     showMenu(i, status) {
       this.$refs.menuCollapsed.getElementsByClassName(

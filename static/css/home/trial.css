@@ -23,6 +23,7 @@
 .edit-dialog .el-form {
     overflow: auto;
     padding: 0 20px;
+    min-height: 300px;
 }
 
 .edit-dialog .el-dialog__footer {
