@@ -134,9 +134,6 @@
     import NProgress from 'nprogress'
     import Sortable from 'sortablejs'
 
-    import { loadCase } from '../../api/Case';
-    import { getDetailListPage, getDetailList, deleteDetail, addDetail, editDetail,deleteBatchDetail,sortDetail } from '../../api/Detail';
-    import { getDossierListPage} from '../../api/Dossier';
     import {baseUrl} from '../../api/baseUrl'
 
     export default {
@@ -495,15 +492,15 @@
             }
         },
         mounted() {
-            this.caseId = this.$route.params.caseId;
-            //this.dossierId = this.$route.params.dossierId;
+            // this.caseId = this.$route.params.caseId;
+            // //this.dossierId = this.$route.params.dossierId;
 
-            this.listLoading = true;
-            this.getDossiers();
+            // this.listLoading = true;
+            // this.getDossiers();
 
-            //this.getDetail();
+            // //this.getDetail();
 
-            this.getCaseInfo();
+            // this.getCaseInfo();
         }
     }
 

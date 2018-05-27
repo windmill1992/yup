@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import { baseUrl } from './../../api/baseUrl'
+
 export default {
     data() {
         return {
@@ -35,7 +37,30 @@ export default {
     methods: {
         curChange() {
 
+        },
+        getEnterApplyList() {
+            this.$http.get(`${baseUrl}/yup-rest/manage/enter-apply-list`, {
+                params: {  pageIndex: this.curPage, pageSize: 20}
+            })
+            .then(res => {
+                if(res.data.resultCode == 200){
+                    this.list = res.data.resultData;
+                }else{
+                    this.$message({
+                        message: res.data.resultMsg,
+                        type: 'error',
+                        duration: 0,
+                        showClose: true
+                    })
+                }
+            })
+            .catch(() => {
+                this.$message.error('未知错误！');
+            })
         }
+    },
+    mounted() {
+        this.getEnterApplyList();
     }
 }
 </script>

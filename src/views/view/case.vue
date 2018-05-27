@@ -179,9 +179,6 @@
     //import NProgress from 'nprogress'
 
 
-    import { getCaseListPage, deleteCase, addCase, editCase,deleteBatchCase,exportCase } from '../../api/Case';
-    import { getDossierListPage, deleteDossier, addDossier, editDossier,deleteBatchDossier,exportDossier } from '../../api/Dossier';
-    import { getCategoryList } from '../../api/Category';
     import {baseUrl} from '../../api/baseUrl'
 
 
@@ -660,8 +657,8 @@
 
         },
         mounted() {
-            this.getCategory();
-            this.getCase();
+            // this.getCategory();
+            // this.getCase();
         }
     }
 

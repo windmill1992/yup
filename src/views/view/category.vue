@@ -65,8 +65,6 @@
     //import NProgress from 'nprogress'
 
 
-    import { getCategoryListPage, getCategoryList, deleteCategory, addCategory, editCategory,deleteBatchCategory } from '../../api/Category';
-
     export default {
         data() {
             return {
@@ -241,7 +239,7 @@
             }
         },
         mounted() {
-            this.getCategory();
+            // this.getCategory();
         }
     }
 

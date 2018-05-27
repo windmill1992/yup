@@ -1,11 +1,6 @@
 import Login from './views/Login.vue'
 import NotFound from './views/404.vue'
 import Home from './views/Home.vue'
-import Main from './views/Main.vue'
-
-import Form from './views/nav1/Form.vue'
-import user from './views/nav1/user.vue'
-
 
 import Case from './views/view/case.vue'
 import Category from './views/view/category.vue'
@@ -41,16 +36,6 @@ let routes = [
             { path: '/feedback', component: Feedback, name: '反馈' },
             { path: '/users', component: Users, name: '用户' },
         ]
-        /* children: [
-            { path: '/main', component: Main, name: '主页', hidden: true },
-            { path: '/case', component: Case, name: '案件', hidden: true },
-
-            { path: '/detail/:caseId/:dossierId', component: Detail, name: '事件2',hidden:true },
-            { path: '/category', component: Category, name: '分类', hiddentrue },
-            { path: '/upload', component: Upload, name: '上传' },
-            { path: '/form', component: Form, name: 'Form' },
-            { path: '/user', component: user, name: '列表' }
-        ] */
     },
     {
         path: '*',

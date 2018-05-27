@@ -20,6 +20,10 @@
     padding-bottom: 20px;
 }
 
+.edit-dialog{
+    width: 60%;
+}
+
 .edit-dialog .el-form {
     overflow: auto;
     padding: 0 20px;
@@ -92,6 +96,14 @@
     max-width: 300px;
     word-break: break-all;
     line-height: 1.5;
+}
+
+.lot-dialog{
+    width: 80%;
+}
+
+.lot-dialog .el-table{
+    min-height: 300px;
 }
 
 .lot-head {
