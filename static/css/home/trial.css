@@ -51,6 +51,7 @@
 
 .front-pic {
     color: #333;
+    margin-top: 10px;
 }
 
 .front-pic .el-upload {
@@ -59,6 +60,7 @@
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    vertical-align: top;
 }
 
 .front-pic .el-upload:hover {
@@ -96,6 +98,7 @@
     max-width: 300px;
     word-break: break-all;
     line-height: 1.5;
+    padding: 8px 0;
 }
 
 .lot-dialog{

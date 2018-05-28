@@ -15,18 +15,18 @@
       <el-col :span="24">
           <el-table :data="trials" highlight-current-row v-loading="loading" 
             style="width: 100%;height: 90%" border>
-            <el-table-column prop="id" width="70" label="编号"></el-table-column>
-            <el-table-column prop="title" label="标题"></el-table-column>
-            <el-table-column prop="originPrice" label="原价"></el-table-column>
-            <el-table-column prop="num" width="80" label="数量"></el-table-column>
-            <el-table-column prop="applyNum" width="120" label="申请人数"></el-table-column>
+            <el-table-column prop="proId" width="70" label="编号"></el-table-column>
+            <el-table-column prop="proName" label="标题"></el-table-column>
+            <el-table-column prop="sellingPrice" label="原价"></el-table-column>
+            <el-table-column prop="proCount" width="80" label="数量"></el-table-column>
+            <el-table-column prop="peopleNum" width="120" label="申请人数"></el-table-column>
             <el-table-column width="120" label="操作">
                 <template slot-scope="scope">
-                    <a href="javascript:;" class="detail" @click="showDetail(scope.row.id, scope.row.state)">查看详情</a>
+                    <a href="javascript:;" class="detail" @click="showDetail(scope.row.proId, scope.row.proStatus)">查看详情</a>
                 </template>
             </el-table-column>
             <el-table-column 
-                prop="state" 
+                prop="status" 
                 width="150" 
                 :label="'状态-'+ state" 
                 :filters="stateOpts" 
@@ -38,105 +38,105 @@
           <el-pagination class="page" 
             @current-change="handleCurrentChange" 
             :current-page.sync="currentPage" 
-            :page-size="20" 
+            :page-size="proSize" 
             layout="total, prev, pager, next" 
             prev-text="上一页" 
             next-text="下一页" 
-            :total="100">
+            :total="proTotal">
           </el-pagination>
       </el-col>
       <el-dialog :title="dialogTitle" :visible.sync="showDialog" width="500" custom-class="edit-dialog" >
-        <el-form ref="form" :model="sizeForm" label-width="100px" :rules="rules"	
+        <el-form ref="form" :model="formdata" label-width="100px" :rules="rules"	
           :style="{'max-height': maxFormHeight}" size="small">
           <p class="label">试用信息</p>
-          <el-form-item label="标题" prop="title">
-            <el-input v-if="!read" v-model="sizeForm.title"></el-input>
-            <p class="read" v-else>{{sizeForm.title}}</p>
+          <el-form-item label="标题" prop="proName">
+            <el-input v-if="!read" v-model="formdata.proName"></el-input>
+            <p class="read" v-else>{{formdata.proName}}</p>
           </el-form-item>
-          <el-form-item label="数量" prop="num">
-            <el-input v-if="!read" v-model.number="sizeForm.num"></el-input>
-            <p class="read" v-else>{{sizeForm.num}}</p>
+          <el-form-item label="数量" prop="proCount">
+            <el-input v-if="!read" v-model.number="formdata.proCount"></el-input>
+            <p class="read" v-else>{{formdata.proCount}}</p>
           </el-form-item>
-          <el-form-item label="售价" prop="salePrice">
-            <el-input v-if="!read" v-model.number="sizeForm.salePrice"></el-input>
-            <p class="read" v-else>{{sizeForm.salePrice}}</p>
+          <el-form-item label="售价" prop="sellingPrice">
+            <el-input v-if="!read" v-model.number="formdata.sellingPrice"></el-input>
+            <p class="read" v-else>{{formdata.sellingPrice}}</p>
           </el-form-item>
-          <el-form-item label="封面" prop="frontUrl">
+          <el-form-item label="封面" prop="coverImg">
               <el-upload class="front-pic" :action="uploadUrl" 
                 :show-file-list="false" :multiple="false" 
                 :before-upload="beforeUpload" accept="image/*"
                 :on-success="frontSuccess" :on-error="frontError" 
                 :limit="1" v-if="!read">
-                <img :src="sizeForm.frontUrl" v-if="sizeForm.frontUrl" class="front-img" alt="">
+                <img :src="formdata.coverImg" v-if="formdata.coverImg" class="front-img" alt="">
                 <i v-else class="el-icon-plus front-icon"></i>
               </el-upload>
-              <img :src="sizeForm.frontUrl" v-else class="front-img">
+              <img :src="formdata.coverImg" v-else class="front-img">
           </el-form-item>
-          <el-form-item label="上架" prop="grounding">
+          <el-form-item label="上架" prop="proStartTime">
             <el-date-picker type="datetime" format="yyyy-MM-dd HH:mm" value-format="yyyy-MM-dd HH:mm"
-              v-if="!read" v-model="sizeForm.grounding">
+              v-if="!read" v-model="formdata.proStartTime">
             </el-date-picker>
-            <p class="read" v-else>{{sizeForm.grounding}}</p>
+            <p class="read" v-else>{{formdata.proStartTime}}</p>
           </el-form-item>
-          <el-form-item label="开奖" prop="lottery">
+          <el-form-item label="开奖" prop="proEndTime">
             <el-date-picker type="datetime" format="yyyy-MM-dd HH:mm" value-format="yyyy-MM-dd HH:mm" 
-              v-if="!read" v-model="sizeForm.lottery">
+              v-if="!read" v-model="formdata.proEndTime">
             </el-date-picker>
-            <p class="read" v-else>{{sizeForm.lottery}}</p>
+            <el-date-picker class="read" format="yyyy-MM-dd HH:mm" v-model="formdata.proEndTime" disabled v-else></el-date-picker>
           </el-form-item>
           <el-form-item label="开奖形式" required>
-            <el-radio-group v-model="sizeForm.prizeway" v-if="!read">
+            <el-radio-group v-model="formdata.lotterType" v-if="!read">
               <el-radio label="自动">自动</el-radio>
               <el-radio label="">手动</el-radio>
               <label class="radio-tip">(请确保在开奖时间前选择中奖名单)</label>
             </el-radio-group>
-            <el-radio-group v-model="sizeForm.prizeway" v-else>
+            <el-radio-group v-model="formdata.lotterType" v-else>
               <el-radio label="自动" disabled ></el-radio>
               <el-radio label="" disabled >手动</el-radio>
             </el-radio-group>
           </el-form-item>
           <p class="label">试用规则</p>
-          <el-form-item label="规则" prop="lottery">
+          <el-form-item label="规则" prop="proDescribe">
             <el-input type="textarea" v-if="!read" :autosize="{minRows: 2, maxRows: 10}" 
-              resize="vertical" v-model="sizeForm.rule" style="width: 300px">
+              resize="vertical" v-model="formdata.proDescribe" style="width: 300px">
             </el-input>
-            <p class="read txt" v-else>{{sizeForm.rule}}</p>
+            <p class="read txt" v-else>{{formdata.proDescribe}}</p>
           </el-form-item>
           <p class="label">商品信息</p>
           <el-form-item label="颜色" prop="color">
-            <el-input v-if="!read" v-model="sizeForm.color"></el-input>
-            <p class="read" v-else>{{sizeForm.color}}</p>
+            <el-input v-if="!read" v-model="formdata.color"></el-input>
+            <p class="read" v-else>{{formdata.color}}</p>
           </el-form-item>
           <el-form-item label="国家" prop="country">
-            <el-input v-if="!read" v-model="sizeForm.country"></el-input>
-            <p class="read" v-else>{{sizeForm.country}}</p>
+            <el-input v-if="!read" v-model="formdata.country"></el-input>
+            <p class="read" v-else>{{formdata.country}}</p>
           </el-form-item>
-          <el-form-item label="价格" prop="price">
-            <el-input v-if="!read" v-model.number="sizeForm.price"></el-input>
-            <p class="read" v-else>{{sizeForm.price}}</p>
+          <el-form-item label="价格" prop="consultPrice">
+            <el-input v-if="!read" v-model.number="formdata.consultPrice"></el-input>
+            <p class="read" v-else>{{formdata.consultPrice}}</p>
           </el-form-item>
           <el-form-item label="品牌" prop="brand">
-            <el-input v-if="!read" v-model="sizeForm.brand"></el-input>
-            <p class="read" v-else>{{sizeForm.brand}}</p>
+            <el-input v-if="!read" v-model="formdata.brand"></el-input>
+            <p class="read" v-else>{{formdata.brand}}</p>
           </el-form-item>
           <el-form-item label="品类" prop="category">
-            <el-input v-if="!read" v-model="sizeForm.category"></el-input>
-            <p class="read" v-else>{{sizeForm.category}}</p>
+            <el-input v-if="!read" v-model="formdata.category"></el-input>
+            <p class="read" v-else>{{formdata.category}}</p>
           </el-form-item>
           <el-form-item label="材质" prop="material">
-            <el-input v-if="!read" v-model="sizeForm.material"></el-input>
-            <p class="read" v-else>{{sizeForm.material}}</p>
+            <el-input v-if="!read" v-model="formdata.material"></el-input>
+            <p class="read" v-else>{{formdata.material}}</p>
           </el-form-item>
-          <el-form-item label="图片" prop="goodsUrl">
+          <el-form-item label="图片" prop="decsImg">
               <el-upload class="front-pic" :action="uploadUrl" 
                 :show-file-list="false" :multiple="false" 
                 :before-upload="beforeUpload" accept="image/*"
                 :on-success="goodsSuccess" :on-error="goodsError" 
                 :limit="1" v-if="!read">
-                <img :src="sizeForm.goodsUrl" v-if="sizeForm.goodsUrl" class="front-img" alt="">
+                <img :src="formdata.decsImg" v-if="formdata.decsImg" class="front-img" alt="">
                 <i v-else class="el-icon-plus front-icon"></i>
               </el-upload>
-              <img :src="sizeForm.goodsUrl" v-else class="front-img" alt="">
+              <img :src="formdata.decsImg" v-else class="front-img" alt="">
           </el-form-item>
           <template v-if="read && dialogState == '已结束'">
             <p class="label">中奖名单</p>
@@ -170,7 +170,7 @@
         </template>
         <template slot="footer" v-if="edit">
           <el-button @click="showDialog = false">取消</el-button>
-          <el-button type="success" @click="editTrial()">保存</el-button>
+          <el-button type="success" @click="saveProduct">保存</el-button>
         </template>
       </el-dialog>
       <el-dialog :visible.sync="showLotteryDialog" width="60%" fullscreen custom-class="lot-dialog">
@@ -216,91 +216,45 @@ import { baseUrl } from './../../api/baseUrl'
 export default {
   data() {
     return {
-      trials: [
-        {
-          id: 1,
-          title: "supreme最新款卫衣",
-          originPrice: "1998.00",
-          num: 30,
-          applyNum: 100000,
-          state: "待发布"
-        },
-        {
-          id: 2,
-          title: "supreme最新款卫衣",
-          originPrice: "1998.00",
-          num: 30,
-          applyNum: 100000,
-          state: "待发布"
-        },
-        {
-          id: 3,
-          title: "supreme最新款卫衣",
-          originPrice: "1998.00",
-          num: 30,
-          applyNum: 100000,
-          state: "待开奖"
-        },
-        {
-          id: 4,
-          title: "supreme最新款卫衣",
-          originPrice: "1998.00",
-          num: 30,
-          applyNum: 100000,
-          state: "已结束"
-        }
-      ],
+      trials: [],
       stateOpts: [
-        { text: "全部", value: "全部" },
-        { text: "待发布", value: "待发布" },
-        { text: "待开奖", value: "待开奖" },
-        { text: "已结束", value: "已结束" }
+        { text: "全部", value: null },
+        { text: "待发布", value: "0" },
+        { text: "待开奖", value: "1" },
+        { text: "已开奖", value: "2" },
+        { text: "已结束", value: "3" }
       ],
+      proTotal: 0,
+      proSize: 20,
       state: "全部",
       loading: false,
       currentPage: 1,
       dialogTitle: "",
       showDialog: false,
-      sizeForm: {
-        title: "",
-        num: "",
-        salePrice: "",
-        frontUrl: "",
-        grounding: "",
-        lottery: "",
-        prizeway: "",
-        rule: "",
-        color: "",
-        country: "",
-        price: "",
-        brand: "",
-        category: "",
-        material: "",
-        goodsUrl: ""
-      },
+      formdata: {},
       rules: {
-        title: [
+        proName: [
           { required: true, message: '请输入试用标题', trigger: 'blur' },
           { min: 1, max: 20, message: '1-20 个字符', trigger: 'blur' }
         ],
-        num: [
+        proCount: [
           { required: true, message: '请输入数量' },
           { type: 'number', message: '请填写有效数字' }
         ],
-        salePrice: [
+        sellingPrice: [
           { required: true, message: '请输入售价' },
           { type: 'number', message: '请填写有效数字' }
         ],
-        frontUrl: [
+        coverImg: [
           { required: true, message: '请上传封面图', trigger: 'blur' }
         ],
-        grounding: [
+        proStartTime: [
           { type: 'date', required: true, message: '请选择上架日期', trigger: 'blur' }
         ],
-        lottery: [
+        proEndTime: [
           { type: 'date', required: true, message: '请选择开奖日期', trigger: 'blur' }
         ],
-        rule: [
+        proDescribe: [
           { required: true, message: '请输入试用规则', trigger: 'blur' },
         ],
         color: [
@@ -309,7 +263,7 @@ export default {
         country: [
           { required: true, message: '请输入商品所在国家', trigger: 'blur' },
         ],
-        price: [
+        consultPrice: [
           { required: true, message: '请输入商品价格' },
           { type: 'number', message: '请填写有效数字' }
         ],
@@ -322,7 +276,7 @@ export default {
         material: [
           { required: true, message: '请输入商品材质', trigger: 'blur' },
         ],
-        goodsUrl: [
+        decsImg: [
           { required: true, message: '请输入商品图片', trigger: 'blur' },
         ],
       },
@@ -379,12 +333,49 @@ export default {
     }
   },
   methods: {
+    getProductList() {
+      let params = {
+        pageIndex: this.currentPage,
+        pageSize: this.proSize
+      };
+      this.$http.get(`${baseUrl}/yup-rest/manage/product-list`, {params: params})
+      .then(res => {
+        console.log(res);
+        if(res.data.resultCode == 200){
+          let r = res.data.resultData;
+          this.trials = r.list;
+          this.proTotal = r.total;
+          this.trials.filter(item => {
+            if(item.proStatus == 0){
+              item.status = '待发布';
+            } else if(item.proStatus == 1){
+              item.status = '待开奖';
+            } else if(item.proStatus == 2){
+              item.status = '已开奖';
+            } else if(item.proStatus == 3){
+              item.status = '已结束';
+            } else {
+              item.status = '待发布';
+            }
+          })
+        }else{
+          this.$message.error(res.data.resultMsg);
+        }
+      })
+      .catch(res => {
+        this.$message.error('未知错误');
+      })
+    },
     filterState(value, row) {
-      this.state = value;
-      if (value == "全部") {
+      if(value != null){
+        this.state = this.stateOpts[parseInt(value) + 1].text;
+      }else{
+        this.state = '全部'
+      }
+      if (value == null) {
         return true;
       } else {
-        return row.state === value;
+        return row.proStatus === value;
       }
     },
     handleCurrentChange(val) {},
@@ -394,16 +385,52 @@ export default {
       this.dialogState = state;
       this.showDialog = true;
       this.dialogTitle = "试用列表-查看详情";
+      this.getProDetail();
+    },
+    getProDetail() {
+      this.$http.get(`${baseUrl}/yup-rest/pro-detail`, { params: { proId: this.editId } })
+      .then(res => {
+        if(res.data.resultCode == 200){
+          this.formdata = res.data.resultData;
+          Object.assign({}, this.formdata, {
+            proStartTime: '',
+            lotterType: '',
+            proStatus: 0,
+            proId: this.editId,
+            proBannerImgList: []
+          })
+        }else{
+          this.$message.error(res.data.resultMsg);  
+        }
+      })
+      .catch(() => {
+        this.$message.error('未知错误');  
+      })
     },
     addTrial() {
       this.read = false;
       this.edit = false;
       this.showDialog = true;
       this.dialogTitle = "试用列表-添加试用";
-      for (const a in this.sizeForm) {
-        if (this.sizeForm.hasOwnProperty(a)) {
-          this.sizeForm[a] = "";
-        }
+      this.formdata = {
+        proName: '',
+        proCount: '',
+        sellingPrice: '',
+        coverImg: '',
+        proStartTime: '',
+        proEndTime: '',
+        lotterType: '',
+        proDescribe: '',
+        color: '',
+        country: '',
+        consultPrice: '',
+        brand: '',
+        category: '',
+        material: '',
+        decsImg: '',
+        proStatus: 0,
+        proId: 0,
+        proBannerImgList: []
       }
     },
     editTrial() {
@@ -411,31 +438,10 @@ export default {
       this.edit = true;
       this.read = false;
       this.dialogTitle = "试用列表-编辑试用";
-      this.sizeForm = {};
     },
     saveProduct() {
-      let o = this.sizeForm;
       this.$http.defaults.headers.userId = 1;
-      this.$http.post(`${baseUrl}/yup-rest/manage/save-product`, {
-        brand: o.brand,
-        category: o.category,
-        color: o.color,
-        consultPrice: o.price,
-        country: o.country,
-        coverImg: o.frontUrl,
-        decsImg: o.goodsUrl,
-        lotterType: o.prizeway == '' ? 2 : 1,
-        material: o.material,
-        proCount: o.num,
-        proDescribe: o.rule,
-        proEndTime: o.lottery,
-        proId: 0,
-        proName: o.title,
-        proStartTime: o.grounding,
-        proStatus: 0,
-        sellingPrice: o.salePrice,
-        proBannerImgList: []
-      })
+      this.$http.post(`${baseUrl}/yup-rest/manage/save-product`, this.formdata)
       .then(res => {
         if(res.data.resultCode == 200){
           this.$message({
@@ -473,7 +479,7 @@ export default {
     },
     frontSuccess(res, file) {
       if(res.resultCode == 200){
-        this.sizeForm.frontUrl = res.resultData;
+        this.formdata.frontUrl = res.resultData;
       }else{
         this.$message.error('上传失败！');
       }
@@ -483,7 +489,7 @@ export default {
     },
     goodsSuccess(res, file) {
       if(res.resultCode == 200){
-        this.sizeForm.goodsUrl = res.resultData;
+        this.formdata.goodsUrl = res.resultData;
       }else{
         this.$message.error('上传失败！');
       }
@@ -514,6 +520,9 @@ export default {
         }
       })
     }
+  },
+  mounted() {
+    this.getProductList();
   }
 };
 </script>
