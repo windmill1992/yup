@@ -76,7 +76,7 @@ export default {
 </script>
 
 <style>
-@import url(./../../../static/css/base.css);
+@import url(./../../assets/css/base.css);
 .el-table th>.cell{
     white-space: nowrap;
 }
@@ -89,6 +89,6 @@ export default {
     margin-right: 10px;
     width: 18px;
     height: 18px;
-    background: url(./../../../static/img/logo.png) no-repeat 0 0 / 100% 100%;
+    background: url(./../../assets/img/logo.png) no-repeat 0 0 / 100% 100%;
 }
 </style>

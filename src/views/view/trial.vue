@@ -22,7 +22,7 @@
             <el-table-column prop="peopleNum" width="120" label="申请人数"></el-table-column>
             <el-table-column width="120" label="操作">
                 <template slot-scope="scope">
-                    <a href="javascript:;" class="detail" @click="showDetail(scope.row.proId, scope.row.proStatus)">查看详情</a>
+                    <a href="javascript:;" class="detail" @click="showDetail(scope.row.proId, scope.row.status)">查看详情</a>
                 </template>
             </el-table-column>
             <el-table-column 
@@ -35,7 +35,7 @@
                 :filter-method="filterState">
             </el-table-column>
           </el-table>
-          <el-pagination class="page" 
+          <el-pagination class="page fr" v-if="proTotal > 10"
             @current-change="handleCurrentChange" 
             :current-page.sync="currentPage" 
             :page-size="proSize" 
@@ -67,16 +67,16 @@
                 :before-upload="beforeUpload" accept="image/*"
                 :on-success="frontSuccess" :on-error="frontError" 
                 :limit="1" v-if="!read">
-                <img :src="formdata.coverImg" v-if="formdata.coverImg" class="front-img" alt="">
-                <i v-else class="el-icon-plus front-icon"></i>
+                <img :src="formdata.coverImg" v-if="formdata.coverImg" class="front-img loading-target" alt="">
+                <i v-else class="el-icon-plus front-icon loading-target"></i>
               </el-upload>
               <img :src="formdata.coverImg" v-else class="front-img">
           </el-form-item>
           <el-form-item label="上架" prop="proStartTime">
-            <el-date-picker type="datetime" format="yyyy-MM-dd HH:mm" value-format="yyyy-MM-dd HH:mm"
+            <el-date-picker type="datetime" format="yyyy-MM-dd HH:mm" value-format="yyyy-MM-dd HH:mm" 
               v-if="!read" v-model="formdata.proStartTime">
             </el-date-picker>
-            <p class="read" v-else>{{formdata.proStartTime}}</p>
+            <el-date-picker class="read" format="yyyy-MM-dd HH:mm" v-model="formdata.proStartTime" disabled v-else></el-date-picker>
           </el-form-item>
           <el-form-item label="开奖" prop="proEndTime">
             <el-date-picker type="datetime" format="yyyy-MM-dd HH:mm" value-format="yyyy-MM-dd HH:mm" 
@@ -85,14 +85,14 @@
             <el-date-picker class="read" format="yyyy-MM-dd HH:mm" v-model="formdata.proEndTime" disabled v-else></el-date-picker>
           </el-form-item>
           <el-form-item label="开奖形式" required>
-            <el-radio-group v-model="formdata.lotterType" v-if="!read">
-              <el-radio label="自动">自动</el-radio>
-              <el-radio label="">手动</el-radio>
+            <el-radio-group v-model="formdata.lotteryType" v-if="!read">
+              <el-radio :label="1">自动</el-radio>
+              <el-radio :label="2">手动</el-radio>
               <label class="radio-tip">(请确保在开奖时间前选择中奖名单)</label>
             </el-radio-group>
-            <el-radio-group v-model="formdata.lotterType" v-else>
-              <el-radio label="自动" disabled ></el-radio>
-              <el-radio label="" disabled >手动</el-radio>
+            <el-radio-group v-model="formdata.lotteryType" v-else>
+              <el-radio :label="1" disabled >自动</el-radio>
+              <el-radio :label="2" disabled >手动</el-radio>
             </el-radio-group>
           </el-form-item>
           <p class="label">试用规则</p>
@@ -133,8 +133,8 @@
                 :before-upload="beforeUpload" accept="image/*"
                 :on-success="goodsSuccess" :on-error="goodsError" 
                 :limit="1" v-if="!read">
-                <img :src="formdata.decsImg" v-if="formdata.decsImg" class="front-img" alt="">
-                <i v-else class="el-icon-plus front-icon"></i>
+                <img :src="formdata.decsImg" v-if="formdata.decsImg" class="front-img loading-target" alt="">
+                <i v-else class="el-icon-plus front-icon loading-target"></i>
               </el-upload>
               <img :src="formdata.decsImg" v-else class="front-img" alt="">
           </el-form-item>
@@ -338,9 +338,10 @@ export default {
         pageIndex: this.currentPage,
         pageSize: this.proSize
       };
-      this.$http.get(`${baseUrl}/yup-rest/manage/product-list`, {params: params})
+      this.loading = true;
+      this.$http.get(`${baseUrl}/yup-rest/manage/product-list`, { params: params })
       .then(res => {
-        console.log(res);
+        this.loading = false;
         if(res.data.resultCode == 200){
           let r = res.data.resultData;
           this.trials = r.list;
@@ -363,6 +364,7 @@ export default {
         }
       })
       .catch(res => {
+        this.loading = false;
         this.$message.error('未知错误');
       })
     },
@@ -379,23 +381,23 @@ export default {
       }
     },
     handleCurrentChange(val) {},
-    showDetail(id, state) {
+    showDetail(id, status) {
       this.read = true;
+      this.edit = false;
       this.editId = id;
-      this.dialogState = state;
+      this.dialogState = status;
       this.showDialog = true;
       this.dialogTitle = "试用列表-查看详情";
       this.getProDetail();
     },
     getProDetail() {
+      this.uploading = this.$loading();
       this.$http.get(`${baseUrl}/yup-rest/pro-detail`, { params: { proId: this.editId } })
       .then(res => {
+        this.uploading.close();
         if(res.data.resultCode == 200){
           this.formdata = res.data.resultData;
-          Object.assign({}, this.formdata, {
-            proStartTime: '',
-            lotterType: '',
-            proStatus: 0,
+          this.formdata = Object.assign({}, this.formdata, {
             proId: this.editId,
             proBannerImgList: []
           })
@@ -404,6 +406,7 @@ export default {
         }
       })
       .catch(() => {
+        this.uploading.close();
         this.$message.error('未知错误');  
       })
     },
@@ -419,7 +422,7 @@ export default {
         coverImg: '',
         proStartTime: '',
         proEndTime: '',
-        lotterType: '',
+        lotteryType: 2,
         proDescribe: '',
         color: '',
         country: '',
@@ -440,18 +443,24 @@ export default {
       this.dialogTitle = "试用列表-编辑试用";
     },
     saveProduct() {
+      let f = this.isPublish;
       this.$http.defaults.headers.userId = 1;
-      this.$http.post(`${baseUrl}/yup-rest/manage/save-product`, this.formdata)
+      let apiUrl = f ? `${baseUrl}/yup-rest/manage/update-product` : `${baseUrl}/yup-rest/manage/save-product`;
+      this.$http.post(apiUrl, this.formdata)
       .then(res => {
         if(res.data.resultCode == 200){
           this.$message({
             type: 'success',
-            message: '保存成功！',
+            message: f ? '发布成功！' : '保存成功！',
             showClose: true,
             center: true
           });
-          this.currentPage = 1;
-          this.getProductList(1, 20);
+          if(this.formdata.proId == 0){
+            this.currentPage = 1;
+            this.getProductList();
+          }else{
+            this.getProductList();
+          }
         }else{
           this.$message({
             message: res.data.resultMsg,
@@ -460,42 +469,54 @@ export default {
             showClose: true
           })
         }
+        if(this.edit || f){
+            this.showDialog = false;
+          }
       })
       .catch(() => {
-         this.$message.error('保存失败！');
+        this.$message.error('保存失败！');
+        if(this.edit){
+          this.showDialog = false;
+        }
       })
     },
     publish() {
-
+      this.formdata.proStatus = 1;
+      this.isPublish = true;
+      this.saveProduct();
     },
     beforeUpload(file) {
       if(file.type != 'image/png' && file.type != 'image/jpg' && file.type != 'image/jpeg' && file.type != 'image/gif' && file.type != 'images/bmp'){
         return false;
       }
-      this.$loading({
-        target: '.front-icon',
+      this.uploading = this.$loading({
+        target: '.loading-target',
       })
       return true;
     },
     frontSuccess(res, file) {
       if(res.resultCode == 200){
-        this.formdata.frontUrl = res.resultData;
+        this.formdata.coverImg = res.resultData;
       }else{
         this.$message.error('上传失败！');
       }
+      this.uploading.close();
     },
     frontError() {
       this.$message.error('上传失败！');
+      this.uploading.close();
     },
     goodsSuccess(res, file) {
       if(res.resultCode == 200){
-        this.formdata.goodsUrl = res.resultData;
+        this.formdata.decsImg = res.resultData;
       }else{
         this.$message.error('上传失败！');
       }
+      this.uploading.close();
     },
     goodsError() {
       this.$message.error('上传失败！');
+      this.uploading.close();
     },
     selectUser() {},
     lotCurChange() {},
@@ -528,6 +549,6 @@ export default {
 </script>
 
 <style>
-@import url(./../../../static/css/base.css);
-@import url(./../../../static/css/home/trial.css);
+@import url(./../../assets/css/base.css);
+@import url(./../../assets/css/home/trial.css);
 </style>

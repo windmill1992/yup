@@ -2,7 +2,7 @@
   <el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-position="left" label-width="0px" class="demo-ruleForm login-container">
     <!-- <h3 class="title">系统登录</h3> -->
     <div class="left">
-      <img src="./../../static/img/logo.png" alt="logo">
+      <img src="./../assets/img/logo.png" alt="logo">
       <p>YUP-共享潮牌电商</p>
       <p>后台管理系统</p>
     </div>

@@ -6,14 +6,14 @@
         </el-col>
         <el-col :span="24">
             <el-table :data="list" highlight-current-row v-loading="loading" border style="width: 100%;height: 90%;">
-                <el-table-column prop="id" label="编号" width="80"></el-table-column>
-                <el-table-column prop="name" label="姓名" width="180"></el-table-column>
+                <el-table-column prop="entryApplyId" label="编号" width="80"></el-table-column>
+                <el-table-column prop="userName" label="姓名" width="180"></el-table-column>
                 <el-table-column prop="mobile" label="手机号" width="180"></el-table-column>
-                <el-table-column prop="wx" label="微信号" width="180"></el-table-column>
-                <el-table-column prop="service" label="经验产品/服务"></el-table-column>
+                <el-table-column prop="wechat" label="微信号" width="180"></el-table-column>
+                <el-table-column prop="note" label="经验产品/服务"></el-table-column>
             </el-table>
             <el-pagination @current-change="curChange" :current-page="curPage" 
-                :page-size="20" :total="100" layout="total, prev, pager, next" class="page">
+                :page-size="pageSize" :total="total" layout="total, prev, pager, next" class="page fr">
             </el-pagination>
         </el-col>
     </el-row>
@@ -25,26 +25,29 @@ import { baseUrl } from './../../api/baseUrl'
 export default {
     data() {
         return {
-            list: [
-                {id: 1, name: '张三', mobile: '1233214244', wx: 'dsadasdasd', service: '本公司经验潮牌服饰，可以提供潮牌服饰，鞋帽，滑板等物品进行合作。'},
-                {id: 2, name: '李四', mobile: '1233214244', wx: 'dsadasdasd', service: '本公司经验潮牌服饰，可以提供潮牌服饰，鞋帽，滑板等物品进行合作。'},
-                {id: 3, name: '王五', mobile: '1233214244', wx: 'dsadasdasd', service: 'it品牌经销商'}
-            ],
+            list: [],
             curPage: 1,
+            pageSize: 20,
+            total: 0,
             loading: false
         }
     },
     methods: {
-        curChange() {
-
+        curChange(idx) {
+            this.curPage = idx;
+            this.getEnterApplyList();
         },
         getEnterApplyList() {
+            this.loading = true;
             this.$http.get(`${baseUrl}/yup-rest/manage/enter-apply-list`, {
-                params: {  pageIndex: this.curPage, pageSize: 20}
+                params: {  pageIndex: this.curPage, pageSize: this.pageSize}
             })
             .then(res => {
+                this.loading = false;
                 if(res.data.resultCode == 200){
-                    this.list = res.data.resultData;
+                    let r = res.data.resultData;
+                    this.list = r.list;
+                    this.total = r.total;
                 }else{
                     this.$message({
                         message: res.data.resultMsg,
@@ -55,6 +58,7 @@ export default {
                 }
             })
             .catch(() => {
+                this.loading = false;
                 this.$message.error('未知错误！');
             })
         }

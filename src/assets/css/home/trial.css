@@ -1,0 +1,121 @@
+.tool-bar {
+    white-space: nowrap;
+}
+
+.el-input {
+    width: auto;
+    margin-right: 10px;
+}
+
+.detail {
+    text-decoration: underline;
+    color: #333;
+}
+
+.page {
+    margin-top: 20px;
+}
+
+.el-dialog__header {
+    padding-bottom: 20px;
+}
+
+.edit-dialog{
+    width: 60%;
+}
+
+.edit-dialog .el-form {
+    overflow: auto;
+    padding: 0 20px;
+    min-height: 300px;
+}
+
+.edit-dialog .el-dialog__footer {
+    border-top: 1px dashed #f1f1f1;
+}
+
+.edit-dialog .label {
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.edit-dialog .label::before {
+    display: inline-block;
+    content: '';
+    width: 4px;
+    height: 14px;
+    background: #333;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.front-pic {
+    color: #333;
+    margin-top: 10px;
+}
+
+.front-pic .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    vertical-align: top;
+}
+
+.front-pic .el-upload:hover {
+    border-color: #409EFF;
+}
+
+.front-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 138px;
+    height: 138px;
+    line-height: 138px;
+    text-align: center;
+}
+
+.front-img {
+    width: 138px;
+    height: 138px;
+    display: block;
+}
+
+.radio-tip {
+    color: #f00;
+    font-size: 13px;
+    margin-left: 10px;
+    line-height: 18px;
+}
+
+.read {
+    color: #999;
+    font-size: 13px;
+}
+
+.read.txt {
+    max-width: 300px;
+    word-break: break-all;
+    line-height: 1.5;
+    padding: 8px 0;
+}
+
+.lot-dialog{
+    width: 80%;
+}
+
+.lot-dialog .el-table{
+    min-height: 300px;
+}
+
+.lot-head {
+    float: left;
+    width: 95%;
+    line-height: 36px;
+    overflow: hidden;
+}
+
+.lot-head .lot-title {
+    margin-right: 10px;
+}
