@@ -45,7 +45,7 @@
             :total="proTotal">
           </el-pagination>
       </el-col>
-      <el-dialog :title="dialogTitle" :visible.sync="showDialog" width="500" custom-class="edit-dialog" >
+      <el-dialog :title="dialogTitle" :visible.sync="showDialog" custom-class="edit-dialog" :fullscreen="fullscreen" >
         <el-form ref="form" :model="formdata" label-width="100px" :rules="rules"	
           :style="{'max-height': maxFormHeight}" size="small">
           <p class="label">试用信息</p>
@@ -65,10 +65,19 @@
               <el-upload class="front-pic" :action="uploadUrl" 
                 :show-file-list="false" :multiple="false" 
                 :before-upload="beforeUpload" accept="image/*"
-                :on-success="frontSuccess" :on-error="frontError" 
+                :on-success="frontSuccess" :on-error="uploadError" 
                 :limit="1" v-if="!read">
                 <img :src="formdata.coverImg" v-if="formdata.coverImg" class="front-img loading-target" alt="">
                 <i v-else class="el-icon-plus front-icon loading-target"></i>
+              </el-upload>
+              <img :src="formdata.coverImg" v-else class="front-img">
+          </el-form-item>
+          <el-form-item label="轮播" prop="proBannerImgList">
+              <el-upload class="front-pic" :action="uploadUrl" 
+                list-type="picture-card" :before-upload="beforeUpload" accept="image/*"
+                :on-success="bannerSuccess" :on-error="uploadError" :on-remove="removeBanner"
+                :limit="10" v-if="!read">
+                <i class="el-icon-plus front-icon loading-target"></i>
               </el-upload>
               <img :src="formdata.coverImg" v-else class="front-img">
           </el-form-item>
@@ -131,7 +140,7 @@
               <el-upload class="front-pic" :action="uploadUrl" 
                 :show-file-list="false" :multiple="false" 
                 :before-upload="beforeUpload" accept="image/*"
-                :on-success="goodsSuccess" :on-error="goodsError" 
+                :on-success="goodsSuccess" :on-error="uploadError" 
                 :limit="1" v-if="!read">
                 <img :src="formdata.decsImg" v-if="formdata.decsImg" class="front-img loading-target" alt="">
                 <i v-else class="el-icon-plus front-icon loading-target"></i>
@@ -173,20 +182,20 @@
           <el-button type="success" @click="saveProduct">保存</el-button>
         </template>
       </el-dialog>
-      <el-dialog :visible.sync="showLotteryDialog" width="60%" fullscreen custom-class="lot-dialog">
+      <el-dialog :visible.sync="showLotteryDialog" fullscreen custom-class="lot-dialog">
         <template slot="title">
           <div class="lot-head">
-            <p class="lot-title fl">试用列表-查看详情-开奖 ( {{selectedUser}} / {{userNum}} )</p>
+            <p class="lot-title fl">试用列表-查看详情-开奖 ( {{selectedUser}} / {{lotTotal}} )</p>
             <el-input placeholder="搜索用户手机号/用户名" class="fr"></el-input>
           </div>
         </template>
         <el-table :data="toLotUsers" highlight-current-row v-loading="loading" 
             style="width: 100%;height: 90%" :style="{'max-height': maxFormHeight}" border>
-            <el-table-column prop="id" width="60" label="ID"></el-table-column>
-            <el-table-column prop="nick" width="120" label="用户昵称" show-overflow-tooltip></el-table-column>
+            <el-table-column prop="proId" width="60" label="ID"></el-table-column>
+            <el-table-column prop="userName" width="120" label="用户昵称" show-overflow-tooltip></el-table-column>
             <el-table-column prop="mobile" width="140" label="手机号"></el-table-column>
-            <el-table-column prop="addr" width="180" label="收货地址" show-overflow-tooltip></el-table-column>
-            <el-table-column prop="trialWord" label="试用宣言" show-overflow-tooltip></el-table-column>
+            <el-table-column prop="userAddress" width="180" label="收货地址" show-overflow-tooltip></el-table-column>
+            <el-table-column prop="note" label="试用宣言" show-overflow-tooltip></el-table-column>
             <el-table-column width="100" label="操作" type="selection" @selection-change="selectUser">
               <!-- <template slot-scope="scope">
                 <span>选中</span>
@@ -196,11 +205,11 @@
           <el-pagination class="page" 
             @current-change="lotCurChange" 
             :current-page.sync="lotCurPage" 
-            :page-size="20" 
+            :page-size="lotPageSize" 
             layout="total, prev, pager, next" 
             prev-text="上一页" 
             next-text="下一页" 
-            :total="100">
+            :total="lotTotal">
           </el-pagination>
           <template slot="footer">
             <el-button @click="showLotteryDialog = false">取消</el-button>
@@ -212,6 +221,7 @@
 
 <script>
 import { baseUrl } from './../../api/baseUrl'
+var moment = require('moment');
 
 export default {
   data() {
@@ -230,6 +240,7 @@ export default {
       loading: false,
       currentPage: 1,
       dialogTitle: "",
+      fullscreen: false,
       showDialog: false,
       formdata: {},
       rules: {
@@ -317,7 +328,10 @@ export default {
       selectedUser: 0,
       lotCurPage: 1,
       lotEndCurPage: 1,
-      dialogState: ""
+      lotPageSize: 20,
+      lotTotal: 0,
+      dialogState: "",
+      isPublish: false
     };
   },
   computed: {
@@ -392,15 +406,11 @@ export default {
     },
     getProDetail() {
       this.uploading = this.$loading();
-      this.$http.get(`${baseUrl}/yup-rest/pro-detail`, { params: { proId: this.editId } })
+      this.$http.get(`${baseUrl}/yup-rest/manage/product-info`, { params: { proId: this.editId } })
       .then(res => {
         this.uploading.close();
         if(res.data.resultCode == 200){
           this.formdata = res.data.resultData;
-          this.formdata = Object.assign({}, this.formdata, {
-            proId: this.editId,
-            proBannerImgList: []
-          })
         }else{
           this.$message.error(res.data.resultMsg);  
         }
@@ -444,8 +454,16 @@ export default {
     },
     saveProduct() {
       let f = this.isPublish;
+      this.formdata.proStartTime = moment(new Date(this.formdata.proStartTime)).format('YYYY-MM-DD HH:mm');
+      this.formdata.proEndTime = moment(new Date(this.formdata.proEndTime)).format('YYYY-MM-DD HH:mm');
+      delete this.formdata.applyPeopleNum;
+      delete this.formdata.applyUserList;
+      delete this.formdata.winningPeopleNum;
+      delete this.formdata.winningUserList;
       this.$http.defaults.headers.userId = 1;
-      let apiUrl = f ? `${baseUrl}/yup-rest/manage/update-product` : `${baseUrl}/yup-rest/manage/save-product`;
+      let updateUrl = `${baseUrl}/yup-rest/manage/update-product`;
+      let saveUrl = `${baseUrl}/yup-rest/manage/update-product`;
+      let apiUrl = f ? updateUrl : saveUrl;
       this.$http.post(apiUrl, this.formdata)
       .then(res => {
         if(res.data.resultCode == 200){
@@ -470,14 +488,16 @@ export default {
           })
         }
         if(this.edit || f){
-            this.showDialog = false;
-          }
+          this.showDialog = false;
+        }
+        this.isPublish = false;
       })
       .catch(() => {
         this.$message.error('保存失败！');
         if(this.edit){
           this.showDialog = false;
         }
+        this.isPublish = false;
       })
     },
     publish() {
@@ -502,7 +522,7 @@ export default {
       }
       this.uploading.close();
     },
-    frontError() {
+    uploadError() {
       this.$message.error('上传失败！');
       this.uploading.close();
     },
@@ -514,24 +534,78 @@ export default {
       }
       this.uploading.close();
     },
-    goodsError() {
-      this.$message.error('上传失败！');
+    bannerSuccess(res, file) {
+      if(res.resultCode == 200){
+        let size = 0;
+        let len = this.formdata.proBannerImgList.length;
+        if(len > 0){
+          size = this.formdata.proBannerImgList[len - 1].imgSort;
+        }
+        this.formdata.proBannerImgList.push({
+          imgSort: ++size,
+          proImageId: null,
+          proId: this.formdata.proId,
+          imgUrl: res.resultData
+        });
+      }else{
+        this.$message.error('上传失败！');
+      }
       this.uploading.close();
     },
-    selectUser() {},
-    lotCurChange() {},
+    removeBanner(file, fileList) {
+      this.formdata.proBannerImgList.forEach((item, index) => {
+        if(item.imgUrl == file.response.resultData){
+          this.formdata.proBannerImgList.splice(index, 1);
+          return;
+        }
+      })
+    },
+    deleteImg(fileName) {
+      this.$http.post(`${baseUrl}/yup-rest/delete`, { fileName: fileName })
+      .then(res => {
+        if(res.data.resultCode == 200){
+          this.$message({
+            type: 'success',
+            message: '删除成功',
+            showClose: true,
+            center: true
+          });
+          this.formdata.proBannerImgList.forEach((item, index) => {
+            if(item.imgUrl == fileName){
+              this.formdata.proBannerImgList.splice(index, 1);
+              return;
+            }
+          })
+        }else{
+          this.$message.error('删除失败！');
+        }
+      })
+      .catch(() => {
+        this.$message.error('删除失败！');
+      })
+    },
+    selectUser(e) {
+      alert(e);
+    },
+    lotCurChange(idx) {
+      this.lotCurPage = idx;
+      this.getApplyUserList();
+    },
     lottery() {
       this.showLotteryDialog = true;
-      // this.showDialog = false;
+      this.lotCurPage = 1;
+      this.getApplyUserList();
     },
     lotEndCurChange() {},
     getApplyUserList() {
       this.$http.get(`${baseUrl}/yup-rest/manage/apply-user-list`, {
-        params: { pageIndex: this.lotCurPage, pageSize: 10, proId: this.proId }
+        params: { pageIndex: this.lotCurPage, pageSize: this.lotPageSize, proId: this.formdata.proId }
       })
       .then(res => {
         if(res.data.resultCode == 200){
-          this.toLotUsers = res.data.resultData;
+          let r = res.data.resultData;
+          this.toLotUsers = r.list;
+          this.lotTotal = r.total;
         }else{
           this.$message({
             message: res.data.resultMsg,
@@ -539,6 +613,9 @@ export default {
             showClose: true,
           })
         }
+      })
+      .catch(() => {
+        this.$message.error('查询申请用户失败！');
       })
     }
   },
