@@ -35,7 +35,7 @@
                 :filter-method="filterState">
             </el-table-column>
           </el-table>
-          <el-pagination class="page fr" v-if="proTotal > 10"
+          <el-pagination class="page fr" v-if="proTotal > 10" 
             @current-change="handleCurrentChange" 
             :current-page.sync="currentPage" 
             :page-size="proSize" 
@@ -74,7 +74,7 @@
           </el-form-item>
           <el-form-item label="轮播" prop="proBannerImgList">
               <el-upload class="front-pic" :action="uploadUrl" 
-                list-type="picture-card" :before-upload="beforeUpload" accept="image/*"
+                list-type="picture-card" accept="image/*"
                 :on-success="bannerSuccess" :on-error="uploadError" :on-remove="removeBanner"
                 :limit="10" v-if="!read">
                 <i class="el-icon-plus front-icon loading-target"></i>
@@ -350,7 +350,8 @@ export default {
     getProductList() {
       let params = {
         pageIndex: this.currentPage,
-        pageSize: this.proSize
+        pageSize: this.proSize,
+        t: Date.now()
       };
       this.loading = true;
       this.$http.get(`${baseUrl}/yup-rest/manage/product-list`, { params: params })
@@ -360,19 +361,21 @@ export default {
           let r = res.data.resultData;
           this.trials = r.list;
           this.proTotal = r.total;
-          this.trials.filter(item => {
-            if(item.proStatus == 0){
-              item.status = '待发布';
-            } else if(item.proStatus == 1){
-              item.status = '待开奖';
-            } else if(item.proStatus == 2){
-              item.status = '已开奖';
-            } else if(item.proStatus == 3){
-              item.status = '已结束';
-            } else {
-              item.status = '待发布';
-            }
-          })
+          if(this.trials != null && this.trials.length > 0){
+            this.trials.filter(item => {
+              if(item.proStatus == 0){
+                item.status = '待发布';
+              } else if(item.proStatus == 1){
+                item.status = '待开奖';
+              } else if(item.proStatus == 2){
+                item.status = '已开奖';
+              } else if(item.proStatus == 3){
+                item.status = '已结束';
+              } else {
+                item.status = '待发布';
+              }
+            })
+          }
         }else{
           this.$message.error(res.data.resultMsg);
         }
