@@ -73,12 +73,22 @@
               <img :src="formdata.coverImg" v-else class="front-img">
           </el-form-item>
           <el-form-item label="轮播" prop="proBannerImgList">
-              <el-upload class="front-pic" :action="uploadUrl" 
-                list-type="picture-card" accept="image/*"
-                :on-success="bannerSuccess" :on-error="uploadError" :on-remove="removeBanner"
-                :limit="10" v-if="!read">
-                <i class="el-icon-plus front-icon loading-target"></i>
-              </el-upload>
+              <template v-if="format.proBannerImgList.length > 0">
+                <el-upload class="front-pic" :action="uploadUrl" 
+                  list-type="picture-card" accept="image/*"
+                  :on-success="bannerSuccess" :on-error="uploadError" :on-remove="removeBanner"
+                  :limit="10" v-if="!read">
+                  <img :src="" class="front-img">
+                </el-upload>
+              </template>
+              <template v-else>
+                <el-upload class="front-pic" :action="uploadUrl" 
+                  list-type="picture-card" accept="image/*"
+                  :on-success="bannerSuccess" :on-error="uploadError" :on-remove="removeBanner"
+                  :limit="10" v-if="!read">
+                  <i class="el-icon-plus front-icon loading-target"></i>
+                </el-upload>
+              </template>
               <img :src="formdata.coverImg" v-else class="front-img">
           </el-form-item>
           <el-form-item label="上架" prop="proStartTime">
@@ -469,7 +479,7 @@ export default {
       let apiUrl = f ? updateUrl : saveUrl;
       this.$http.post(apiUrl, this.formdata)
       .then(res => {
-        if(res.data.resultCode == 200){
+        if(res.data.resultCode == 200 && res.data.resultData){
           this.$message({
             type: 'success',
             message: f ? '发布成功！' : '保存成功！',
@@ -483,12 +493,16 @@ export default {
             this.getProductList();
           }
         }else{
-          this.$message({
-            message: res.data.resultMsg,
-            type: 'error',
-            duration: 0,
-            showClose: true
-          })
+          if(!res.data.resultMsg){
+            this.$message.error('保存失败！');
+          }else{
+            this.$message({
+              message: res.data.resultMsg,
+              type: 'error',
+              duration: 0,
+              showClose: true
+            })
+          }
         }
         if(this.edit || f){
           this.showDialog = false;
