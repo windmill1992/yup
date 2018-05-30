@@ -26,12 +26,9 @@
                 </template>
             </el-table-column>
             <el-table-column 
-                prop="status" 
-                width="150" 
-                :label="'状态-'+ state" 
+                prop="status" width="150" label="状态" 
                 :filters="stateOpts" 
                 :filter-multiple="false" 
-                :filtered-value="[state]" 
                 :filter-method="filterState">
             </el-table-column>
           </el-table>
@@ -73,23 +70,25 @@
               <img :src="formdata.coverImg" v-else class="front-img">
           </el-form-item>
           <el-form-item label="轮播" prop="proBannerImgList">
-              <template v-if="format.proBannerImgList.length > 0">
+              <template v-if="!read">
+                <template v-if="edit && formdata.proBannerImgList && formdata.proBannerImgList.length > 0">
+                  <a href="javascript:;" v-for="(img, index) in formdata.proBannerImgList" :key="'b'+index" 
+                    class="uploaded">
+                    <img :src="img.imgUrl" class="front-img">
+                    <i class="del el-icon-delete" @click="deleteImg(img.imgUrl)"></i>
+                  </a>
+                </template>
                 <el-upload class="front-pic" :action="uploadUrl" 
                   list-type="picture-card" accept="image/*"
                   :on-success="bannerSuccess" :on-error="uploadError" :on-remove="removeBanner"
-                  :limit="10" v-if="!read">
-                  <img :src="" class="front-img">
-                </el-upload>
-              </template>
-              <template v-else>
-                <el-upload class="front-pic" :action="uploadUrl" 
-                  list-type="picture-card" accept="image/*"
-                  :on-success="bannerSuccess" :on-error="uploadError" :on-remove="removeBanner"
-                  :limit="10" v-if="!read">
+                  :limit="10">
                   <i class="el-icon-plus front-icon loading-target"></i>
                 </el-upload>
               </template>
-              <img :src="formdata.coverImg" v-else class="front-img">
+              <template v-else>
+                <img :src="img.imgUrl" v-for="(img, index) in formdata.proBannerImgList" :key="'b'+index" 
+                  class="front-img fl" style="margin-right: 10px;">
+              </template>
           </el-form-item>
           <el-form-item label="上架" prop="proStartTime">
             <el-date-picker type="datetime" format="yyyy-MM-dd HH:mm" value-format="yyyy-MM-dd HH:mm" 
@@ -238,7 +237,6 @@ export default {
     return {
       trials: [],
       stateOpts: [
-        { text: "全部", value: null },
         { text: "待发布", value: "0" },
         { text: "待开奖", value: "1" },
         { text: "已开奖", value: "2" },
@@ -246,7 +244,6 @@ export default {
       ],
       proTotal: 0,
       proSize: 20,
-      state: "全部",
       loading: false,
       currentPage: 1,
       dialogTitle: "",
@@ -396,16 +393,7 @@ export default {
       })
     },
     filterState(value, row) {
-      if(value != null){
-        this.state = this.stateOpts[parseInt(value) + 1].text;
-      }else{
-        this.state = '全部'
-      }
-      if (value == null) {
-        return true;
-      } else {
-        return row.proStatus === value;
-      }
+      return row.proStatus == value;
     },
     handleCurrentChange(val) {},
     showDetail(id, status) {
@@ -415,6 +403,7 @@ export default {
       this.dialogState = status;
       this.showDialog = true;
       this.dialogTitle = "试用列表-查看详情";
+      this.formdata = {};
       this.getProDetail();
     },
     getProDetail() {
@@ -424,6 +413,16 @@ export default {
         this.uploading.close();
         if(res.data.resultCode == 200){
           this.formdata = res.data.resultData;
+          this.formdata.proBannerImgList = [];
+          this.formdata.bannerImgList.forEach((item, index) => {
+            this.formdata.proBannerImgList.push({
+              imgSort: index + 1,
+              imgUrl: item,
+              proImageId: null,
+              proId: this.formdata.proId
+            })
+          })
+          delete this.formdata.bannerImgList;
         }else{
           this.$message.error(res.data.resultMsg);  
         }
@@ -473,9 +472,10 @@ export default {
       delete this.formdata.applyUserList;
       delete this.formdata.winningPeopleNum;
       delete this.formdata.winningUserList;
+      delete this.formdata.bannerImgList;
       this.$http.defaults.headers.userId = 1;
       let updateUrl = `${baseUrl}/yup-rest/manage/update-product`;
-      let saveUrl = `${baseUrl}/yup-rest/manage/update-product`;
+      let saveUrl = `${baseUrl}/yup-rest/manage/save-product`;
       let apiUrl = f ? updateUrl : saveUrl;
       this.$http.post(apiUrl, this.formdata)
       .then(res => {
@@ -554,6 +554,9 @@ export default {
     bannerSuccess(res, file) {
       if(res.resultCode == 200){
         let size = 0;
+        if(!this.formdata.proBannerImgList || this.formdata.proBannerImgList == null){
+          this.formdata.proBannerImgList = [];
+        }
         let len = this.formdata.proBannerImgList.length;
         if(len > 0){
           size = this.formdata.proBannerImgList[len - 1].imgSort;
@@ -578,9 +581,10 @@ export default {
       })
     },
     deleteImg(fileName) {
+      fileName = encodeURIComponent(fileName);
       this.$http.post(`${baseUrl}/yup-rest/delete`, { fileName: fileName })
       .then(res => {
-        if(res.data.resultCode == 200){
+        if(res.data.resultCode == 200 && res.data.resultData){
           this.$message({
             type: 'success',
             message: '删除成功',
@@ -594,7 +598,7 @@ export default {
             }
           })
         }else{
-          this.$message.error('删除失败！');
+          this.$message.error(res.data.resultMsg? res.data.resultMsg : '删除失败！');
         }
       })
       .catch(() => {

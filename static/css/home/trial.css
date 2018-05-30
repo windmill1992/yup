@@ -79,8 +79,9 @@
 .front-img {
     width: 138px;
     height: 138px;
-    display: block;
+    /* display: block; */
 }
+
 
 .radio-tip {
     color: #f00;
