@@ -2,7 +2,7 @@
     <el-row>
         <el-col :span="24" class="tool-bar">
             <p class="title fl">反馈列表</p>
-            <el-input placeholder="搜索用户手机号／用户名" class="fr"></el-input>
+            <!-- <el-input placeholder="搜索用户手机号／用户名" class="fr"></el-input> -->
         </el-col>
         <el-col :span="24">
             <el-table :data="list" highlight-current-row v-loading="loading" border style="width: 100%;height: 90%;">

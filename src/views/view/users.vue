@@ -22,7 +22,7 @@
                 </el-table-column>
             </el-table>
             <el-pagination @current-change="curChange" :current-page="curPage" 
-                :page-size="20" :total="100" layout="total, prev, pager, next" class="page">
+                :page-size="pageSize" :total="total" layout="total, prev, pager, next" class="page fr">
             </el-pagination>
         </el-col>
     </el-row>
@@ -33,41 +33,17 @@ var moment = require('moment');
 export default {
   data() {
     return {
-      list: [
-        {
-          id: 1,
-          nick: "张三",
-          mobile: "1233214244",
-          regisTime: 1526798145964,
-          city: "杭州",
-          vip: '0',
-          from: 'wx'
-        },
-        {
-          id: 2,
-          nick: "张三",
-          mobile: "1233214244",
-          regisTime: 1526798145964,
-          city: "杭州",
-          vip: '0',
-          from: 'wx'
-        },
-        {
-          id: 3,
-          nick: "张三",
-          mobile: "1233214244",
-          regisTime: 1526798145964,
-          city: "杭州",
-          vip: '0',
-          from: 'wx'
-        }
-      ],
+      list: [],
       curPage: 1,
+      pageSize: 20,
+      total: 0,
       loading: false
     };
   },
   methods: {
-    curChange() {},
+    curChange(idx) {
+        this.curPage = idx;
+    },
     formatTime(row, column){
         return moment(new Date(row.regisTime)).format('YYYY-MM-DD HH:mm:ss');
     }

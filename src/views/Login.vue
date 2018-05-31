@@ -13,14 +13,13 @@
       <el-form-item prop="checkPass">
         <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off" placeholder="请输入密码"></el-input>
       </el-form-item>
-      <el-form-item prop="yzm">
+      <!-- <el-form-item prop="yzm">
         <el-input type="text" auto-complete="off" placeholder="请输入验证码">
           <template slot="append"><img src="" alt="验证码" class="yzm"></template>
         </el-input>
-        
-      </el-form-item>
+      </el-form-item> -->
       <el-checkbox v-model="checked" checked class="remember">记住密码</el-checkbox>
-      <a href="http://"  class="forget">忘记账号/密码</a>
+      <!-- <a href="http://"  class="forget">忘记账号/密码</a> -->
       <el-form-item style="width:100%;">
         <el-button class="login" @click.native.prevent="handleSubmit2" :loading="logining">立即登录</el-button>
         <!--<el-button @click.native.prevent="handleReset2">重置</el-button>-->

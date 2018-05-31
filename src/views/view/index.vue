@@ -25,15 +25,9 @@
             </div>
             <p class="tip">快捷入口</p>
             <div class="quick-enter">
-                <a href="" class="item">
-                    <p>添加试用</p>
-                </a>
-                <a href="" class="item">
-                    <p>管理试用</p>
-                </a>
-                <a href="" class="item">
-                    <p>用户反馈</p>
-                </a>
+                <!-- <router-link to="trial/add" class="item">添加试用</router-link> -->
+                <router-link to="trial" class="item">管理试用</router-link>
+                <router-link to="feedback" class="item">用户反馈</router-link>
             </div>
         </el-col>
     </el-row>

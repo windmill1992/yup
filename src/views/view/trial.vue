@@ -37,9 +37,7 @@
             :current-page.sync="currentPage" 
             :page-size="proSize" 
             layout="total, prev, pager, next" 
-            prev-text="上一页" 
-            next-text="下一页" 
-            :total="proTotal">
+            prev-text="上一页" next-text="下一页" :total="proTotal">
           </el-pagination>
       </el-col>
       <el-dialog :title="dialogTitle" :visible.sync="showDialog" custom-class="edit-dialog" :fullscreen="fullscreen" >
@@ -165,14 +163,12 @@
               <el-table-column prop="mobile" width="130" label="手机号"></el-table-column>
               <el-table-column prop="addr" label="收货地址" show-overflow-tooltip></el-table-column>
             </el-table>
-            <el-pagination class="page" 
+            <el-pagination class="page fr" 
               @current-change="lotEndCurChange" 
               :current-page.sync="lotEndCurPage" 
-              :page-size="20" 
+              :page-size="lotEndPageSize" 
               layout="total, prev, pager, next" 
-              prev-text="上一页" 
-              next-text="下一页" 
-              :total="100">
+              prev-text="上一页" next-text="下一页" :total="lotEndTotal">
             </el-pagination>
           </template>
         </el-form>
@@ -181,7 +177,7 @@
           <el-button type="primary" @click="publish">发布</el-button>
           <el-button @click="showDialog = false">取消</el-button>
         </template>
-        <template slot="footer" v-if="read && dialogState != '已结束'">
+        <template slot="footer" v-if="read">
             <el-button type="success" @click="editTrial">编辑</el-button>
             <el-button type="primary" @click="lottery" v-if="dialogState == '待开奖'">开奖</el-button>
             <el-button type="primary" @click="publish" v-if="dialogState == '待发布'">发布</el-button>
@@ -191,38 +187,38 @@
           <el-button type="success" @click="saveProduct">保存</el-button>
         </template>
       </el-dialog>
+      <!-- 开奖选择申请人列表 -->
       <el-dialog :visible.sync="showLotteryDialog" fullscreen custom-class="lot-dialog">
         <template slot="title">
           <div class="lot-head">
             <p class="lot-title fl">试用列表-查看详情-开奖 ( {{selectedUser}} / {{lotTotal}} )</p>
-            <el-input placeholder="搜索用户手机号/用户名" class="fr"></el-input>
+            <!-- <el-input placeholder="搜索用户手机号/用户名" class="fr"></el-input> -->
           </div>
         </template>
         <el-table :data="toLotUsers" highlight-current-row v-loading="loading" 
+            @select="selectUser" @select-all="selectAllUser"
             style="width: 100%;height: 90%" :style="{'max-height': maxFormHeight}" border>
-            <el-table-column prop="proId" width="60" label="ID"></el-table-column>
+            <el-table-column prop="userId" width="60" label="ID"></el-table-column>
             <el-table-column prop="userName" width="120" label="用户昵称" show-overflow-tooltip></el-table-column>
             <el-table-column prop="mobile" width="140" label="手机号"></el-table-column>
-            <el-table-column prop="userAddress" width="180" label="收货地址" show-overflow-tooltip></el-table-column>
-            <el-table-column prop="note" label="试用宣言" show-overflow-tooltip></el-table-column>
-            <el-table-column width="100" label="操作" type="selection" @selection-change="selectUser">
+            <el-table-column prop="userAddress" min-width="200" label="收货地址" show-overflow-tooltip></el-table-column>
+            <!-- <el-table-column prop="note" label="试用宣言" show-overflow-tooltip></el-table-column> -->
+            <el-table-column width="100" label="操作" type="selection">
               <!-- <template slot-scope="scope">
                 <span>选中</span>
               </template> -->
             </el-table-column>
           </el-table>
-          <el-pagination class="page" 
+          <el-pagination class="page fr" 
             @current-change="lotCurChange" 
             :current-page.sync="lotCurPage" 
             :page-size="lotPageSize" 
             layout="total, prev, pager, next" 
-            prev-text="上一页" 
-            next-text="下一页" 
-            :total="lotTotal">
+            prev-text="上一页" next-text="下一页" :total="lotTotal">
           </el-pagination>
           <template slot="footer">
             <el-button @click="showLotteryDialog = false">取消</el-button>
-            <el-button type="success">确定</el-button>
+            <el-button type="success" @click="chooseUsers">确定</el-button>
           </template>
       </el-dialog>
   </el-row>
@@ -239,8 +235,8 @@ export default {
       stateOpts: [
         { text: "待发布", value: "0" },
         { text: "待开奖", value: "1" },
-        { text: "已开奖", value: "2" },
-        { text: "已结束", value: "3" }
+        { text: "已结束", value: "2" },
+        { text: "已下架", value: "3" }
       ],
       proTotal: 0,
       proSize: 20,
@@ -301,42 +297,15 @@ export default {
       read: false,
       edit: false,
       showLotteryDialog: false,
-      toLotUsers: [
-        {
-          id: 1,
-          nick: "那个杯子",
-          mobile: "15972955687",
-          addr: "北京市朝阳区",
-          trialWord: "我要试用，我很爱"
-        },
-        {
-          id: 2,
-          nick: "那个杯子",
-          mobile: "15972955687",
-          addr: "北京市朝阳区",
-          trialWord: "我要试用，我很爱"
-        },
-        {
-          id: 3,
-          nick: "那个杯子",
-          mobile: "15972955687",
-          addr: "北京市朝阳区",
-          trialWord: "我要试用，我很爱"
-        },
-        {
-          id: 4,
-          nick: "那个杯子",
-          mobile: "15972955687",
-          addr: "北京市朝阳区",
-          trialWord: "我要试用，我很爱打电话卡事件回调"
-        }
-      ],
-      userNum: 100,
+      toLotUsers: [],
+      selUserList: [],
       selectedUser: 0,
       lotCurPage: 1,
-      lotEndCurPage: 1,
       lotPageSize: 20,
+      lotEndCurPage: 1,
+      lotEndPageSize: 20,
       lotTotal: 0,
+      lotEndTotal: 0,
       dialogState: "",
       isPublish: false
     };
@@ -375,9 +344,9 @@ export default {
               } else if(item.proStatus == 1){
                 item.status = '待开奖';
               } else if(item.proStatus == 2){
-                item.status = '已开奖';
-              } else if(item.proStatus == 3){
                 item.status = '已结束';
+              } else if(item.proStatus == 3){
+                item.status = '已下架';
               } else {
                 item.status = '待发布';
               }
@@ -466,6 +435,10 @@ export default {
     },
     saveProduct() {
       let f = this.isPublish;
+      if(new Date(this.formdata.proEndTime).getTime() < Date.now()){
+        this.formdata.proStatus = 2;
+        this.formdata = Object.assign({}, this.formdata);
+      }
       this.formdata.proStartTime = moment(new Date(this.formdata.proStartTime)).format('YYYY-MM-DD HH:mm');
       this.formdata.proEndTime = moment(new Date(this.formdata.proEndTime)).format('YYYY-MM-DD HH:mm');
       delete this.formdata.applyPeopleNum;
@@ -581,8 +554,7 @@ export default {
       })
     },
     deleteImg(fileName) {
-      fileName = encodeURIComponent(fileName);
-      this.$http.post(`${baseUrl}/yup-rest/delete`, { fileName: fileName })
+      this.$http.post(`${baseUrl}/yup-rest/delete?fileName=`+ fileName, {})
       .then(res => {
         if(res.data.resultCode == 200 && res.data.resultData){
           this.$message({
@@ -594,7 +566,8 @@ export default {
           this.formdata.proBannerImgList.forEach((item, index) => {
             if(item.imgUrl == fileName){
               this.formdata.proBannerImgList.splice(index, 1);
-              return;
+              this.formdata = Object.assign({}, this.formdata);
+              return false;
             }
           })
         }else{
@@ -605,8 +578,52 @@ export default {
         this.$message.error('删除失败！');
       })
     },
-    selectUser(e) {
-      alert(e);
+    selectUser(selection, row) {
+      this.selUserList = [];
+      if(selection.length > 0){
+        selection.forEach(item => {
+          this.selUserList.push(item.userId);
+        })
+      }
+    },
+    selectAllUser(selection) {
+      this.selUserList = [];
+      if(selection.length > 0){
+        selection.forEach(item => {
+          this.selUserList.push(item.userId);
+        })
+      }
+    },
+    chooseUsers() {
+      if(this.selUserList.length == 0){
+        this.$message.error('至少选择一个用户！');
+        return;
+      }
+      let query = 'userIdList='+ this.selUserList.join(',') + '&proId='+ this.formdata.proId;
+      this.$http.post(`${baseUrl}/yup-rest/manage/choose-user?`+ query, {})
+      .then(res => {
+        if(res.data.resultCode == 200){
+          if(res.data.resultData){
+            this.$message({
+              type: 'success',
+              message: '开奖成功',
+              showClose: true,
+              center: true
+            });
+            this.showLotteryDialog = false;
+            this.formdata.proStatus = 2;
+            this.formdata = Object.assign({}, this.formdata);
+            this.saveProduct();
+          }else{
+            this.$message.error('开奖失败');
+          }
+        }else{
+          this.$message.error(res.data.resultMsg);
+        }
+      })
+      .catch(() => {
+        this.$message.error('开奖失败');
+      })
     },
     lotCurChange(idx) {
       this.lotCurPage = idx;
@@ -614,10 +631,14 @@ export default {
     },
     lottery() {
       this.showLotteryDialog = true;
+      this.selUserList = [];
       this.lotCurPage = 1;
       this.getApplyUserList();
     },
-    lotEndCurChange() {},
+    lotEndCurChange(idx) {
+      this.lotEndCurPage = idx;
+      this.getPrizedUserList();
+    },
     getApplyUserList() {
       this.$http.get(`${baseUrl}/yup-rest/manage/apply-user-list`, {
         params: { pageIndex: this.lotCurPage, pageSize: this.lotPageSize, proId: this.formdata.proId }
