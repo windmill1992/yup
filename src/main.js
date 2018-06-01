@@ -27,7 +27,7 @@ Vue.use(Vuex)
 //NProgress.configure({ showSpinner: false });
 
 const router = new VueRouter({
-  mode: 'history',
+  // mode: 'history',
   routes: routes
 })
 

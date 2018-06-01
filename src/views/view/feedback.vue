@@ -70,6 +70,6 @@ export default {
 </script>
 
 <style>
-@import url(./../../../static/css/base.css);
-@import url(./../../../static/css/home/feedback.css);
+@import url(./../../assets/css/base.css);
+@import url(./../../assets/css/home/feedback.css);
 </style>

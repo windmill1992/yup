@@ -174,7 +174,7 @@
         </el-form>
         <template slot="footer" v-if="!read && !edit">
           <el-button type="success" @click="saveProduct">保存</el-button>
-          <el-button type="primary" @click="publish">发布</el-button>
+          <!-- <el-button type="primary" @click="publish">发布</el-button> -->
           <el-button @click="showDialog = false">取消</el-button>
         </template>
         <template slot="footer" v-if="read">
@@ -480,9 +480,7 @@ export default {
             })
           }
         }
-        if(this.edit || f){
-          this.showDialog = false;
-        }
+        this.showDialog = false;
         this.isPublish = false;
       })
       .catch(() => {
