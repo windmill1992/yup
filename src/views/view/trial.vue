@@ -364,7 +364,10 @@ export default {
     filterState(value, row) {
       return row.proStatus == value;
     },
-    handleCurrentChange(val) {},
+    handleCurrentChange(idx) {
+      this.currentPage = idx;
+      this.getProductList();
+    },
     showDetail(id, status) {
       this.read = true;
       this.edit = false;
