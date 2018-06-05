@@ -2,25 +2,21 @@
     <el-row>
         <el-col :span="24">
             <div class="header">
-                <el-col :span="4" class="item">
-                    <p class="num">1000</p>
+                <el-col :span="6" class="item">
+                    <p class="num">{{countData.userCount}}</p>
                     <p class="name">用户总数</p>
                 </el-col>
-                <el-col :span="4" class="item">
-                    <p class="num">1000</p>
-                    <p class="name">用户总数</p>
+                <el-col :span="6" class="item">
+                    <p class="num">{{countData.proCount}}</p>
+                    <p class="name">试用商品总数</p>
                 </el-col>
-                <el-col :span="4" class="item">
-                    <p class="num">1000</p>
-                    <p class="name">用户总数</p>
+                <el-col :span="6" class="item">
+                    <p class="num">{{countData.todayUserCount}}</p>
+                    <p class="name">今日新增用户总数</p>
                 </el-col>
-                <el-col :span="4" class="item">
-                    <p class="num">1000</p>
-                    <p class="name">用户总数</p>
-                </el-col>
-                <el-col :span="4" class="item">
-                    <p class="num">1000</p>
-                    <p class="name">用户总数</p>
+                <el-col :span="6" class="item">
+                    <p class="num">{{countData.todayApplyUserCount}}</p>
+                    <p class="name">今日申请用户总数 </p>
                 </el-col>
             </div>
             <p class="tip">快捷入口</p>
@@ -34,8 +30,38 @@
 </template>
 
 <script>
+import { baseUrl } from "./../../api/baseUrl"
 export default {
-  
+    data() {
+        return {
+            countData: {
+                userCount: 0,
+                todayUserCount: 0,
+                todayApplyUserCount: 0,
+                proCount: 0
+            }
+        }
+    },
+    methods: {
+        getIndexData() {
+            this.$http.get(`${baseUrl}/yup-rest/manage/index`, {})
+            .then(res => {
+                if(res.data.resultCode == 200){
+                    if(res.data.resultData){
+                        this.countData = res.data.resultData;
+                    }
+                }else{
+                    this.$message.error(res.data.resultMsg);
+                }
+            })
+            .catch(() => {
+                this.$message.error('未知错误！');
+            })
+        }
+    },
+    mounted() {
+        this.getIndexData();
+    }
 }
 </script>
 

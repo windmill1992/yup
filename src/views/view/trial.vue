@@ -156,20 +156,15 @@
           </el-form-item>
           <template v-if="read && dialogState == '已结束'">
             <p class="label">中奖名单</p>
-            <el-table :data="toLotUsers" highlight-current-row 
+            <el-table :data="winnerUsers" highlight-current-row 
               style="width: 100%;max-height: 200px" border>
-              <el-table-column prop="id" width="70" label="ID"></el-table-column>
-              <el-table-column prop="nick" width="120" label="用户昵称" show-overflow-tooltip></el-table-column>
-              <el-table-column prop="mobile" width="130" label="手机号"></el-table-column>
-              <el-table-column prop="addr" label="收货地址" show-overflow-tooltip></el-table-column>
+              <el-table-column prop="useId" width="60" label="ID"></el-table-column>
+              <el-table-column prop="userNickName" width="120" label="用户昵称" show-overflow-tooltip></el-table-column>
+              <el-table-column prop="userAddressName" width="120" label="收货名称" show-overflow-tooltip></el-table-column>
+              <el-table-column prop="userMobile" width="130" label="手机号"></el-table-column>
+              <el-table-column prop="userAddress" label="收货地址" min-width="200" show-overflow-tooltip></el-table-column>
+              <el-table-column prop="userApplyTime" label="申请时间" width="180"></el-table-column>
             </el-table>
-            <el-pagination class="page fr" 
-              @current-change="lotEndCurChange" 
-              :current-page.sync="lotEndCurPage" 
-              :page-size="lotEndPageSize" 
-              layout="total, prev, pager, next" 
-              prev-text="上一页" next-text="下一页" :total="lotEndTotal">
-            </el-pagination>
           </template>
         </el-form>
         <template slot="footer" v-if="!read && !edit">
@@ -178,7 +173,7 @@
           <el-button @click="showDialog = false">取消</el-button>
         </template>
         <template slot="footer" v-if="read">
-            <el-button type="success" @click="editTrial">编辑</el-button>
+            <el-button type="success" @click="editTrial" v-if="(dialogState != '已开奖' && dialogState != '已结束')">编辑</el-button>
             <el-button type="primary" @click="lottery" v-if="dialogState == '待开奖'">开奖</el-button>
             <el-button type="primary" @click="publish" v-if="dialogState == '待发布'">发布</el-button>
         </template>
@@ -298,14 +293,12 @@ export default {
       edit: false,
       showLotteryDialog: false,
       toLotUsers: [],
+      winnerUsers: [],
       selUserList: [],
       selectedUser: 0,
       lotCurPage: 1,
       lotPageSize: 20,
-      lotEndCurPage: 1,
-      lotEndPageSize: 20,
       lotTotal: 0,
-      lotEndTotal: 0,
       dialogState: "",
       isPublish: false
     };
@@ -395,6 +388,9 @@ export default {
             })
           })
           delete this.formdata.bannerImgList;
+          if(this.formdata.proStatus > 1){
+            this.getWinnerUserList(this.formdata.proId);
+          }
         }else{
           this.$message.error(res.data.resultMsg);  
         }
@@ -409,6 +405,7 @@ export default {
       this.edit = false;
       this.showDialog = true;
       this.dialogTitle = "试用列表-添加试用";
+      this.$refs.form.resetFields();
       this.formdata = {
         proName: '',
         proCount: '',
@@ -437,59 +434,65 @@ export default {
       this.dialogTitle = "试用列表-编辑试用";
     },
     saveProduct() {
-      let f = this.isPublish;
-      if(new Date(this.formdata.proEndTime).getTime() < Date.now()){
-        this.formdata.proStatus = 2;
-        this.formdata = Object.assign({}, this.formdata);
-      }
-      this.formdata.proStartTime = moment(new Date(this.formdata.proStartTime)).format('YYYY-MM-DD HH:mm');
-      this.formdata.proEndTime = moment(new Date(this.formdata.proEndTime)).format('YYYY-MM-DD HH:mm');
-      delete this.formdata.applyPeopleNum;
-      delete this.formdata.applyUserList;
-      delete this.formdata.winningPeopleNum;
-      delete this.formdata.winningUserList;
-      delete this.formdata.bannerImgList;
-      this.$http.defaults.headers.userId = 1;
-      let updateUrl = `${baseUrl}/yup-rest/manage/update-product`;
-      let saveUrl = `${baseUrl}/yup-rest/manage/save-product`;
-      let apiUrl = f ? updateUrl : saveUrl;
-      this.$http.post(apiUrl, this.formdata)
-      .then(res => {
-        if(res.data.resultCode == 200 && res.data.resultData){
-          this.$message({
-            type: 'success',
-            message: f ? '发布成功！' : '保存成功！',
-            showClose: true,
-            center: true
-          });
-          if(this.formdata.proId == 0){
-            this.currentPage = 1;
-            this.getProductList();
-          }else{
-            this.getProductList();
+      this.$refs.form.validate((valid) => {
+        if(valid){
+          let f = this.isPublish;
+          if(new Date(this.formdata.proEndTime).getTime() < Date.now()){
+            this.formdata.proStatus = 2;
+            this.formdata = Object.assign({}, this.formdata);
           }
-        }else{
-          if(!res.data.resultMsg){
+          this.formdata.proStartTime = moment(new Date(this.formdata.proStartTime)).format('YYYY-MM-DD HH:mm');
+          this.formdata.proEndTime = moment(new Date(this.formdata.proEndTime)).format('YYYY-MM-DD HH:mm');
+          delete this.formdata.applyPeopleNum;
+          delete this.formdata.applyUserList;
+          delete this.formdata.winningPeopleNum;
+          delete this.formdata.winningUserList;
+          delete this.formdata.bannerImgList;
+          this.$http.defaults.headers.userId = 1;
+          let updateUrl = `${baseUrl}/yup-rest/manage/update-product`;
+          let saveUrl = `${baseUrl}/yup-rest/manage/save-product`;
+          let apiUrl = f ? updateUrl : saveUrl;
+          this.$http.post(apiUrl, this.formdata)
+          .then(res => {
+            if(res.data.resultCode == 200 && res.data.resultData){
+              this.$message({
+                type: 'success',
+                message: f ? '发布成功！' : '保存成功！',
+                showClose: true,
+                center: true
+              });
+              if(this.formdata.proId == 0){
+                this.currentPage = 1;
+                this.getProductList();
+              }else{
+                this.getProductList();
+              }
+            }else{
+              if(!res.data.resultMsg){
+                this.$message.error('保存失败！');
+              }else{
+                this.$message({
+                  message: res.data.resultMsg,
+                  type: 'error',
+                  duration: 0,
+                  showClose: true
+                })
+              }
+            }
+            this.showDialog = false;
+            this.isPublish = false;
+          })
+          .catch(() => {
             this.$message.error('保存失败！');
-          }else{
-            this.$message({
-              message: res.data.resultMsg,
-              type: 'error',
-              duration: 0,
-              showClose: true
-            })
-          }
+            if(this.edit){
+              this.showDialog = false;
+            }
+            this.isPublish = false;
+          })
+        }else{
+          return false;
         }
-        this.showDialog = false;
-        this.isPublish = false;
-      })
-      .catch(() => {
-        this.$message.error('保存失败！');
-        if(this.edit){
-          this.showDialog = false;
-        }
-        this.isPublish = false;
-      })
+      });
     },
     publish() {
       this.formdata.proStatus = 1;
@@ -636,10 +639,6 @@ export default {
       this.lotCurPage = 1;
       this.getApplyUserList();
     },
-    lotEndCurChange(idx) {
-      this.lotEndCurPage = idx;
-      this.getPrizedUserList();
-    },
     getApplyUserList() {
       this.$http.get(`${baseUrl}/yup-rest/manage/apply-user-list`, {
         params: { pageIndex: this.lotCurPage, pageSize: this.lotPageSize, proId: this.formdata.proId }
@@ -659,6 +658,29 @@ export default {
       })
       .catch(() => {
         this.$message.error('查询申请用户失败！');
+      })
+    },
+    getWinnerUserList(id) {
+      this.$http.get(`${baseUrl}/yup-rest/manage/winner-user-list`, { 
+        params: { proId: id } 
+      })
+      .then(res => {
+        if(res.data.resultCode == 200){
+          let r = res.data.resultData;
+          if(r && r.length > 0){
+            this.winnerUsers = r;
+            for( let i=0; i<r.length; i++){
+              r[i].userApplyTime = moment(new Date(r[i].userApplyTime)).format('YYYY-MM-DD HH:mm:ss');
+            }
+          }else{
+            this.winnerUsers = [];
+          }
+        }else{
+          this.$message.error(res.data.resultMsg);
+        }
+      })
+      .catch(() => {
+        this.$message.error('查询已中奖名单失败！');
       })
     }
   },

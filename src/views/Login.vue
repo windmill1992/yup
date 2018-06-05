@@ -1,5 +1,5 @@
 <template>
-  <el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-position="left" label-width="0px" class="demo-ruleForm login-container">
+  <el-form :model="formdata" :rules="rules" ref="form" label-position="left" label-width="0px" class="demo-ruleForm login-container">
     <!-- <h3 class="title">系统登录</h3> -->
     <div class="left">
       <img src="./../assets/img/logo.png" alt="logo">
@@ -11,7 +11,7 @@
         <el-input type="text" v-model="ruleForm2.account" auto-complete="off" placeholder="请输入用户账号"></el-input>
       </el-form-item>
       <el-form-item prop="checkPass">
-        <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off" placeholder="请输入密码"></el-input>
+        <el-input type="password" v-model="ruleForm2.password" auto-complete="off" placeholder="请输入密码"></el-input>
       </el-form-item>
       <!-- <el-form-item prop="yzm">
         <el-input type="text" auto-complete="off" placeholder="请输入验证码">
@@ -21,75 +21,82 @@
       <el-checkbox v-model="checked" checked class="remember">记住密码</el-checkbox>
       <!-- <a href="http://"  class="forget">忘记账号/密码</a> -->
       <el-form-item style="width:100%;">
-        <el-button class="login" @click.native.prevent="handleSubmit2" :loading="logining">立即登录</el-button>
-        <!--<el-button @click.native.prevent="handleReset2">重置</el-button>-->
+        <el-button class="login" @click.native.prevent="handleSubmit" :loading="logining">立即登录</el-button>
+        <!--<el-button @click.native.prevent="handleReset">重置</el-button>-->
       </el-form-item>
     </div>
   </el-form>
 </template>
 
 <script>
-  import { requestLogin } from '../api/api';
-  //import NProgress from 'nprogress'
+  import { baseUrl } from '../api/baseUrl';
   export default {
     data() {
       return {
         logining: false,
-        ruleForm2: {
+        formdata: {
           account: 'admin',
-          checkPass: '123456'
+          password: '123456'
         },
-        rules2: {
+        rules: {
           account: [
             { required: true, message: '请输入账号', trigger: 'blur' },
-            //{ validator: validaePass }
           ],
-          checkPass: [
+          password: [
             { required: true, message: '请输入密码', trigger: 'blur' },
-            //{ validator: validaePass2 }
           ]
         },
         checked: true
       };
     },
     methods: {
-      handleReset2() {
-        this.$refs.ruleForm2.resetFields();
+      handleReset() {
+        this.$refs.form.resetFields();
       },
-      handleSubmit2(ev) {
+      handleSubmit(ev) {
         var _this = this;
-        this.$refs.ruleForm2.validate((valid) => {
+        this.$refs.form.validate((valid) => {
           if (valid) {
-            //_this.$router.replace('/table');
             this.logining = true;
-            //NProgress.start();
-            var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass };
-            sessionStorage.setItem('user', JSON.stringify(loginParams));
-           // this.$router.push({ path: '/table' });
-            this.logining = false;
-
-            //sessionStorage.setItem('user', JSON.stringify(user));
-
-            this.$router.push({ path: '/index' });
-//            requestLogin(loginParams).then(data => {
-//              this.logining = false;
-//              //NProgress.done();
-//              let { msg, code, user } = data;
-//              if (code !== 200) {
-//                this.$message({
-//                  message: msg,
-//                  type: 'error'
-//                });
-//              } else {
-//                sessionStorage.setItem('user', JSON.stringify(user));
-//                this.$router.push({ path: '/table' });
-//              }
-//            });
+            var loginParams = { username: this.formdata.account, password: this.formdata.password };
+            
+            this.$http.post(`${baseUrl}/yup-rest/login`, { 
+              account: this.formdata.account,
+              loginMethod: 1,
+              password: this.formdata.password
+            })
+            .then(res => {
+              this.logining = false;
+              if(res.data.resultCode == 200){
+                if(res.data.resultData){
+                  if(this.checked){
+                    sessionStorage.setItem('user', JSON.stringify(loginParams));
+                  }
+                  this.$router.push({ path: '/index' });
+                }else{
+                  this.$message.error('账户名或密码错误！');
+                }
+              }else{
+                this.$message.error(res.data.resultMsg);
+              }
+             })
+            .catch(() => {
+              this.logining = false;
+              this.$message.error('登录未知错误！');
+            })
           } else {
             console.log('error submit!!');
             return false;
           }
         });
+      }
+    },
+    mounted() {
+      let user = sessionStorage.getItem('user');
+      if(user && user != ''){
+        user = JSON.parse(user);
+        this.formdata.account = user.username;
+        this.formdata.password = user.password;
       }
     }
   }
