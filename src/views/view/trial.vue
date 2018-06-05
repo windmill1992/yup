@@ -259,10 +259,10 @@ export default {
           { required: true, message: '请上传封面图', trigger: 'blur' }
         ],
         proStartTime: [
-          { type: 'date', required: true, message: '请选择上架日期', trigger: 'blur' }
+          { type: 'number', required: true, message: '请选择上架日期', trigger: 'blur' }
         ],
         proEndTime: [
-          { type: 'date', required: true, message: '请选择开奖日期', trigger: 'blur' }
+          { type: 'number', required: true, message: '请选择开奖日期', trigger: 'blur' }
         ],
         proDescribe: [
           { required: true, message: '请输入试用规则', trigger: 'blur' },
@@ -438,6 +438,7 @@ export default {
       this.$refs.form.validate((valid) => {
         if(valid){
           let f = this.isPublish;
+          console.log(this.formdata.proEndTime);
           if(new Date(this.formdata.proEndTime).getTime() < Date.now()){
             this.formdata.proStatus = 2;
             this.formdata = Object.assign({}, this.formdata);
@@ -497,6 +498,7 @@ export default {
     },
     publish() {
       this.formdata.proStatus = 1;
+      this.formdata = Object.assign({}, this.formdata);
       this.isPublish = true;
       this.saveProduct();
     },
