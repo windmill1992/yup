@@ -1,0 +1,7 @@
+.el-icon-goods::before{
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 14px;
+    background: url(./../img/goods.png) no-repeat 0 0 / 100% 100%;
+}

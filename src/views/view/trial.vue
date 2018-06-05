@@ -211,6 +211,7 @@
             layout="total, prev, pager, next" 
             prev-text="上一页" next-text="下一页" :total="lotTotal">
           </el-pagination>
+          <div class="clearFix"></div>
           <template slot="footer">
             <el-button @click="showLotteryDialog = false">取消</el-button>
             <el-button type="success" @click="chooseUsers">确定</el-button>
@@ -589,6 +590,7 @@ export default {
           this.selUserList.push(item.userId);
         })
       }
+      this.selectedUser = selection.length;
     },
     selectAllUser(selection) {
       this.selUserList = [];
@@ -597,6 +599,7 @@ export default {
           this.selUserList.push(item.userId);
         })
       }
+      this.selectedUser = selection.length;
     },
     chooseUsers() {
       if(this.selUserList.length == 0){

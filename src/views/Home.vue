@@ -109,7 +109,7 @@ export default {
         //type: 'warning'
       })
         .then(() => {
-          sessionStorage.removeItem("user");
+          localStorage.removeItem("user");
           _this.$router.push("/login");
         })
         .catch(() => {});
@@ -126,7 +126,7 @@ export default {
     }
   },
   mounted() {
-    var user = sessionStorage.getItem("user");
+    var user = localStorage.getItem("user");
     if (user) {
       user = JSON.parse(user);
       this.sysUserName = user.username || "";
@@ -138,7 +138,7 @@ export default {
 
 <style scoped lang="scss">
 @import "~scss_vars";
-
+@import "./../assets/css/icon.css";
 .container {
   position: absolute;
   top: 0px;
@@ -195,6 +195,13 @@ export default {
       height: 60px;
       line-height: 60px;
       cursor: pointer;
+      .fa-align-justify:before{
+        content: '';
+        display: inline-block;
+        width: 16px;
+        height: 14px;
+        background: url(./../assets/img/menu.png) no-repeat 0 0 / 100% 100%;
+      }
     }
   }
   .main {

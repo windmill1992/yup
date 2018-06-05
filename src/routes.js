@@ -20,12 +20,11 @@ let routes = [
         name: '',
         hidden: true
     },
-    //{ path: '/main', component: Main },
     {
         path: '/',
         component: Home,
-        name: '导航',
-        iconCls: 'el-icon-message',//图标样式class
+        name: '商品管理',
+        iconCls: 'el-icon-goods',//图标样式class
         children: [
             { path: '/index', component: Index0, name: '首页' },
             { path: '/trial', component: Trial, name: '试用' },

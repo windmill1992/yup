@@ -8,10 +8,10 @@
     </div>
     <div class="right">
       <el-form-item prop="account">
-        <el-input type="text" v-model="ruleForm2.account" auto-complete="off" placeholder="请输入用户账号"></el-input>
+        <el-input type="text" v-model="formdata.account" auto-complete="off" placeholder="请输入用户账号"></el-input>
       </el-form-item>
       <el-form-item prop="checkPass">
-        <el-input type="password" v-model="ruleForm2.password" auto-complete="off" placeholder="请输入密码"></el-input>
+        <el-input type="password" v-model="formdata.password" auto-complete="off" placeholder="请输入密码"></el-input>
       </el-form-item>
       <!-- <el-form-item prop="yzm">
         <el-input type="text" auto-complete="off" placeholder="请输入验证码">
@@ -29,77 +29,89 @@
 </template>
 
 <script>
-  import { baseUrl } from '../api/baseUrl';
-  export default {
-    data() {
-      return {
-        logining: false,
-        formdata: {
-          account: 'admin',
-          password: '123456'
-        },
-        rules: {
-          account: [
-            { required: true, message: '请输入账号', trigger: 'blur' },
-          ],
-          password: [
-            { required: true, message: '请输入密码', trigger: 'blur' },
-          ]
-        },
-        checked: true
-      };
-    },
-    methods: {
-      handleReset() {
-        this.$refs.form.resetFields();
+import { baseUrl } from '../api/baseUrl';
+import md5 from 'js-md5'
+
+export default {
+  data() {
+    return {
+      logining: false,
+      formdata: {
+        account: '',
+        password: ''
       },
-      handleSubmit(ev) {
-        var _this = this;
-        this.$refs.form.validate((valid) => {
-          if (valid) {
-            this.logining = true;
-            var loginParams = { username: this.formdata.account, password: this.formdata.password };
-            
-            this.$http.post(`${baseUrl}/yup-rest/login`, { 
-              account: this.formdata.account,
-              loginMethod: 1,
-              password: this.formdata.password
-            })
-            .then(res => {
-              this.logining = false;
-              if(res.data.resultCode == 200){
-                if(res.data.resultData){
-                  if(this.checked){
-                    sessionStorage.setItem('user', JSON.stringify(loginParams));
-                  }
-                  this.$router.push({ path: '/index' });
-                }else{
-                  this.$message.error('账户名或密码错误！');
-                }
-              }else{
-                this.$message.error(res.data.resultMsg);
-              }
-             })
-            .catch(() => {
-              this.logining = false;
-              this.$message.error('登录未知错误！');
-            })
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
-      }
+      rules: {
+        account: [
+          { required: true, message: '请输入账号', trigger: 'blur' },
+        ],
+        password: [
+          { required: true, message: '请输入密码', trigger: 'blur' },
+        ]
+      },
+      checked: false
+    };
+  },
+  methods: {
+    handleReset() {
+      this.$refs.form.resetFields();
     },
-    mounted() {
-      let user = sessionStorage.getItem('user');
-      if(user && user != ''){
-        user = JSON.parse(user);
-        this.formdata.account = user.username;
+    handleSubmit(ev) {
+      localStorage.setItem('rememberPW', this.checked);
+      this.$refs.form.validate((valid) => {
+        if (valid) {
+          this.logining = true;
+          var loginParams = { username: this.formdata.account, password: '' };
+          let pw = md5(this.formdata.password);
+          this.$http.post(`${baseUrl}/yup-rest/login`, { 
+            account: this.formdata.account,
+            loginMethod: 1,
+            password: pw
+          })
+          .then(res => {
+            this.logining = false;
+            if(res.data.resultCode == 200){
+              if(res.data.resultData){
+                if(this.checked){
+                  loginParams.password = this.formdata.password;
+                }
+                localStorage.setItem('user', JSON.stringify(loginParams));
+                this.$router.push({ path: '/index' });
+              }else{
+                this.$message.error('账户名或密码错误！');
+              }
+            }else{
+              this.$message.error(res.data.resultMsg);
+            }
+            })
+          .catch(() => {
+            this.logining = false;
+            this.$message.error('登录错误！');
+          })
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+    }
+  },
+  mounted() {
+    let user = localStorage.getItem('user');
+    this.checked = eval(localStorage.getItem('rememberPW'));
+    if(user && user != '' && user != null){
+      user = JSON.parse(user);
+      this.formdata.account = user.username;
+      if(user.password){
         this.formdata.password = user.password;
       }
     }
+    const _this = this;
+    document.body.addEventListener('keyup', function(e){
+      if(e.keyCode == 13){
+        _this.handleSubmit();
+      }
+    }, false);
   }
+}
 
 </script>
 
