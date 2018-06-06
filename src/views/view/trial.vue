@@ -16,8 +16,8 @@
           <el-table :data="trials" highlight-current-row v-loading="loading" 
             style="width: 100%;height: 90%" border>
             <el-table-column prop="proId" width="70" label="编号"></el-table-column>
-            <el-table-column prop="proName" label="标题"></el-table-column>
-            <el-table-column prop="sellingPrice" label="原价"></el-table-column>
+            <el-table-column prop="proName" label="标题" min-width="200"></el-table-column>
+            <el-table-column prop="sellingPrice" label="原价" min-width="150"></el-table-column>
             <el-table-column prop="proCount" width="80" label="数量"></el-table-column>
             <el-table-column prop="peopleNum" width="120" label="申请人数"></el-table-column>
             <el-table-column width="120" label="操作">
@@ -26,7 +26,7 @@
                 </template>
             </el-table-column>
             <el-table-column 
-                prop="status" width="150" label="状态" 
+                prop="status" width="120" label="状态" 
                 :filters="stateOpts" 
                 :filter-multiple="false" 
                 :filter-method="filterState">

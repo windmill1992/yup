@@ -4,10 +4,11 @@ html, body {
 	padding: 0;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 	border: 0;
-	font-family: "微软雅黑";
+	font-family: "微软雅黑", Arial, Helvetica, sans-serif;
 	-webkit-text-size-adjust: 100%!important;
 	-moz-text-size-adjust: 100%!important;
 	-ms-text-size-adjust: 100%!important;
+	min-width: 1000px;
 }
 html, body, ul, li, ol, p, div, h1, h2, h3, h4, h5, h6, nav, header, footer, table, tr, td, th, form, label {
 	-webkit-margin-after: 0;
@@ -220,4 +221,8 @@ img[mode='fix']{
 }
 .btn-next .el-icon{
     display: none!important;
+}
+
+#app{
+	min-width: 1000px;
 }
