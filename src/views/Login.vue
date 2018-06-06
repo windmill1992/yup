@@ -74,7 +74,7 @@ export default {
                 if(this.checked){
                   loginParams.password = this.formdata.password;
                 }
-                localStorage.setItem('user', JSON.stringify(loginParams));
+                sessionStorage.setItem('user', JSON.stringify(loginParams));
                 this.$router.push({ path: '/index' });
               }else{
                 this.$message.error('账户名或密码错误！');
@@ -95,7 +95,7 @@ export default {
     }
   },
   mounted() {
-    let user = localStorage.getItem('user');
+    let user = sessionStorage.getItem('user');
     this.checked = eval(localStorage.getItem('rememberPW'));
     if(user && user != '' && user != null){
       user = JSON.parse(user);

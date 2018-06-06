@@ -406,7 +406,9 @@ export default {
       this.edit = false;
       this.showDialog = true;
       this.dialogTitle = "试用列表-添加试用";
-      this.$refs.form.resetFields();
+      if(this.$refs.form){
+        this.$refs.form.resetFields();
+      }
       this.formdata = {
         proName: '',
         proCount: '',

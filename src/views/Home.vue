@@ -126,7 +126,7 @@ export default {
     }
   },
   mounted() {
-    var user = localStorage.getItem("user");
+    var user = sessionStorage.getItem("user");
     if (user) {
       user = JSON.parse(user);
       this.sysUserName = user.username || "";
