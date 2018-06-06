@@ -89,13 +89,13 @@
               </template>
           </el-form-item>
           <el-form-item label="上架" prop="proStartTime">
-            <el-date-picker type="datetime" format="yyyy-MM-dd HH:mm" value-format="yyyy-MM-dd HH:mm" 
+            <el-date-picker type="datetime" format="yyyy-MM-dd HH:mm" value-format="timestamp" 
               v-if="!read" v-model="formdata.proStartTime">
             </el-date-picker>
             <el-date-picker class="read" format="yyyy-MM-dd HH:mm" v-model="formdata.proStartTime" disabled v-else></el-date-picker>
           </el-form-item>
           <el-form-item label="开奖" prop="proEndTime">
-            <el-date-picker type="datetime" format="yyyy-MM-dd HH:mm" value-format="yyyy-MM-dd HH:mm" 
+            <el-date-picker type="datetime" format="yyyy-MM-dd HH:mm" value-format="timestamp" 
               v-if="!read" v-model="formdata.proEndTime">
             </el-date-picker>
             <el-date-picker class="read" format="yyyy-MM-dd HH:mm" v-model="formdata.proEndTime" disabled v-else></el-date-picker>
@@ -437,10 +437,12 @@ export default {
       this.dialogTitle = "试用列表-编辑试用";
     },
     saveProduct() {
+      this.formdata.proStartTime = new Date(this.formdata.proStartTime).getTime();
+      this.formdata.proEndTime = new Date(this.formdata.proEndTime).getTime();
+      this.formdata = Object.assign({}, this.formdata);
       this.$refs.form.validate((valid) => {
         if(valid){
           let f = this.isPublish;
-          console.log(this.formdata.proEndTime);
           if(new Date(this.formdata.proEndTime).getTime() < Date.now()){
             this.formdata.proStatus = 2;
             this.formdata = Object.assign({}, this.formdata);
@@ -494,6 +496,7 @@ export default {
             this.isPublish = false;
           })
         }else{
+          this.$message.error('验证未通过！');
           return false;
         }
       });
