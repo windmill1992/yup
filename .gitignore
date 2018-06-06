@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 node_modules
 .idea
 npm-debug.log
 .DS_Store
 dist
+=======
+dist
+.DS_Store
+.npm-debug.log
+.idea
+node_modules
+>>>>>>> 82dc0ab37a9ea54d5fd6595275024ef5542a0157
