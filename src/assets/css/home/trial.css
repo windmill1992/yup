@@ -151,6 +151,7 @@
 
 .lot-dialog .el-table{
     min-height: 300px;
+    overflow: auto;
 }
 
 .lot-head {

@@ -123,6 +123,14 @@ input::-webkit-input-placeholder{
 .fr{
 	float: right;
 }
+.clearFix{
+	clear: both;
+}
+.clearFix::after{
+	clear: both;
+	display: table-cell;
+	content: '';
+}
 .bold{
 	font-weight: 600;
 }

@@ -198,7 +198,7 @@
             <el-table-column prop="mobile" width="140" label="手机号"></el-table-column>
             <el-table-column prop="userAddress" min-width="200" label="收货地址" show-overflow-tooltip></el-table-column>
             <!-- <el-table-column prop="note" label="试用宣言" show-overflow-tooltip></el-table-column> -->
-            <el-table-column width="100" label="操作" type="selection">
+            <el-table-column width="80" label="操作" type="selection">
               <!-- <template slot-scope="scope">
                 <span>选中</span>
               </template> -->
