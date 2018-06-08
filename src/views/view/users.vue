@@ -5,7 +5,7 @@
             <el-input placeholder="搜索用户手机号／用户名" class="fr"></el-input>
         </el-col>
         <el-col :span="24">
-            <el-table :data="list" highlight-current-row v-loading="loading" border style="width: 100%;height: 90%;">
+            <el-table :data="list" highlight-current-row v-loading="loading" border style="width: 100%;height: 80%;">
                 <el-table-column type="index" label="#" width="60"></el-table-column>
                 <el-table-column prop="userId" label="用户ID" width="80" show-overflow-tooltip></el-table-column>
                 <el-table-column prop="userName" label="用户昵称" min-width="150" show-overflow-tooltip></el-table-column>
@@ -45,8 +45,10 @@ export default {
   },
   methods: {
     getUserList() {
+        this.loading = true;
         this.$http.post(`${baseUrl}/yup-rest/manage/user-list`, { pageIndex: this.curPage, pageSize: this.pageSize })
         .then(res => {
+            this.loading = false;
             if(res.data.resultCode == 200){
                 let r = res.data.resultData;
                 if(r){
@@ -58,11 +60,13 @@ export default {
             }
         })
         .catch(() => {
+            this.loading = false;
             this.$message.error('未知错误！');
         })
     },
     curChange(idx) {
         this.curPage = idx;
+        this.getUserList();
     },
     formatTime(row, column){
         return moment(new Date(row.regisTime)).format('YYYY-MM-DD HH:mm:ss');

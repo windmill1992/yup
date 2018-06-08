@@ -14,15 +14,21 @@
       </el-col>
       <el-col :span="24">
           <el-table :data="trials" highlight-current-row v-loading="loading" 
-            style="width: 100%;height: 90%" border>
-            <el-table-column prop="proId" width="70" label="编号"></el-table-column>
+            style="width: 100%;height: 80%" border>
+            <el-table-column type="index" width="60" label="#"></el-table-column>
+            <el-table-column prop="proId" width="70" label="ID"></el-table-column>
             <el-table-column prop="proName" label="标题" min-width="200"></el-table-column>
             <el-table-column prop="sellingPrice" label="原价" min-width="150"></el-table-column>
             <el-table-column prop="proCount" width="80" label="数量"></el-table-column>
             <el-table-column prop="peopleNum" width="120" label="申请人数"></el-table-column>
-            <el-table-column width="120" label="操作">
+            <el-table-column width="120" label="详情">
                 <template slot-scope="scope">
                     <a href="javascript:;" class="detail" @click="showDetail(scope.row.proId, scope.row.status)">查看详情</a>
+                </template>
+            </el-table-column>
+            <el-table-column width="120" label="申请人列表">
+                <template slot-scope="scope">
+                    <a href="javascript:;" class="detail" @click="showApplyList(scope.row.proId)">申请人列表</a>
                 </template>
             </el-table-column>
             <el-table-column 
@@ -31,6 +37,11 @@
                 :filter-multiple="false" 
                 :filter-method="filterState">
             </el-table-column>
+            <!-- <el-table-column min-width="150" label="操作">
+              <template slot-scope="scope">
+                <el-button type="" size="mini" ></el-button>
+              </template>
+            </el-table-column> -->
           </el-table>
           <el-pagination class="page fr" v-if="proTotal > 10" 
             @current-change="handleCurrentChange" 
@@ -185,20 +196,23 @@
       <!-- 开奖选择申请人列表 -->
       <el-dialog :visible.sync="showLotteryDialog" fullscreen custom-class="lot-dialog">
         <template slot="title">
-          <div class="lot-head">
+          <div class="lot-head" v-if="!lotRead">
             <p class="lot-title fl">试用列表-查看详情-开奖 ( {{selectedUser}} / {{lotTotal}} )</p>
             <!-- <el-input placeholder="搜索用户手机号/用户名" class="fr"></el-input> -->
+          </div>
+          <div class="lot-head" v-else>
+            <p class="lot-title">申请人列表</p>
           </div>
         </template>
         <el-table :data="toLotUsers" highlight-current-row v-loading="loading" 
             @select="selectUser" @select-all="selectAllUser"
             style="width: 100%;height: 90%" :style="{'max-height': maxFormHeight}" border>
-            <el-table-column prop="userId" width="60" label="ID"></el-table-column>
+            <el-table-column prop="userId" width="100" label="ID"></el-table-column>
             <el-table-column prop="userName" width="120" label="用户昵称" show-overflow-tooltip></el-table-column>
             <el-table-column prop="mobile" width="140" label="手机号"></el-table-column>
             <el-table-column prop="userAddress" min-width="200" label="收货地址" show-overflow-tooltip></el-table-column>
-            <!-- <el-table-column prop="note" label="试用宣言" show-overflow-tooltip></el-table-column> -->
-            <el-table-column width="80" label="操作" type="selection">
+            <el-table-column prop="note" min-width="200" label="试用宣言" show-overflow-tooltip></el-table-column>
+            <el-table-column width="80" label="操作" type="selection" v-if="!lotRead">
               <!-- <template slot-scope="scope">
                 <span>选中</span>
               </template> -->
@@ -212,9 +226,12 @@
             prev-text="上一页" next-text="下一页" :total="lotTotal">
           </el-pagination>
           <div class="clearFix"></div>
-          <template slot="footer">
+          <template slot="footer" v-if="!lotRead">
             <el-button @click="showLotteryDialog = false">取消</el-button>
             <el-button type="success" @click="chooseUsers">确定</el-button>
+          </template>
+          <template slot="footer" v-else>
+            <el-button type="primary" @click="showLotteryDialog = false">关闭</el-button>
           </template>
       </el-dialog>
   </el-row>
@@ -300,6 +317,7 @@ export default {
       lotCurPage: 1,
       lotPageSize: 20,
       lotTotal: 0,
+      lotRead: false,
       dialogState: "",
       isPublish: false
     };
@@ -647,6 +665,15 @@ export default {
       this.showLotteryDialog = true;
       this.selUserList = [];
       this.lotCurPage = 1;
+      this.lotRead = false;
+      this.getApplyUserList();
+    },
+    showApplyList(id) {
+      this.formdata.proId = id;
+      this.formdata = Object.assign({}, this.formdata);
+      this.lotCurPage = 1;
+      this.lotRead = true;
+      this.showLotteryDialog = true;
       this.getApplyUserList();
     },
     getApplyUserList() {

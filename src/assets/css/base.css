@@ -234,3 +234,13 @@ img[mode='fix']{
 #app{
 	min-width: 1000px;
 }
+.el-dialog{
+	transform: translate3d(-50%, -7.5%, 0)!important;
+	margin-bottom: 0
+}
+.el-dialog__body{
+	padding: 10px 20px;
+}
+.el-table td, .el-table th{
+	height: 32px;
+}
