@@ -69,7 +69,6 @@ export default {
 }
 </script>
 
-<style>
-@import url(./../../assets/css/base.css);
+<style scoped>
 @import url(./../../assets/css/home/feedback.css);
 </style>

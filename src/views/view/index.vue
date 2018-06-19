@@ -66,7 +66,6 @@ export default {
 </script>
 
 <style scoped>
-    @import url(./../../assets/css/base.css);
     .header{
         padding: 10px 20px;
         background: #f2f2f2;

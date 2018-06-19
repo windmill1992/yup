@@ -78,8 +78,7 @@ export default {
 };
 </script>
 
-<style>
-@import url(./../../assets/css/base.css);
+<style scoped>
 .el-table th>.cell{
     white-space: nowrap;
 }
