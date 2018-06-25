@@ -6,6 +6,7 @@ import Index0 from './views/view/index.vue'
 import Trial from './views/view/trial.vue'
 import Feedback from './views/view/feedback.vue'
 import Users from './views/view/users.vue'
+import YupType from './views/view/yupType.vue'
 
 let routes = [
     {
@@ -30,6 +31,7 @@ let routes = [
             { path: '/trial', component: Trial, name: '试用' },
             { path: '/feedback', component: Feedback, name: '反馈' },
             { path: '/users', component: Users, name: '用户' },
+            { path: '/yupType', component: YupType, name: 'yup类型' },
         ]
     },
     {

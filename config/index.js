@@ -29,7 +29,8 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://api.yupfashion.cn/yup',
+        target: 'http://apidev.yupfashion.cn/yup',
+        // target: 'http://api.yupfashion.cn/yup',
         // secure: false,
         changeOrigin: true,
         pathRewrite: {'^/api' : '/'}

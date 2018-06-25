@@ -1,7 +1,7 @@
 <template>
   <el-row>
       <el-col :span="24" class="tool-bar" >
-        <el-form class="" :inline="true">
+        <el-form :inline="true">
             <el-form-item class="fl">
                 <p class="title">试用列表</p>
             </el-form-item>
