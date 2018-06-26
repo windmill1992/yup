@@ -14,7 +14,8 @@
             <span>{{scope.row.yup == -1 ? '随机' : scope.row.yup}}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="yupDesc" label="yup描述" min-width="180"></el-table-column>
+        <el-table-column prop="yupDesc" label="描述" min-width="180"></el-table-column>
+        <el-table-column prop="yupDescTemplate" label="描述模板" width="150"></el-table-column>
         <el-table-column prop="yupLimit" label="领取限制" width="100"></el-table-column>
         <el-table-column prop="yupLimitCount" label="领取限制次数" width="150">
           <template slot-scope="scope">
@@ -41,6 +42,9 @@
         </el-form-item>
         <el-form-item label="描述" prop="yupDesc">
           <el-input v-model="formdata.yupDesc"></el-input>
+        </el-form-item>
+        <el-form-item label="描述模板" prop="yupDescTemplate">
+          <el-input v-model="formdata.yupDescTemplate"></el-input>
         </el-form-item>
         <el-form-item label="yup值">
           <el-input v-model.number="formdata.yup"></el-input>
@@ -117,6 +121,7 @@ export default {
         yupTypeId: 0,
         yupTypeName: '',
         yupDesc: '',
+        yupDescTemplate: '',
         yup: '',
         yupLimit: 1,
         yupLimitCount: '',
