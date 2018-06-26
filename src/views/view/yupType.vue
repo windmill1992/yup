@@ -9,10 +9,18 @@
         <el-table-column type="index" label="#" width="60"></el-table-column>
         <el-table-column prop="yupTypeId" label="ID" width="80"></el-table-column>
         <el-table-column prop="yupTypeName" label="yup名称" min-width="150" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="yup" label="yup值" width="80"></el-table-column>
+        <el-table-column prop="yup" label="yup值" width="80">
+          <template slot-scope="scope">
+            <span>{{scope.row.yup == -1 ? '随机' : scope.row.yup}}</span>
+          </template>
+        </el-table-column>
         <el-table-column prop="yupDesc" label="yup描述" min-width="180"></el-table-column>
         <el-table-column prop="yupLimit" label="领取限制" width="100"></el-table-column>
-        <el-table-column prop="yupLimitCount" label="领取限制次数" width="150"></el-table-column>
+        <el-table-column prop="yupLimitCount" label="领取限制次数" width="150">
+          <template slot-scope="scope">
+            <span>{{scope.row.yupLimitCount == -1 ? '不限' : scope.row.yupLimitCount}}</span>
+          </template>
+        </el-table-column>
         <el-table-column prop="isEnable" label="是否启用" width="120">
           <template slot-scope="scope">
             <span>{{scope.row.isEnable == 1 ? '是' : '否'}}</span>
@@ -129,7 +137,7 @@ export default {
           if(!this.formdata.yupLimitCount){
             this.formdata.yupLimitCount = -1;
           }
-          this.$http.post(`${baseUrl}/yup-rest/manage/save-yup-type`, { data: this.formdata })
+          this.$http.post(`${baseUrl}/yup-rest/manage/save-yup-type`, this.formdata )
           .then(res => {
             if(res.data.resultCode == 200 && res.data.resultData){
               this.$message.success('保存成功');
@@ -178,12 +186,6 @@ export default {
         })
       })
     },
-  },
-  computed: {
-    maxFormHeight() {
-      let h = window.innerHeight;
-      return h - 400 + "px";
-    }
   },
   mounted() {
     this.getList();
