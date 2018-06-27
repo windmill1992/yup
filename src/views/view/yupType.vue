@@ -16,7 +16,12 @@
         </el-table-column>
         <el-table-column prop="yupDesc" label="描述" min-width="180"></el-table-column>
         <el-table-column prop="yupDescTemplate" label="描述模板" width="150"></el-table-column>
-        <el-table-column prop="yupLimit" label="领取限制" width="100"></el-table-column>
+        <el-table-column prop="yupTypeCode" label="类型唯一code" width="150"></el-table-column>
+        <el-table-column prop="yupLimit" label="领取限制" width="100">
+          <template slot-scope="scope">
+            <span>{{scope.row.yupLimit == 1 ? '每天' : '总共'}}</span>
+          </template>
+        </el-table-column>
         <el-table-column prop="yupLimitCount" label="领取限制次数" width="150">
           <template slot-scope="scope">
             <span>{{scope.row.yupLimitCount == -1 ? '不限' : scope.row.yupLimitCount}}</span>
@@ -45,6 +50,9 @@
         </el-form-item>
         <el-form-item label="描述模板" prop="yupDescTemplate">
           <el-input v-model="formdata.yupDescTemplate"></el-input>
+        </el-form-item>
+        <el-form-item label="唯一code" prop="yupTypeCode">
+          <el-input v-model="formdata.yupTypeCode"></el-input>
         </el-form-item>
         <el-form-item label="yup值">
           <el-input v-model.number="formdata.yup"></el-input>
@@ -89,6 +97,12 @@ export default {
         ],
         yupDesc: [
           { required: true, message: '描述不能为空', trigger: 'blur' }
+        ],
+        yupDescTemplate: [
+          { required: true, message: '描述模板不能为空', trigger: 'blur' }
+        ],
+        yupTypeCode: [
+          { required: true, message: 'code不能为空', trigger: 'blur' }
         ]
       }
     }
@@ -122,6 +136,7 @@ export default {
         yupTypeName: '',
         yupDesc: '',
         yupDescTemplate: '',
+        yupTypeCode: '',
         yup: '',
         yupLimit: 1,
         yupLimitCount: '',
@@ -171,11 +186,8 @@ export default {
         type: 'warning'
       })
       .then(() => {
-        this.$http.post(`${baseUrl}/yup-rest/manage/delete-yup-type`, { yupTypeId: id }, {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          }
-        }).then(res => {
+        this.$http.post(`${baseUrl}/yup-rest/manage/delete-yup-type?yupTypeId=`+ id, {})
+        .then(res => {
           if(res.data.resultCode == 200){
             this.$message.success('删除成功');
             this.getList();
