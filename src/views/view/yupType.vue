@@ -6,7 +6,6 @@
     </el-col>
     <el-col :span="24">
       <el-table :data="list" highlight-current-row v-loading="loading" border style="width: 100%;height: 80%;">
-        <el-table-column type="index" label="#" width="60"></el-table-column>
         <el-table-column prop="yupTypeId" label="ID" width="80"></el-table-column>
         <el-table-column prop="yupTypeName" label="yup名称" min-width="150" show-overflow-tooltip></el-table-column>
         <el-table-column prop="yup" label="yup值" width="80">
