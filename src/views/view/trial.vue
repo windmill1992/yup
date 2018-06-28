@@ -122,6 +122,10 @@
               <el-radio :label="2" disabled >手动</el-radio>
             </el-radio-group>
           </el-form-item>
+          <el-form-item label="优惠券链接" prop="tbCouponUrl">
+            <el-input v-model="formdata.tbCouponUrl" v-if="!read" style="width: 400px"></el-input>
+            <p class="read" v-else>{{formdata.tbCouponUrl}}</p>
+          </el-form-item>
           <p class="label">试用规则</p>
           <el-form-item label="规则" prop="proDescribe">
             <el-input type="textarea" v-if="!read" :autosize="{minRows: 2, maxRows: 10}" 
@@ -284,6 +288,9 @@ export default {
         proDescribe: [
           { required: true, message: '请输入试用规则', trigger: 'blur' },
         ],
+        tbCouponUrl: [
+          { required: true, message: '请输入优惠券链接', trigger: 'blur' }
+        ],
         color: [
           { required: true, message: '请输入商品颜色', trigger: 'blur' },
         ],
@@ -445,6 +452,7 @@ export default {
         decsImg: '',
         proStatus: 0,
         proId: 0,
+        tbCouponUrl: '',
         proBannerImgList: []
       }
     },
