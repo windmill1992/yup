@@ -338,7 +338,7 @@ export default {
       return h - 400 + "px";
     },
     uploadUrl() {
-      return `${baseUrl}/yup-rest/upload`;
+      return `${baseUrl}/yup-rest/upload?picType=1`;
     }
   },
   methods: {
@@ -592,7 +592,7 @@ export default {
       })
     },
     deleteImg(fileName) {
-      this.$http.post(`${baseUrl}/yup-rest/delete?fileName=`+ fileName, {})
+      this.$http.post(`${baseUrl}/yup-rest/delete?picType=1&fileName=`+ fileName, {})
       .then(res => {
         if(res.data.resultCode == 200 && res.data.resultData){
           this.$message({
