@@ -2,7 +2,7 @@
     <el-row>
         <el-col :span="24" class="tool-bar">
             <p class="title fl">用户列表</p>
-            <el-input placeholder="搜索用户手机号／用户名" class="fr"></el-input>
+            <el-input v-model="userName" placeholder="搜索用户名" class="fr"></el-input>
         </el-col>
         <el-col :span="24">
             <el-table :data="list" highlight-current-row v-loading="loading" border style="width: 100%;height: 80%;">
@@ -40,13 +40,19 @@ export default {
       curPage: 1,
       pageSize: 20,
       total: 0,
-      loading: false
+      loading: false,
+      userName: ''
     };
   },
   methods: {
     getUserList() {
         this.loading = true;
-        this.$http.post(`${baseUrl}/yup-rest/manage/user-list`, { pageIndex: this.curPage, pageSize: this.pageSize })
+        let data = {
+            pageIndex: this.curPage,
+            pageSize: this.pageSize,
+            userName: this.userName
+        };
+        this.$http.post(`${baseUrl}/yup-rest/manage/user-list`, data)
         .then(res => {
             this.loading = false;
             if(res.data.resultCode == 200){
@@ -74,6 +80,13 @@ export default {
   },
   mounted() {
       this.getUserList();
+      let _this = this;
+      window.addEventListener('keypress', function(e){
+        if(e.keyCode == 13){
+            _this.curPage = 1;
+            _this.getUserList();
+        }
+      }, false);
   }
 };
 </script>

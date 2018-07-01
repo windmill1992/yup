@@ -106,7 +106,7 @@
             <el-date-picker class="read" format="yyyy-MM-dd HH:mm" v-model="formdata.proStartTime" disabled v-else></el-date-picker>
           </el-form-item>
           <el-form-item label="开奖" prop="proEndTime">
-            <el-date-picker type="datetime" format="yyyy-MM-dd HH:mm" value-format="timestamp" 
+            <el-date-picker type="datetime" format="yyyy-MM-dd HH" value-format="timestamp" 
               v-if="!read" v-model="formdata.proEndTime">
             </el-date-picker>
             <el-date-picker class="read" format="yyyy-MM-dd HH:mm" v-model="formdata.proEndTime" disabled v-else></el-date-picker>
@@ -169,6 +169,23 @@
               </el-upload>
               <img :src="formdata.decsImg" v-else class="front-img" alt="">
           </el-form-item>
+          <el-form-item label="造假商品" required>
+            <el-radio-group v-model="formdata.isFake" v-if="!read">
+              <el-radio :label="1">是</el-radio>
+              <el-radio :label="0">否</el-radio>
+            </el-radio-group>
+            <el-radio-group v-model="formdata.isFake" v-else>
+              <el-radio :label="1" disabled >是</el-radio>
+              <el-radio :label="0" disabled >否</el-radio>
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item v-if="formdata.isFake == 1" label="中奖用户" required>
+            <el-select v-model="formdata.fakeUserIdList" multiple filterable collapse-tags remote reserve-keyword
+              :remote-method="remoteMethod" :multiple-limit="formdata.proCount ? formdata.proCount : 0" 
+              :loading="loading2" style="width: 300px;" placeholder="请输入关键词" >
+              <el-option v-for="item in fakeUserList" :key="item.value" :value="item.value" :label="item.label"></el-option>
+            </el-select>
+          </el-form-item>
           <template v-if="read && dialogState == '已结束'">
             <p class="label">中奖名单</p>
             <el-table :data="winnerUsers" highlight-current-row 
@@ -212,10 +229,11 @@
             @select="selectUser" @select-all="selectAllUser"
             style="width: 100%;height: 90%" :style="{'max-height': maxFormHeight}" border>
             <el-table-column prop="userId" width="100" label="ID"></el-table-column>
-            <el-table-column prop="userName" width="120" label="用户昵称" show-overflow-tooltip></el-table-column>
+            <el-table-column prop="userName" width="120" label="用户名称" show-overflow-tooltip></el-table-column>
+            <el-table-column prop="userNickName" width="120" label="用户昵称" show-overflow-tooltip></el-table-column>
             <el-table-column prop="mobile" width="140" label="手机号"></el-table-column>
             <el-table-column prop="userAddress" min-width="200" label="收货地址" show-overflow-tooltip></el-table-column>
-            <el-table-column prop="note" min-width="200" label="试用宣言" show-overflow-tooltip></el-table-column>
+            <!-- <el-table-column prop="note" min-width="200" label="试用宣言" show-overflow-tooltip></el-table-column> -->
             <el-table-column width="80" label="操作" type="selection" v-if="!lotRead">
               <!-- <template slot-scope="scope">
                 <span>选中</span>
@@ -258,6 +276,7 @@ export default {
       proTotal: 0,
       proSize: 20,
       loading: false,
+      loading2: false,
       currentPage: 1,
       dialogTitle: "",
       fullscreen: false,
@@ -326,7 +345,8 @@ export default {
       lotTotal: 0,
       lotRead: false,
       dialogState: "",
-      isPublish: false
+      isPublish: false,
+      fakeUserList: []
     };
   },
   computed: {
@@ -453,7 +473,9 @@ export default {
         proStatus: 0,
         proId: 0,
         tbCouponUrl: '',
-        proBannerImgList: []
+        proBannerImgList: [],
+        fakeUserIdList: [],
+        isFake: 0
       }
     },
     editTrial() {
@@ -468,13 +490,14 @@ export default {
       this.formdata = Object.assign({}, this.formdata);
       this.$refs.form.validate((valid) => {
         if(valid){
-          let f = this.isPublish;
+          let f = this.isPublish || this.formdata.proStatus == 2;
           if(new Date(this.formdata.proEndTime).getTime() < Date.now()){
             this.formdata.proStatus = 2;
             this.formdata = Object.assign({}, this.formdata);
           }
           this.formdata.proStartTime = moment(new Date(this.formdata.proStartTime)).format('YYYY-MM-DD HH:mm');
-          this.formdata.proEndTime = moment(new Date(this.formdata.proEndTime)).format('YYYY-MM-DD HH:mm');
+          this.formdata.proEndTime = moment(new Date(this.formdata.proEndTime)).format('YYYY-MM-DD HH');
+          this.formdata.proEndTime = this.formdata.proEndTime + ':00';
           delete this.formdata.applyPeopleNum;
           delete this.formdata.applyUserList;
           delete this.formdata.winningPeopleNum;
@@ -489,7 +512,7 @@ export default {
             if(res.data.resultCode == 200 && res.data.resultData){
               this.$message({
                 type: 'success',
-                message: f ? '发布成功！' : '保存成功！',
+                message: '提交成功！',
                 showClose: true,
                 center: true
               });
@@ -499,7 +522,9 @@ export default {
               }else{
                 this.getProductList();
               }
+              this.showDialog = false;
             }else{
+              this.getProductList();
               if(!res.data.resultMsg){
                 this.$message.error('保存失败！');
               }else{
@@ -511,10 +536,10 @@ export default {
                 })
               }
             }
-            this.showDialog = false;
             this.isPublish = false;
           })
           .catch(() => {
+            this.getProductList();
             this.$message.error('保存失败！');
             if(this.edit){
               this.showDialog = false;
@@ -653,6 +678,7 @@ export default {
             this.showLotteryDialog = false;
             this.formdata.proStatus = 2;
             this.formdata = Object.assign({}, this.formdata);
+            this.formdata.proStatus = 2;
             this.saveProduct();
           }else{
             this.$message.error('开奖失败');
@@ -727,7 +753,38 @@ export default {
       .catch(() => {
         this.$message.error('查询已中奖名单失败！');
       })
-    }
+    },
+    getUserList(name) {
+        let data = {
+            pageIndex: 1,
+            pageSize: 10,
+            userName: name
+        };
+        this.$http.post(`${baseUrl}/yup-rest/manage/user-list`, data)
+        .then(res => {
+          this.loading2 = false;
+          if(res.data.resultCode == 200){
+              let r = res.data.resultData;
+              if(r){
+                  this.fakeUserList = r.list.map(item => {
+                    return { value: item.userId, label: item.userName };
+                  });
+              }
+          }else{
+              this.$message.error(res.data.resultMsg);
+          }
+        })
+        .catch(() => {
+            this.loading2 = false;
+            this.$message.error('未知错误！');
+        })
+    },
+    remoteMethod(query) {
+      if(query){
+        this.loading2 = true;
+        this.getUserList(query);
+      }
+    },
   },
   mounted() {
     this.getProductList();
