@@ -181,7 +181,7 @@
           </el-form-item>
           <el-form-item v-if="formdata.isFake == 1" label="中奖用户" required>
             <el-select v-model="formdata.fakeUserIdList" multiple filterable collapse-tags remote reserve-keyword
-              :remote-method="remoteMethod" :multiple-limit="formdata.proCount ? formdata.proCount : 0" 
+              :remote-method="remoteMethod" :multiple-limit="formdata.proCount ? formdata.proCount : 0"
               :loading="loading2" style="width: 300px;" placeholder="请输入关键词" v-if="!read">
               <el-option v-for="item in fakeUserList" :key="item.value" :value="item.value" :label="item.label"></el-option>
             </el-select>
@@ -398,7 +398,7 @@ export default {
           this.$message.error(res.data.resultMsg);
         }
       })
-      .catch(res => {
+      .catch(() => {
         this.loading = false;
         this.$message.error('未知错误');
       })
@@ -439,6 +439,7 @@ export default {
           delete this.formdata.bannerImgList;
           if(this.formdata.isFake == 1){
             this.formdata.fakeUserIdList = [];
+            this.fakeUserList = [];
             for (let v of this.formdata.fakeUserList){
               this.formdata.fakeUserIdList.push(v.userId);
               this.fakeUserList.push({
@@ -490,6 +491,7 @@ export default {
         fakeUserIdList: [],
         isFake: 0
       }
+      this.getAllUsers();
     },
     editTrial() {
       this.showDialog = true;
@@ -793,11 +795,17 @@ export default {
         })
     },
     remoteMethod(query) {
+      this.loading2 = true;
       if(query){
-        this.loading2 = true;
         this.getUserList(query);
+      }else{
+        this.getUserList('');
       }
     },
+    getAllUsers() {
+      this.loading2 = true;
+      this.getUserList('');
+    }
   },
   mounted() {
     this.getProductList();
