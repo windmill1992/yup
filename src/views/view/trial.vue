@@ -182,9 +182,12 @@
           <el-form-item v-if="formdata.isFake == 1" label="中奖用户" required>
             <el-select v-model="formdata.fakeUserIdList" multiple filterable collapse-tags remote reserve-keyword
               :remote-method="remoteMethod" :multiple-limit="formdata.proCount ? formdata.proCount : 0" 
-              :loading="loading2" style="width: 300px;" placeholder="请输入关键词" >
+              :loading="loading2" style="width: 300px;" placeholder="请输入关键词" v-if="!read">
               <el-option v-for="item in fakeUserList" :key="item.value" :value="item.value" :label="item.label"></el-option>
             </el-select>
+            <p v-else>
+              <span v-for="item in formdata.fakeUserList">{{item.userName}}, </span>
+            </p>
           </el-form-item>
           <template v-if="read && dialogState == '已结束'">
             <p class="label">中奖名单</p>
@@ -434,6 +437,16 @@ export default {
             })
           })
           delete this.formdata.bannerImgList;
+          if(this.formdata.isFake == 1){
+            this.formdata.fakeUserIdList = [];
+            for (let v of this.formdata.fakeUserList){
+              this.formdata.fakeUserIdList.push(v.userId);
+              this.fakeUserList.push({
+                label: v.userName,
+                value: v.userId
+              })
+            }
+          }
           if(this.formdata.proStatus > 1){
             this.getWinnerUserList(this.formdata.proId);
           }
