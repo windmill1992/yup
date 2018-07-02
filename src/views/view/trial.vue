@@ -181,7 +181,7 @@
           </el-form-item>
           <el-form-item v-if="formdata.isFake == 1" label="中奖用户" required>
             <el-select v-model="formdata.fakeUserIdList" multiple filterable collapse-tags remote reserve-keyword
-              :remote-method="remoteMethod" :multiple-limit="formdata.proCount ? formdata.proCount : 0"
+              :remote-method="remoteMethod" :multiple-limit="formdata.proCount ? formdata.proCount : 0" @remove-tag="removeTag"
               :loading="loading2" style="width: 300px;" placeholder="请输入关键词" v-if="!read">
               <el-option v-for="item in fakeUserList" :key="item.value" :value="item.value" :label="item.label"></el-option>
             </el-select>
@@ -805,6 +805,10 @@ export default {
     getAllUsers() {
       this.loading2 = true;
       this.getUserList('');
+    },
+    removeTag(e) {
+      this.formdata.fakeUserIdList.splice(e.index, 1);
+      this.formdata = Object.assign({}, this.formdata);
     }
   },
   mounted() {
