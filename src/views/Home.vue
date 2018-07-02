@@ -195,6 +195,9 @@ export default {
       height: 60px;
       line-height: 60px;
       cursor: pointer;
+      .fa{
+        font-family: '微软雅黑',Arial, 'PingFang SC', Helvetica, sans-serif;
+      }
       .fa-align-justify:before{
         content: '';
         display: inline-block;
