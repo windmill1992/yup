@@ -170,7 +170,7 @@
               <img :src="formdata.decsImg" v-else class="front-img" alt="">
           </el-form-item>
           <el-form-item label="造假商品" required>
-            <el-radio-group v-model="formdata.isFake" v-if="!read">
+            <el-radio-group v-model="formdata.isFake" v-if="!read && !formdata.fakeUserList">
               <el-radio :label="1">是</el-radio>
               <el-radio :label="0">否</el-radio>
             </el-radio-group>
@@ -182,7 +182,7 @@
           <el-form-item v-if="formdata.isFake == 1" label="中奖用户" required>
             <el-select v-model="formdata.fakeUserIdList" multiple filterable collapse-tags remote reserve-keyword
               :remote-method="remoteMethod" :multiple-limit="formdata.proCount ? formdata.proCount : 0" @remove-tag="removeTag"
-              :loading="loading2" style="width: 300px;" placeholder="请输入关键词" v-if="!read">
+              :loading="loading2" style="width: 300px;" placeholder="请输入关键词" v-if="!read && !formdata.fakeUserList">
               <el-option v-for="item in fakeUserList" :key="item.value" :value="item.value" :label="item.label"></el-option>
             </el-select>
             <p v-else>
