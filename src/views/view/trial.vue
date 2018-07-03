@@ -232,11 +232,11 @@
             @select="selectUser" @select-all="selectAllUser"
             style="width: 100%;height: 90%" :style="{'max-height': maxFormHeight}" border>
             <el-table-column prop="userId" width="100" label="ID"></el-table-column>
-            <el-table-column prop="userName" width="120" label="用户名称" show-overflow-tooltip></el-table-column>
-            <el-table-column prop="userNickName" width="120" label="用户昵称" show-overflow-tooltip></el-table-column>
+            <el-table-column prop="userNickName" width="120" label="昵称" show-overflow-tooltip></el-table-column>
+            <el-table-column prop="userName" width="120" label="收货姓名" show-overflow-tooltip></el-table-column>
             <el-table-column prop="mobile" width="140" label="手机号"></el-table-column>
             <el-table-column prop="userAddress" min-width="200" label="收货地址" show-overflow-tooltip></el-table-column>
-            <!-- <el-table-column prop="note" min-width="200" label="试用宣言" show-overflow-tooltip></el-table-column> -->
+            <el-table-column prop="userApplyTime"width="200" label="申请时间"></el-table-column>
             <el-table-column width="80" label="操作" type="selection" v-if="!lotRead">
               <!-- <template slot-scope="scope">
                 <span>选中</span>
@@ -734,6 +734,9 @@ export default {
           let r = res.data.resultData;
           this.toLotUsers = r.list;
           this.lotTotal = r.total;
+          for (let v of this.toLotUsers) {
+            v.userApplyTime = moment(new Date(v.userApplyTime)).format('YYYY-MM-DD HH:mm:ss');
+          }
         }else{
           this.$message({
             message: res.data.resultMsg,
