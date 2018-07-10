@@ -577,6 +577,10 @@ export default {
       if(file.type != 'image/png' && file.type != 'image/jpg' && file.type != 'image/jpeg' && file.type != 'image/gif' && file.type != 'images/bmp'){
         return false;
       }
+      if(file.size / 1024 / 1024 > 2){
+        this.$message.error('图片大小不能超过2M！');
+        return false;
+      }
       this.uploading = this.$loading({
         target: '.loading-target',
       })
