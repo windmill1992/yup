@@ -5,3 +5,10 @@
     height: 14px;
     background: url(./../img/goods.png) no-repeat 0 0 / 100% 100%;
 }
+.el-icon-user::before{
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background: url(./../img/user.png) no-repeat 0 0 / 100% 100%;
+}
