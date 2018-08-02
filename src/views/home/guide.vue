@@ -69,6 +69,9 @@
                     <el-input v-model.number="formdata.state"></el-input>
                 </el-form-item>
                 <el-form-item label="商品">
+                    <a href="javascript:;" v-for="img in formdata.imgs" :key="img" class="goods-pic" @click="editGoods()">
+                        <img :src="img" alt="">
+                    </a>
                     <el-button type="ghost" @click="addGoods">添加商品</el-button>
                 </el-form-item>
                 <el-form-item label="内容">
@@ -292,6 +295,9 @@ export default {
                 weburl: '',
                 coverImg: '',
             };
+        },
+        editGoods() {
+
         },
         saveGoods() {
 
