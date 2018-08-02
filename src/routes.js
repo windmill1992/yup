@@ -5,6 +5,7 @@ import Home from '@/views/Home'
 import Index0 from '@/views/home/index'
 import Trial from '@/views/home/trial'
 import Feedback from '@/views/home/feedback'
+import Guide from '@/views/home/guide'
 
 import YupType from '@/views/system/yupType'
 import GuideTag from '@/views/system/guideTag'
@@ -33,6 +34,7 @@ let routes = [
             { path: '/index', component: Index0, name: '首页' },
             { path: '/trial', component: Trial, name: '试用' },
             { path: '/feedback', component: Feedback, name: '反馈' },
+            { path: '/guide', component: Guide, name: '指南' },
         ]
     },
     {
