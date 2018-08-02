@@ -42,23 +42,19 @@
                     <el-upload class="front-pic" :action="uploadUrl" 
                         :show-file-list="false" :multiple="false" 
                         :before-upload="beforeUpload" accept="image/*"
-                        :on-success="frontSuccess" :on-error="uploadError" 
-                        :limit="1" v-if="!read">
+                        :on-success="frontSuccess" :on-error="uploadError" :limit="1">
                         <img :src="formdata.coverImg" v-if="formdata.coverImg" class="front-img loading-target" alt="">
                         <i v-else class="el-icon-plus front-icon loading-target"></i>
                     </el-upload>
-                    <img :src="formdata.coverImg" v-else class="front-img">
                 </el-form-item>
                 <el-form-item label="头像" prop="avatarImg">
                     <el-upload class="front-pic" :action="uploadUrl" 
                         :show-file-list="false" :multiple="false" 
-                        :before-upload="beforeUpload" accept="image/*"
-                        :on-success="avatarSuccess" :on-error="uploadError" 
-                        :limit="1" v-if="!read">
-                        <img :src="formdata.avatarImg" v-if="formdata.avatarImg" class="front-img loading-target" alt="">
-                        <i v-else class="el-icon-plus front-icon loading-target"></i>
+                        :before-upload="beforeUpload2" accept="image/*"
+                        :on-success="avatarSuccess" :on-error="uploadError" :limit="1">
+                        <img :src="formdata.avatarImg" v-if="formdata.avatarImg" class="front-img loading-target2" alt="">
+                        <i v-else class="el-icon-plus front-icon loading-target2"></i>
                     </el-upload>
-                    <img :src="formdata.avatarImg" v-else class="front-img" alt="">
                 </el-form-item>
                 <el-form-item label="来源" prop="source">
                     <el-input v-model="formdata.source"></el-input>
@@ -73,7 +69,7 @@
                     <el-input v-model.number="formdata.state"></el-input>
                 </el-form-item>
                 <el-form-item label="商品">
-                    <el-button>添加商品</el-button>
+                    <el-button type="ghost" @click="addGoods">添加商品</el-button>
                 </el-form-item>
                 <el-form-item label="内容">
                     <textarea id="conEditor"></textarea>
@@ -83,6 +79,30 @@
             <template slot="footer">
                 <el-button @click="showModal = false">取消</el-button>
                 <el-button type="success" @click="save">保存</el-button>
+            </template>
+        </el-dialog>
+
+        <el-dialog :visible.sync="showGoodsModal" :title="goodsTitle" custom-class="goods-dialog">
+            <el-form :model="goodsdata" label-width="100px" size="small">
+                <el-form-item label="名称" prop="name">
+                    <el-input v-model="goodsdata.name"></el-input>
+                </el-form-item>
+                <el-form-item label="地址" prop="weburl">
+                    <el-input v-model="goodsdata.weburl"></el-input>
+                </el-form-item>
+                <el-form-item label="封面" prop="coverImg">
+                    <el-upload class="front-pic" :action="uploadUrl" 
+                        :show-file-list="false" :multiple="false" 
+                        :before-upload="beforeUpload3" accept="image/*"
+                        :on-success="goodsSuccess" :on-error="uploadError" :limit="1">
+                        <img :src="goodsdata.coverImg" v-if="goodsdata.coverImg" class="front-img loading-target3" alt="">
+                        <i v-else class="el-icon-plus front-icon loading-target3"></i>
+                    </el-upload>
+                </el-form-item>
+            </el-form>
+            <template slot="footer">
+                <el-button @click="showGoodsModal = false">取消</el-button>
+                <el-button type="success" @click="saveGoods">保存</el-button>
             </template>
         </el-dialog>
     </el-row>
@@ -101,8 +121,11 @@ export default {
             total: 0,
             loading: false,
             showModal: false,
+            showGoodsModal: false,
             title: '',
+            goodsTitle: '',
             formdata: {},
+            goodsdata: {},
             rules: {
                 title: [
                     { required: true, message: '标题不能为空', trigger: 'blur' },
@@ -207,6 +230,32 @@ export default {
             })
             return true;
         },
+        beforeUpload2(file) {
+            if(file.type != 'image/png' && file.type != 'image/jpg' && file.type != 'image/jpeg' && file.type != 'image/gif' && file.type != 'images/bmp'){
+                return false;
+            }
+            if(file.size / 1024 / 1024 > 1){
+                this.$message.error('图片大小不能超过1M！');
+                return false;
+            }
+            this.uploading = this.$loading({
+                target: '.loading-target2',
+            })
+            return true;
+        },
+        beforeUpload3(file) {
+            if(file.type != 'image/png' && file.type != 'image/jpg' && file.type != 'image/jpeg' && file.type != 'image/gif' && file.type != 'images/bmp'){
+                return false;
+            }
+            if(file.size / 1024 / 1024 > 2){
+                this.$message.error('图片大小不能超过2M！');
+                return false;
+            }
+            this.uploading = this.$loading({
+                target: '.loading-target3',
+            })
+            return true;
+        },
         frontSuccess(res, file) {
             if(res.resultCode == 200){
                 this.formdata.coverImg = res.resultData;
@@ -215,17 +264,37 @@ export default {
             }
             this.uploading.close();
             },
-            uploadError() {
+        uploadError() {
             this.$message.error('上传失败！');
             this.uploading.close();
         },
         avatarSuccess(res, file) {
             if(res.resultCode == 200){
-                this.formdata.decsImg = res.resultData;
+                this.formdata.avatarImg = res.resultData;
             }else{
                 this.$message.error('上传失败！');
             }
             this.uploading.close();
+        },
+        goodsSuccess(res, file) {
+            if(res.resultCode == 200){
+                this.goodsdata.coverImg = res.resultData;
+            }else{
+                this.$message.error('上传失败！');
+            }
+            this.uploading.close();
+        },
+        addGoods() {
+            this.showGoodsModal = true;
+            this.goodsTitle = '添加商品';
+            this.goodsdata = {
+                name: '',
+                weburl: '',
+                coverImg: '',
+            };
+        },
+        saveGoods() {
+
         },
         tinymceInit() {
             console.log('mce init');
