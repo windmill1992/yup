@@ -63,7 +63,10 @@
                     <el-input v-model="formdata.web"></el-input>
                 </el-form-item>
                 <el-form-item label="标签">
-                    
+                    <el-select v-model="formdata.tag">
+                        <el-option :value="1">1</el-option>
+                        <el-option :value="2">2</el-option>
+                    </el-select>
                 </el-form-item>
                 <el-form-item label="状态">
                     <el-input v-model.number="formdata.state"></el-input>
@@ -77,7 +80,6 @@
                 <el-form-item label="内容">
                     <textarea id="conEditor"></textarea>
                 </el-form-item>
-
             </el-form>
             <template slot="footer">
                 <el-button @click="showModal = false">取消</el-button>
