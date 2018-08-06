@@ -35,41 +35,44 @@
                 <el-form-item label="标题" prop="title">
                     <el-input v-model="formdata.title"></el-input>
                 </el-form-item>
-                <el-form-item label="作者" prop="author">
-                    <el-input v-model="formdata.author"></el-input>
+                <el-form-item label="作者" prop="authorName">
+                    <el-input v-model="formdata.authorName"></el-input>
                 </el-form-item>
-                <el-form-item label="封面" prop="coverImg">
+                <el-form-item label="封面" prop="cover">
                     <el-upload class="front-pic" :action="uploadUrl" 
                         :show-file-list="false" :multiple="false" 
                         :before-upload="beforeUpload" accept="image/*"
                         :on-success="frontSuccess" :on-error="uploadError" :limit="1">
-                        <img :src="formdata.coverImg" v-if="formdata.coverImg" class="front-img loading-target" alt="">
+                        <img :src="formdata.cover" v-if="formdata.cover" class="front-img loading-target" alt="">
                         <i v-else class="el-icon-plus front-icon loading-target"></i>
                     </el-upload>
                 </el-form-item>
-                <el-form-item label="头像" prop="avatarImg">
+                <el-form-item label="头像" prop="authorAvatar">
                     <el-upload class="front-pic" :action="uploadUrl" 
                         :show-file-list="false" :multiple="false" 
                         :before-upload="beforeUpload2" accept="image/*"
                         :on-success="avatarSuccess" :on-error="uploadError" :limit="1">
-                        <img :src="formdata.avatarImg" v-if="formdata.avatarImg" class="front-img loading-target2" alt="">
+                        <img :src="formdata.authorAvatar" v-if="formdata.authorAvatar" class="front-img loading-target2" alt="">
                         <i v-else class="el-icon-plus front-icon loading-target2"></i>
                     </el-upload>
                 </el-form-item>
-                <el-form-item label="来源" prop="source">
-                    <el-input v-model="formdata.source"></el-input>
+                <el-form-item label="来源" prop="infoSource">
+                    <el-input v-model="formdata.infoSource"></el-input>
                 </el-form-item>
-                <el-form-item label="网址">
-                    <el-input v-model="formdata.web"></el-input>
+                <el-form-item label="网址" prop="infoAddress">
+                    <el-input v-model="formdata.infoAddress"></el-input>
                 </el-form-item>
-                <el-form-item label="标签">
-                    <el-select v-model="formdata.tag">
-                        <el-option :value="1">1</el-option>
-                        <el-option :value="2">2</el-option>
+                <el-form-item label="标签" prop="labelId">
+                    <el-select v-model="formdata.labelId">
+                        <el-option :value="tag.labelId" :label="tag.labelName" v-for="tag in tagList" :key="tag.labelId">{{tag.labelName}}</el-option>
                     </el-select>
                 </el-form-item>
-                <el-form-item label="状态">
-                    <el-input v-model.number="formdata.state"></el-input>
+                <el-form-item label="状态" prop="infoStatus">
+                    <el-select v-model="formdata.infoStatus">
+                        <el-option :value="0" label="未发布">未发布</el-option>
+                        <el-option :value="1" label="已发布">已发布</el-option>
+                        <el-option :value="2" label="已推荐">已推荐</el-option>
+                    </el-select>
                 </el-form-item>
                 <el-form-item label="商品">
                     <a href="javascript:;" v-for="img in formdata.imgs" :key="img" class="goods-pic" @click="editGoods()">
@@ -95,12 +98,12 @@
                 <el-form-item label="地址" prop="weburl">
                     <el-input v-model="goodsdata.weburl"></el-input>
                 </el-form-item>
-                <el-form-item label="封面" prop="coverImg">
+                <el-form-item label="封面" prop="cover">
                     <el-upload class="front-pic" :action="uploadUrl" 
                         :show-file-list="false" :multiple="false" 
                         :before-upload="beforeUpload3" accept="image/*"
                         :on-success="goodsSuccess" :on-error="uploadError" :limit="1">
-                        <img :src="goodsdata.coverImg" v-if="goodsdata.coverImg" class="front-img loading-target3" alt="">
+                        <img :src="goodsdata.cover" v-if="goodsdata.cover" class="front-img loading-target3" alt="">
                         <i v-else class="el-icon-plus front-icon loading-target3"></i>
                     </el-upload>
                 </el-form-item>
@@ -131,24 +134,36 @@ export default {
             goodsTitle: '',
             formdata: {},
             goodsdata: {},
+            tagList: [],
             rules: {
                 title: [
                     { required: true, message: '标题不能为空', trigger: 'blur' },
                 ],
-                author: [
+                authorName: [
                     { required: true, message: '作者不能为空', trigger: 'blur' },
                 ],
-                coverImg: [
+                cover: [
                     { required: true, message: '封面图不能为空' },
                 ],
-                avatarImg: [
+                authorAvatar: [
                     { required: true, message: '头像不能为空' },
                 ],
-                source: [
+                infoSource: [
                     { required: true, message: '来源不能为空', trigger: 'blur' },
                 ],
+                infoAddress: [
+                    { required: true, message: '网址不能为空', trigger: 'blur' },
+                ],
+                labelId: [
+                    { required: true, message: '标签不能为空', trigger: 'blur' },
+                ],
+                infoStatus: [
+                    { required: true, message: '状态不能为空', trigger: 'blur' },
+                ],
+                infoStatus: [
+                    { required: true, message: '状态不能为空', trigger: 'blur' },
+                ],
             },
-            read: false,
         }
     },
     computed: {
@@ -161,6 +176,24 @@ export default {
         },
     },
     methods: {
+        getTags(pn, ps) {
+            this.$http.post(`${baseUrl}/yup-rest/manage/label-list`, { pageIndex: pn, pageSize: ps })
+            .then(res => {
+                if(res.data.resultCode == 200){
+                    this.tagList = res.data.resultData.list;
+                }else{
+                    if(res.data.resultMsg){
+                        this.$message.error(res.data.resultMsg);
+                    }else{
+                        this.$message.error('服务器错误！');
+                    }
+                }
+            })
+            .catch(() => {
+                this.loading = false;
+                this.$message.error('未知错误！');
+            })
+        },
         curChange(idx) {
             this.curPage = idx;
             this.getGuideList();
@@ -198,15 +231,16 @@ export default {
             this.title = '添加指南';
             this.formdata = {
                 title: '',
-                author: '',
-                coverImg: '',
-                avatarImg: '',
-                source: '',
-                web: '',
-                tag: '',
-                state: 1,
-                goods: [],
+                authorName: '',
+                cover: '',
+                authorAvatar: '',
+                infoSource: '',
+                infoAddress: '',
+                infoStatus: 0,
+                labelId: '',
+                relatedProIdList: [],
                 content: '',
+                infoId: 0,
             }
             if(!this.mceinit){
                 setTimeout(() => {
@@ -220,7 +254,32 @@ export default {
             }
         },
         save() {
-
+            this.formdata.content = tinymce.activeEditor.getContent();
+            this.formdata = Object.assign({}, this.formdata);
+            console.log(this.formdata);
+            this.$http.post(`${baseUrl}/yup-rest/manage/save-information`, this.formdata)
+            .then(res => {
+                if(res.data.resultCode == 200){
+                    this.showModal = false;
+                    this.$message({
+                        type: 'success',
+                        message: '保存成功！',
+                        showClose: true,
+                        center: true
+                    });
+                    if(this.formdata.infoId == 0){
+                        this.curPage = 1;
+                        this.getGuideList();
+                    }else{
+                        this.getGuideList();
+                    }
+                }else{
+                    this.$message.error(res.data.resultMsg);
+                }
+            })
+            .catch(() => {
+                this.$message.error('未知错误');
+            })
         },
         beforeUpload(file) {
             if(file.type != 'image/png' && file.type != 'image/jpg' && file.type != 'image/jpeg' && file.type != 'image/gif' && file.type != 'images/bmp'){
@@ -263,7 +322,7 @@ export default {
         },
         frontSuccess(res, file) {
             if(res.resultCode == 200){
-                this.formdata.coverImg = res.resultData;
+                this.formdata.cover = res.resultData;
             }else{
                 this.$message.error('上传失败！');
             }
@@ -275,7 +334,7 @@ export default {
         },
         avatarSuccess(res, file) {
             if(res.resultCode == 200){
-                this.formdata.avatarImg = res.resultData;
+                this.formdata.authorAvatar = res.resultData;
             }else{
                 this.$message.error('上传失败！');
             }
@@ -283,7 +342,7 @@ export default {
         },
         goodsSuccess(res, file) {
             if(res.resultCode == 200){
-                this.goodsdata.coverImg = res.resultData;
+                this.goodsdata.cover = res.resultData;
             }else{
                 this.$message.error('上传失败！');
             }
@@ -295,7 +354,7 @@ export default {
             this.goodsdata = {
                 name: '',
                 weburl: '',
-                coverImg: '',
+                cover: '',
             };
         },
         editGoods() {
@@ -338,7 +397,7 @@ export default {
     },
     mounted() {
         this.getGuideList();
-
+        this.getTags(1, 10);
     },
     destroyed() {
         tinymce.get('conEditor').destroy();

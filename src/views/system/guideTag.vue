@@ -6,35 +6,42 @@
     </el-col>
     <el-col :span="24">
       <el-table :data="list" highlight-current-row v-loading="loading" border style="width: 100%;height: 80%;">
-        <el-table-column prop="index" label="排序" width="80"></el-table-column>
-        <el-table-column prop="yupTypeId" label="ID" width="80"></el-table-column>
-        <el-table-column prop="yupTypeName" label="标签名称" min-width="150" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="yupTypeCode" label="标签唯一code" width="150"></el-table-column>
-        <el-table-column prop="yupDesc" label="文章数" min-width="80"></el-table-column>
+        <el-table-column prop="labelSort" label="排序" width="80"></el-table-column>
+        <el-table-column prop="labelId" label="ID" width="80"></el-table-column>
+        <el-table-column prop="labelName" label="标签名称" min-width="150" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="labelCode" label="标签唯一code" width="150"></el-table-column>
+        <el-table-column prop="labelRelatedNum" label="文章数" min-width="80"></el-table-column>
+        <el-table-column prop="labelStatus" label="是否启用" width="100">
+          <template slot-scope="scope">
+            <span v-if="scope.row.labelStatus == 1">启用</span>
+            <span v-else>未启用</span>
+          </template>
+        </el-table-column>
         <el-table-column label="操作" width="200">
           <template slot-scope="scope">
-            <el-button type="success" size="mini" @click="online(scope.row.yupTypeId)">上线</el-button>
+            <el-button v-if="scope.row.labelStatus == 0" type="success" size="mini" @click="online(scope.row.labelId)">上线</el-button>
             <el-button type="primary" size="mini" @click="editType(scope.row)">编辑</el-button>
-            <el-button type="danger" size="mini" @click="deleteType(scope.row.yupTypeId)">删除</el-button>
+            <!-- <el-button type="danger" size="mini" @click="deleteType(scope.row.labelId)">删除</el-button> -->
           </template>
         </el-table-column>
       </el-table>
     </el-col>
     <el-dialog :visible.sync="showModal" :title="title" >
       <el-form ref="form" :model="formdata" label-width="100px" :rules="rules" size="small">
-        <el-form-item label="名称" prop="yupTypeName">
-          <el-input v-model="formdata.yupTypeName"></el-input>
+        <el-form-item label="名称" prop="labelName">
+          <el-input v-model="formdata.labelName"></el-input>
         </el-form-item>
-        <el-form-item label="Code" prop="yupTypeCode">
-          <el-input v-model="formdata.yupTypeCode"></el-input>
+        <el-form-item label="Code" prop="labelCode">
+          <el-input v-model="formdata.labelCode"></el-input>
         </el-form-item>
-        <el-form-item label="排序" prop="yupDesc">
-          <el-input v-model="formdata.yupDesc"></el-input>
+        <el-form-item label="排序" prop="labelSort">
+          <el-input v-model.number="formdata.labelSort"></el-input>
         </el-form-item>
-        <el-form-item label="状态" prop="yupDescTemplate">
-          <el-select v-model="formdata.yupDescTemplate">
-            <el-option ></el-option>
-          </el-select>
+        <el-form-item label="状态">
+          <el-radio-group v-model="formdata.labelStatus">
+            <el-radio :label="0">不启用</el-radio>
+            <el-radio :label="1">启用</el-radio>
+          </el-radio-group>
         </el-form-item>
       </el-form>
       <template slot="footer">
@@ -56,29 +63,28 @@ export default {
       title: '',
       formdata: {},
       rules: {
-        yupTypeName: [
+        labelName: [
           { required: true, message: '名称不能为空', trigger: 'blur' }
         ],
-        yupDesc: [
-          { required: true, message: '描述不能为空', trigger: 'blur' }
-        ],
-        yupDescTemplate: [
-          { required: true, message: '描述模板不能为空', trigger: 'blur' }
-        ],
-        yupTypeCode: [
+        labelCode: [
           { required: true, message: 'code不能为空', trigger: 'blur' }
-        ]
+        ],
+        labelSort: [
+          { type: 'number', required: true, message: '排序不能为空', trigger: 'blur' }
+        ],
       },
+      curPage: 1,
+      pageSize: 10,
     }
   },
   methods: {
     getList() {
       this.loading = true;
-      this.$http.get(`${baseUrl}/yup-rest/manage/yup-type-list`, {})
+      this.$http.post(`${baseUrl}/yup-rest/manage/label-list`, { pageIndex: this.curPage, pageSize: this.pageSize })
       .then(res => {
         this.loading = false;
         if(res.data.resultCode == 200){
-          this.list = res.data.resultData;
+          this.list = res.data.resultData.list;
         }else{
           if(res.data.resultMsg){
             this.$message.error(res.data.resultMsg);
@@ -96,15 +102,13 @@ export default {
       this.showModal = true;
       this.title = '添加标签';
       this.formdata = {
-        yupTypeId: 0,
-        yupTypeName: '',
-        yupDesc: '',
-        yupDescTemplate: '',
-        yupTypeCode: '',
-        yup: '',
-        yupLimit: 1,
-        yupLimitCount: '',
-        isEnable: 0
+        labelId: 0,
+        labelName: '',
+        labelCode: '',
+        labelSort: 0,
+        labelStatus: 0,
+        labelParentId: 0,
+        enable: false,
       }
     },
     editType(row) {
@@ -115,13 +119,8 @@ export default {
     save() {
       this.$refs.form.validate(valid => {
         if(valid){
-          if(!this.formdata.yup){
-            this.formdata.yup = -1;
-          }
-          if(!this.formdata.yupLimitCount){
-            this.formdata.yupLimitCount = -1;
-          }
-          this.$http.post(`${baseUrl}/yup-rest/manage/save-yup-type`, this.formdata )
+          this.formdata.enable = this.formdata.labelStatus == 1;
+          this.$http.post(`${baseUrl}/yup-rest/manage/save-label`, this.formdata, { headers: { userId: 1 } } )
           .then(res => {
             if(res.data.resultCode == 200 && res.data.resultData){
               this.$message.success('保存成功');
@@ -168,7 +167,7 @@ export default {
       })
 		},
 		online(id) {
-
+      
 		}
   },
   mounted() {
