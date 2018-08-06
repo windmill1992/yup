@@ -32,7 +32,9 @@
           <el-input v-model="formdata.yupDesc"></el-input>
         </el-form-item>
         <el-form-item label="状态" prop="yupDescTemplate">
-          <el-input v-model="formdata.yupDescTemplate"></el-input>
+          <el-select v-model="formdata.yupDescTemplate">
+            <el-option ></el-option>
+          </el-select>
         </el-form-item>
       </el-form>
       <template slot="footer">
@@ -66,7 +68,7 @@ export default {
         yupTypeCode: [
           { required: true, message: 'code不能为空', trigger: 'blur' }
         ]
-      }
+      },
     }
   },
   methods: {
