@@ -3,20 +3,37 @@
         <el-col :span="24" class="tool-bar">
             <p class="title fl">指南列表</p>
             <div class="fr">
-                <el-input placeholder="搜索"></el-input>
-                <el-button type="primary" >搜索</el-button>
+                <el-input v-model="searchTitle" placeholder="标题"></el-input>
+                <el-input v-model.number="searchLabelId" placeholder="标签id"></el-input>
+                <el-select v-model="searchStatus" placeholder="状态">
+                    <el-option value="" label="全部"></el-option>
+                    <el-option :value="0" label="未发布"></el-option>
+                    <el-option :value="1" label="已发布"></el-option>
+                    <el-option :value="2" label="已推荐"></el-option>
+                </el-select>
+                <el-button type="primary" @click="search">搜索</el-button>
                 <el-button type="primary" @click="addGuide">添加</el-button>
             </div>
         </el-col>
         <el-col :span="24">
             <el-table :data="list" highlight-current-row v-loading="loading" border style="width: 100%;height: 90%;">
-                <el-table-column prop="index" label="排序" width="80"></el-table-column>
-                <el-table-column prop="entryApplyId" label="ID" width="80"></el-table-column>
-                <el-table-column prop="userName" label="标题" min-width="180"></el-table-column>
-                <el-table-column prop="mobile" label="网址" min-width="180"></el-table-column>
-                <el-table-column prop="wechat" label="来源" width="100"></el-table-column>
-                <el-table-column prop="note" label="类型" width="100"></el-table-column>
-                <el-table-column prop="note" label="状态" width="120"></el-table-column>
+                <el-table-column type="index" label="排序" width="80"></el-table-column>
+                <el-table-column prop="infoId" label="ID" width="80"></el-table-column>
+                <el-table-column prop="title" label="标题" min-width="180"></el-table-column>
+                <el-table-column prop="infoAddress" label="网址" min-width="180"></el-table-column>
+                <el-table-column prop="infoSource" label="来源" width="120"></el-table-column>
+                <el-table-column prop="labelNameList" label="类型" width="120">
+                    <template slot-scope="scope">
+                        <p v-for="item in scope.row.labelNameList">{{item}}</p>
+                    </template>
+                </el-table-column>
+                <el-table-column label="状态" width="120">
+                    <template slot-scope="scope">
+                        <span v-if="scope.row.infoStatus == 0">未发布</span>
+                        <span v-else-if="scope.row.infoStatus == 1">已发布</span>
+                        <span v-else-if="scope.row.infoStatus == 2">已推荐</span>
+                    </template>
+                </el-table-column>
                 <el-table-column label="操作" width="200">
                     <template slot-scope="scope">
                         <el-button type="primary" size="mini" @click="editType(scope.row)">编辑</el-button>
@@ -123,6 +140,9 @@ import { baseUrl } from './../../api/baseUrl'
 export default {
     data() {
         return {
+            searchTitle: '',
+            searchLabelId: '',
+            searchStatus: '',
             list: [],
             curPage: 1,
             pageSize: 20,
@@ -199,10 +219,16 @@ export default {
             this.getGuideList();
         },
         getGuideList() {
+            let labelId = !Number.isNaN(Number.parseInt(this.searchLabelId)) && this.searchLabelId ? Number.parseInt(this.searchLabelId) : null;
+            let param = {
+                title: this.searchTitle,
+                labelId: labelId,
+                infoStatus: this.searchStatus == '' ? null : this.searchStatus,
+                pageIndex: this.curPage,
+                pageSize: this.pageSize,
+            }
             this.loading = true;
-            this.$http.get(`${baseUrl}/yup-rest/manage/enter-apply-list`, {
-                params: {  pageIndex: this.curPage, pageSize: this.pageSize}
-            })
+            this.$http.post(`${baseUrl}/yup-rest/manage/info-list`, param)
             .then(res => {
                 this.loading = false;
                 if(res.data.resultCode == 200){
@@ -222,6 +248,10 @@ export default {
                 this.loading = false;
                 this.$message.error('未知错误！');
             })
+        },
+        search() {
+            this.curPage = 1;
+            this.getGuideList();
         },
         relation(id) {
 
@@ -252,6 +282,9 @@ export default {
             }else{
                 tinymce.activeEditor.setContent('');
             }
+        },
+        editType() {
+            
         },
         save() {
             this.formdata.content = tinymce.activeEditor.getContent();
