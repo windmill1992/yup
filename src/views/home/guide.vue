@@ -34,11 +34,9 @@
                         <span v-else-if="scope.row.infoStatus == 2">已推荐</span>
                     </template>
                 </el-table-column>
-                <el-table-column label="操作" width="200">
+                <el-table-column label="操作" width="100">
                     <template slot-scope="scope">
-                        <el-button type="primary" size="mini" @click="editType(scope.row)">编辑</el-button>
-                        <el-button type="success" size="mini" @click="relation(scope.row.entryApplyId)">关联商品</el-button>
-                        <el-button type="danger" size="mini" @click="deleteType(scope.row.entryApplyId)">删除</el-button>
+                        <el-button type="primary" size="mini" @click="editType(scope.row.infoId)">编辑</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -253,9 +251,6 @@ export default {
             this.curPage = 1;
             this.getGuideList();
         },
-        relation(id) {
-
-        },
         addGuide() {
             this.showModal = true;
             this.title = '添加指南';
@@ -283,8 +278,31 @@ export default {
                 tinymce.activeEditor.setContent('');
             }
         },
-        editType() {
-            
+        editType(id) {
+            this.showModal = true;
+            this.title = '编辑指南';
+            this.getInfoDetail(id);
+        },
+        getInfoDetail(id) {
+            this.$http.post(`${baseUrl}/yup-rest/manage/info-detail?infoId=`+ id)
+            .then(res => {
+                if(res.data.resultCode == 200){
+                    this.formdata = Object.assign({}, res.data.resultData);
+                    let con = this.formdata.content;
+                    if(!this.mceinit){
+                        setTimeout(() => {
+                            this.tinymceInit();
+                        }, 100);
+                        setTimeout(() => {
+                            tinymce.activeEditor.setContent(con);
+                        }, 500);
+                    }else{
+                        tinymce.activeEditor.setContent(con);
+                    }
+                }else{
+                    this.$message.error(res.data.resultMsg);
+                }
+            })
         },
         save() {
             this.formdata.content = tinymce.activeEditor.getContent();
