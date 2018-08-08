@@ -10,6 +10,7 @@ import Comment from '@/views/home/comment'
 
 import YupType from '@/views/system/yupType'
 import GuideTag from '@/views/system/guideTag'
+import CopyWrite from '@/views/system/copyWrite'
 
 import Users from '@/views/user/users'
 
@@ -47,6 +48,7 @@ let routes = [
         children: [
             { path: '/yupType', component: YupType, name: 'yup类型' },
             { path: '/guideTag', component: GuideTag, name: '指南标签' },
+            { path: '/copyWrite', component: CopyWrite, name: '文案库' },
         ]
     },
     {

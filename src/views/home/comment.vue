@@ -5,14 +5,18 @@
     </el-col>
     <el-col :span="24">
       <el-table :data="list" highlight-current-row v-loading="loading" border style="width: 100%;height: 80%;">
-        <el-table-column prop="userId" label="ID" width="80"></el-table-column>
-        <el-table-column prop="userName" label="评论人名称" min-width="150" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="yupDesc" label="描述" min-width="180"></el-table-column>
-        <el-table-column prop="yupDescTemplate" label="描述模板" width="150"></el-table-column>
-        <el-table-column prop="yupTypeCode" label="类型唯一code" width="150"></el-table-column>
+        <el-table-column prop="userName" label="评论者名称" min-width="150" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="comment" label="评论内容" min-width="180"></el-table-column>
+        <el-table-column prop="relatedTitle" label="相关评论标题" width="180" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="createTime" label="评论时间" width="180"></el-table-column>
+        <el-table-column label="是否展示" width="120">
+          <template slot-scope="scope">
+            <span>{{scope.row.isShow == 1 ? '是' : '否'}}</span>
+          </template>
+        </el-table-column>
         <el-table-column label="操作" width="100">
           <template slot-scope="scope">
-            <el-button type="primary" size="mini" @click="editType(scope.row.commentId)">展示</el-button>
+            <el-button type="primary" size="mini" @click="showHide(scope.row)">{{scope.row.isShow == 1 ? '隐藏' : '展示'}}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -25,6 +29,7 @@
 
 <script>
 import { baseUrl } from './../../api/baseUrl'
+const moment = require('moment')
 export default {
   data() {
     return {
@@ -52,6 +57,9 @@ export default {
         this.loading = false;
         if(res.data.resultCode == 200){
           let r = res.data.resultData;
+          for(let v of r.list){
+            v.createTime = moment(new Date(v.createTime)).format('YYYY-MM-DD HH:mm:ss');
+          }
           this.list = r.list;
           this.total = r.total;
         }else{
@@ -71,7 +79,23 @@ export default {
       this.page = idx;
       this.getList();
     },
-    
+    showHide(row) {
+      let param = '?commentId='+ row.relatedId + '&isShow='+ !row.isShow;
+      this.$http.post(`${baseUrl}/yup-rest/manage/handle-comment`+ param, {}, {
+        headers: { userId: 1 }
+      })
+      .then(res => {
+        if(res.data.resultCode == 200 && res.data.resultData){
+          this.$message.success('操作成功！');
+          this.getList();
+        }else{
+          this.$message.error(res.data.resultMsg);
+        }
+      })
+      .catch(() => {
+        this.$message.error('未知异常！');
+      })
+    },
   },
   mounted() {
     this.getList();
