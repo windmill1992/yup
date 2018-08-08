@@ -5,12 +5,12 @@
     </el-col>
     <el-col :span="24">
       <el-table :data="list" highlight-current-row v-loading="loading" border style="width: 100%;height: 80%;">
-        <el-table-column prop="commenteeId" label="ID" width="80"></el-table-column>
-        <el-table-column prop="commenteeName" label="评论人名称" min-width="150" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="userId" label="ID" width="80"></el-table-column>
+        <el-table-column prop="userName" label="评论人名称" min-width="150" show-overflow-tooltip></el-table-column>
         <el-table-column prop="yupDesc" label="描述" min-width="180"></el-table-column>
         <el-table-column prop="yupDescTemplate" label="描述模板" width="150"></el-table-column>
         <el-table-column prop="yupTypeCode" label="类型唯一code" width="150"></el-table-column>
-        <el-table-column label="操作" width="200">
+        <el-table-column label="操作" width="100">
           <template slot-scope="scope">
             <el-button type="primary" size="mini" @click="editType(scope.row.commentId)">展示</el-button>
           </template>
