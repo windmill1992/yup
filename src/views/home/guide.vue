@@ -307,17 +307,12 @@ export default {
         save() {
             this.formdata.content = tinymce.activeEditor.getContent();
             this.formdata = Object.assign({}, this.formdata);
-            console.log(this.formdata);
             this.$http.post(`${baseUrl}/yup-rest/manage/save-information`, this.formdata)
             .then(res => {
-                if(res.data.resultCode == 200){
+                if(res.data.resultCode == 200 && res.data.resultData){
                     this.showModal = false;
-                    this.$message({
-                        type: 'success',
-                        message: '保存成功！',
-                        showClose: true,
-                        center: true
-                    });
+                    this.$message.success('保存成功！');
+
                     if(this.formdata.infoId == 0){
                         this.curPage = 1;
                         this.getGuideList();
@@ -325,7 +320,11 @@ export default {
                         this.getGuideList();
                     }
                 }else{
-                    this.$message.error(res.data.resultMsg);
+                    if(res.data.resultMsg){
+                        this.$message.error(res.data.resultMsg);
+                    }else{
+                        this.$message.error('保存失败');
+                    }
                 }
             })
             .catch(() => {
@@ -451,7 +450,9 @@ export default {
         this.getTags(1, 10);
     },
     destroyed() {
-        tinymce.get('conEditor').destroy();
+        if(tinymce.get('conEditor')){
+            tinymce.get('conEditor').destroy();
+        }
     }
 }
 </script>
