@@ -90,10 +90,9 @@
                     </el-select>
                 </el-form-item>
                 <el-form-item label="商品">
-                    <a href="javascript:;" v-for="img in formdata.imgs" :key="img" class="goods-pic" @click="editGoods()">
-                        <img :src="img" alt="">
-                    </a>
-                    <el-button type="ghost" @click="addGoods">添加商品</el-button>
+                    <el-select v-model="formdata." filterable placeholder="选择商品">
+                        <el-option v-for="item in goodsList" :key="item.value" :label="item.label" :value="item.value"></el-option>
+                    </el-select>
                 </el-form-item>
                 <el-form-item label="内容">
                     <textarea id="conEditor"></textarea>
