@@ -90,8 +90,8 @@
                     </el-select>
                 </el-form-item>
                 <el-form-item label="商品">
-                    <el-select v-model="formdata." filterable placeholder="选择商品">
-                        <el-option v-for="item in goodsList" :key="item.value" :label="item.label" :value="item.value"></el-option>
+                    <el-select v-model="formdata.relatedProIdList" filterable multiple placeholder="选择商品">
+                        <el-option v-for="item in goodsList" :key="item.proId" :label="item.proName" :value="item.proId"></el-option>
                     </el-select>
                 </el-form-item>
                 <el-form-item label="内容">
@@ -101,30 +101,6 @@
             <template slot="footer">
                 <el-button @click="showModal = false">取消</el-button>
                 <el-button type="success" @click="save">保存</el-button>
-            </template>
-        </el-dialog>
-
-        <el-dialog :visible.sync="showGoodsModal" :title="goodsTitle" custom-class="goods-dialog">
-            <el-form :model="goodsdata" label-width="100px" size="small">
-                <el-form-item label="名称" prop="name">
-                    <el-input v-model="goodsdata.name"></el-input>
-                </el-form-item>
-                <el-form-item label="地址" prop="weburl">
-                    <el-input v-model="goodsdata.weburl"></el-input>
-                </el-form-item>
-                <el-form-item label="封面" prop="cover">
-                    <el-upload class="front-pic" :action="uploadUrl" 
-                        :show-file-list="false" :multiple="false" 
-                        :before-upload="beforeUpload3" accept="image/*"
-                        :on-success="goodsSuccess" :on-error="uploadError" :limit="1">
-                        <img :src="goodsdata.cover" v-if="goodsdata.cover" class="front-img loading-target3" alt="">
-                        <i v-else class="el-icon-plus front-icon loading-target3"></i>
-                    </el-upload>
-                </el-form-item>
-            </el-form>
-            <template slot="footer">
-                <el-button @click="showGoodsModal = false">取消</el-button>
-                <el-button type="success" @click="saveGoods">保存</el-button>
             </template>
         </el-dialog>
     </el-row>
@@ -146,11 +122,9 @@ export default {
             total: 0,
             loading: false,
             showModal: false,
-            showGoodsModal: false,
             title: '',
-            goodsTitle: '',
+            goodsList: [],
             formdata: {},
-            goodsdata: {},
             tagList: [],
             rules: {
                 title: [
@@ -389,28 +363,26 @@ export default {
             }
             this.uploading.close();
         },
-        goodsSuccess(res, file) {
-            if(res.resultCode == 200){
-                this.goodsdata.cover = res.resultData;
-            }else{
-                this.$message.error('上传失败！');
-            }
-            this.uploading.close();
-        },
-        addGoods() {
-            this.showGoodsModal = true;
-            this.goodsTitle = '添加商品';
-            this.goodsdata = {
-                name: '',
-                weburl: '',
-                cover: '',
+        getGoodsList() {
+            let params = {
+                pageIndex: 1,
+                pageSize: 100,
+                t: Date.now(),
             };
-        },
-        editGoods() {
-
-        },
-        saveGoods() {
-
+            this.$http.get(`${baseUrl}/yup-rest/manage/product-list`, { params: params })
+            .then(res => {
+                this.loading = false;
+                if(res.data.resultCode == 200 && res.data.resultData){
+                    let r = res.data.resultData;
+                    this.goodsList = r.list;
+                }else{
+                    this.$message.error(res.data.resultMsg);
+                }
+            })
+            .catch(() => {
+                this.loading = false;
+                this.$message.error('未知错误');
+            })
         },
         tinymceInit() {
             console.log('mce init');
@@ -447,6 +419,7 @@ export default {
     mounted() {
         this.getGuideList();
         this.getTags(1, 10);
+        this.getGoodsList();
     },
     destroyed() {
         if(tinymce.get('conEditor')){
