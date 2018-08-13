@@ -121,6 +121,7 @@ export default {
             pageSize: 20,
             total: 0,
             loading: false,
+            loading2: false,
             showModal: false,
             title: '',
             goodsList: [],
@@ -181,7 +182,6 @@ export default {
                 }
             })
             .catch(() => {
-                this.loading = false;
                 this.$message.error('未知错误！');
             })
         },
@@ -371,7 +371,7 @@ export default {
             };
             this.$http.get(`${baseUrl}/yup-rest/manage/product-list`, { params: params })
             .then(res => {
-                this.loading = false;
+                this.loading2 = false;
                 if(res.data.resultCode == 200 && res.data.resultData){
                     let r = res.data.resultData;
                     this.goodsList = r.list;
@@ -380,7 +380,7 @@ export default {
                 }
             })
             .catch(() => {
-                this.loading = false;
+                this.loading2 = false;
                 this.$message.error('未知错误');
             })
         },
