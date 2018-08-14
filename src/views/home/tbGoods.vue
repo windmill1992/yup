@@ -240,23 +240,29 @@ export default {
             })
         },
         saveGoods() {
-            this.$http.post(`${baseUrl}/yup-rest/manage/save-tbpro`, this.formdata)
-            .then(res => {
-                if(res.data.resultCode == 200 && res.data.resultData){
-                    this.$message.success('保存成功');
-                    this.showModal = false;
-                    this.getGoodsList();
+            this.$refs.form.validate((valid) => {
+                if(valid){
+                    this.$http.post(`${baseUrl}/yup-rest/manage/save-tbpro`, this.formdata)
+                    .then(res => {
+                        if(res.data.resultCode == 200 && res.data.resultData){
+                            this.$message.success('保存成功');
+                            this.showModal = false;
+                            this.getGoodsList();
+                        }else{
+                            if(res.data.resultMsg){
+                                this.$message.error(res.data.resultMsg);
+                            }else{
+                                this.$message.error('保存失败');
+                            }
+                        }
+                    })
+                    .catch(e => {
+                        this.$message.error('未知错误----'+ e);
+                    })
                 }else{
-                    if(res.data.resultMsg){
-                        this.$message.error(res.data.resultMsg);
-                    }else{
-                        this.$message.error('保存失败');
-                    }
+                    this.$message.error('验证未通过');
                 }
-            })
-            .catch(e => {
-                this.$message.error('未知错误----'+ e);
-            })
+            });
         },
     },
     mounted() {

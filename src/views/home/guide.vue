@@ -326,29 +326,35 @@ export default {
         save() {
             this.formdata.content = tinymce.activeEditor.getContent();
             this.formdata = Object.assign({}, this.formdata);
-            this.$http.post(`${baseUrl}/yup-rest/manage/save-information`, this.formdata)
-            .then(res => {
-                if(res.data.resultCode == 200 && res.data.resultData){
-                    this.showModal = false;
-                    this.$message.success('保存成功！');
-
-                    if(this.formdata.infoId == 0){
-                        this.curPage = 1;
-                        this.getGuideList();
-                    }else{
-                        this.getGuideList();
-                    }
+            this.$refs.form.validate((valid) => {
+                if(valid){
+                    this.$http.post(`${baseUrl}/yup-rest/manage/save-information`, this.formdata)
+                    .then(res => {
+                        if(res.data.resultCode == 200 && res.data.resultData){
+                            this.showModal = false;
+                            this.$message.success('保存成功！');
+        
+                            if(this.formdata.infoId == 0){
+                                this.curPage = 1;
+                                this.getGuideList();
+                            }else{
+                                this.getGuideList();
+                            }
+                        }else{
+                            if(res.data.resultMsg){
+                                this.$message.error(res.data.resultMsg);
+                            }else{
+                                this.$message.error('保存失败');
+                            }
+                        }
+                    })
+                    .catch(() => {
+                        this.$message.error('未知错误');
+                    })
                 }else{
-                    if(res.data.resultMsg){
-                        this.$message.error(res.data.resultMsg);
-                    }else{
-                        this.$message.error('保存失败');
-                    }
+                    this.$message.error('验证未通过');
                 }
-            })
-            .catch(() => {
-                this.$message.error('未知错误');
-            })
+            });
         },
         beforeUpload(file) {
             if(file.type != 'image/png' && file.type != 'image/jpg' && file.type != 'image/jpeg' && file.type != 'image/gif' && file.type != 'images/bmp'){

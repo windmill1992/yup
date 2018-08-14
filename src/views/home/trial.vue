@@ -99,6 +99,17 @@
                   class="front-img fl" style="margin-right: 10px;">
               </template>
           </el-form-item>
+          <el-form-item label="淘宝分享图" prop="tbCouponUrl">
+            <el-upload class="front-pic" :action="uploadUrl" 
+                :show-file-list="false" :multiple="false" 
+                :before-upload="beforeUpload2" accept="image/*"
+                :on-success="tbSuccess" :on-error="uploadError" 
+                :limit="1" v-if="!read">
+                <img :src="formdata.tbCouponUrl" v-if="formdata.tbCouponUrl" class="front-img loading-target2" alt="">
+                <i v-else class="el-icon-plus front-icon loading-target2"></i>
+            </el-upload>
+            <img :src="formdata.tbCouponUrl" v-else class="front-img">
+          </el-form-item>
           <el-form-item label="上架" prop="proStartTime">
             <el-date-picker type="datetime" format="yyyy-MM-dd HH:mm" value-format="timestamp" 
               v-if="!read" v-model="formdata.proStartTime">
@@ -121,10 +132,6 @@
               <el-radio :label="1" disabled >自动</el-radio>
               <el-radio :label="2" disabled >手动</el-radio>
             </el-radio-group>
-          </el-form-item>
-          <el-form-item label="优惠券链接" prop="tbCouponUrl">
-            <el-input v-model="formdata.tbCouponUrl" v-if="!read" style="width: 400px"></el-input>
-            <p class="read" v-else>{{formdata.tbCouponUrl}}</p>
           </el-form-item>
           <p class="label">试用规则</p>
           <el-form-item label="规则" prop="proDescribe">
@@ -161,11 +168,11 @@
           <el-form-item label="图片" prop="decsImg">
               <el-upload class="front-pic" :action="uploadUrl" 
                 :show-file-list="false" :multiple="false" 
-                :before-upload="beforeUpload" accept="image/*"
+                :before-upload="beforeUpload3" accept="image/*"
                 :on-success="goodsSuccess" :on-error="uploadError" 
                 :limit="1" v-if="!read">
-                <img :src="formdata.decsImg" v-if="formdata.decsImg" class="front-img loading-target" alt="">
-                <i v-else class="el-icon-plus front-icon loading-target"></i>
+                <img :src="formdata.decsImg" v-if="formdata.decsImg" class="front-img loading-target3" alt="">
+                <i v-else class="el-icon-plus front-icon loading-target3"></i>
               </el-upload>
               <img :src="formdata.decsImg" v-else class="front-img" alt="">
           </el-form-item>
@@ -586,6 +593,32 @@ export default {
       })
       return true;
     },
+    beforeUpload2(file) {
+      if(file.type != 'image/png' && file.type != 'image/jpg' && file.type != 'image/jpeg' && file.type != 'image/gif' && file.type != 'images/bmp'){
+        return false;
+      }
+      if(file.size / 1024 / 1024 > 2){
+        this.$message.error('图片大小不能超过2M！');
+        return false;
+      }
+      this.uploading = this.$loading({
+        target: '.loading-target2',
+      })
+      return true;
+    },
+    beforeUpload3(file) {
+      if(file.type != 'image/png' && file.type != 'image/jpg' && file.type != 'image/jpeg' && file.type != 'image/gif' && file.type != 'images/bmp'){
+        return false;
+      }
+      if(file.size / 1024 / 1024 > 2){
+        this.$message.error('图片大小不能超过2M！');
+        return false;
+      }
+      this.uploading = this.$loading({
+        target: '.loading-target3',
+      })
+      return true;
+    },
     frontSuccess(res, file) {
       if(res.resultCode == 200){
         this.formdata.coverImg = res.resultData;
@@ -634,6 +667,14 @@ export default {
           return;
         }
       })
+    },
+    tbSuccess(res, file) {
+      if(res.resultCode == 200){
+        this.formdata.tbCouponUrl = res.resultData;
+      }else{
+        this.$message.error('上传失败！');
+      }
+      this.uploading.close();
     },
     deleteImg(fileName) {
       this.$http.post(`${baseUrl}/yup-rest/delete?picType=1&fileName=`+ fileName, {})
