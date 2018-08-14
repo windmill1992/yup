@@ -90,8 +90,9 @@
                     </el-select>
                 </el-form-item>
                 <el-form-item label="商品">
-                    <el-select v-model="formdata.relatedProIdList" filterable multiple placeholder="选择商品">
-                        <el-option v-for="item in goodsList" :key="item.proId" :label="item.proName" :value="item.proId"></el-option>
+                    <el-select v-model="formdata.relatedProIdList" filterable multiple remote reserve-keyword placeholder="请输入关键词" 
+                        :remote-method="getGoodsList" :loading="loading2">
+                        <el-option v-for="item in goodsList" :key="item.tbProductId" :label="item.productTitle" :value="item.tbProductId"></el-option>
                     </el-select>
                 </el-form-item>
                 <el-form-item label="内容">
@@ -124,8 +125,8 @@ export default {
             loading2: false,
             showModal: false,
             title: '',
-            goodsList: [],
             formdata: {},
+            goodsList: [],
             tagList: [],
             rules: {
                 title: [
@@ -148,9 +149,6 @@ export default {
                 ],
                 labelId: [
                     { required: true, message: '标签不能为空', trigger: 'blur' },
-                ],
-                infoStatus: [
-                    { required: true, message: '状态不能为空', trigger: 'blur' },
                 ],
                 infoStatus: [
                     { required: true, message: '状态不能为空', trigger: 'blur' },
@@ -227,6 +225,9 @@ export default {
         addGuide() {
             this.showModal = true;
             this.title = '添加指南';
+            if(this.$refs.form){
+                this.$refs.form.resetFields();
+            }
             this.formdata = {
                 title: '',
                 authorName: '',
@@ -240,6 +241,7 @@ export default {
                 content: '',
                 infoId: 0,
             }
+            this.goodsList = [];
             if(!this.mceinit){
                 setTimeout(() => {
                     this.tinymceInit();
@@ -254,12 +256,14 @@ export default {
         editType(id) {
             this.showModal = true;
             this.title = '编辑指南';
+            this.goodsList = [];
             this.getInfoDetail(id);
         },
         getInfoDetail(id) {
             this.$http.post(`${baseUrl}/yup-rest/manage/info-detail?infoId=`+ id)
             .then(res => {
-                if(res.data.resultCode == 200){
+                if(res.data.resultCode == 200 && res.data.resultData){
+                    this.getGoodsDetail(res.data.resultData.relatedProIdList);
                     this.formdata = Object.assign({}, res.data.resultData);
                     let con = this.formdata.content;
                     if(!this.mceinit){
@@ -275,6 +279,48 @@ export default {
                 }else{
                     this.$message.error(res.data.resultMsg);
                 }
+            })
+        },
+        getGoodsList(query) {
+            if(query != ''){
+                this.loading2 = true;
+                this.$http.post(`${baseUrl}/yup-rest/manage/tbpro-list`, { keywords: query })
+                .then(res => {
+                    this.loading2 = false;
+                    if(res.data.resultCode == 200 && res.data.resultData){
+                        this.goodsList = res.data.resultData.list;
+                    }else{
+                        if(res.data.resultMsg){
+                            this.$message.error(res.data.resultMsg);
+                        }else{
+                            this.$message.error('查询关联商品错误');
+                        }
+                    }
+                })
+                .catch(e => {
+                    this.loading2 = false;
+                    this.$message.error('未知错误----' + e);
+                })
+            }else{
+                this.goodsList = [];
+            }
+        },
+        getGoodsDetail(ids) {
+            if(!ids || ids.length == 0) return;
+            this.$http.get(`${baseUrl}/yup-rest/tbpro-list`, { params: { tbProIdList: ids.join(',') } })
+            .then(res => {
+                if(res.data.resultCode == 200 && res.data.resultData){
+                    this.goodsList = res.data.resultData;
+                }else{
+                    if(res.data.resultMsg){
+                        this.$message.error(res.data.resultMsg);
+                    }else{
+                        this.$message.error('查询商品错误');
+                    }
+                }
+            })
+            .catch(e => {
+                this.$message.error('未知错误----'+ e);
             })
         },
         save() {
@@ -330,19 +376,6 @@ export default {
             })
             return true;
         },
-        beforeUpload3(file) {
-            if(file.type != 'image/png' && file.type != 'image/jpg' && file.type != 'image/jpeg' && file.type != 'image/gif' && file.type != 'images/bmp'){
-                return false;
-            }
-            if(file.size / 1024 / 1024 > 2){
-                this.$message.error('图片大小不能超过2M！');
-                return false;
-            }
-            this.uploading = this.$loading({
-                target: '.loading-target3',
-            })
-            return true;
-        },
         frontSuccess(res, file) {
             if(res.resultCode == 200){
                 this.formdata.cover = res.resultData;
@@ -362,27 +395,6 @@ export default {
                 this.$message.error('上传失败！');
             }
             this.uploading.close();
-        },
-        getGoodsList() {
-            let params = {
-                pageIndex: 1,
-                pageSize: 100,
-                t: Date.now(),
-            };
-            this.$http.get(`${baseUrl}/yup-rest/manage/product-list`, { params: params })
-            .then(res => {
-                this.loading2 = false;
-                if(res.data.resultCode == 200 && res.data.resultData){
-                    let r = res.data.resultData;
-                    this.goodsList = r.list;
-                }else{
-                    this.$message.error(res.data.resultMsg);
-                }
-            })
-            .catch(() => {
-                this.loading2 = false;
-                this.$message.error('未知错误');
-            })
         },
         tinymceInit() {
             console.log('mce init');
@@ -419,7 +431,6 @@ export default {
     mounted() {
         this.getGuideList();
         this.getTags(1, 10);
-        this.getGoodsList();
     },
     destroyed() {
         if(tinymce.get('conEditor')){

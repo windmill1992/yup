@@ -7,6 +7,7 @@ import Trial from '@/views/home/trial'
 import Feedback from '@/views/home/feedback'
 import Guide from '@/views/home/guide'
 import Comment from '@/views/home/comment'
+import TbGoods from '@/views/home/tbGoods'
 
 import YupType from '@/views/system/yupType'
 import GuideTag from '@/views/system/guideTag'
@@ -37,6 +38,7 @@ let routes = [
             { path: '/trial', component: Trial, name: '试用' },
             { path: '/feedback', component: Feedback, name: '反馈' },
             { path: '/guide', component: Guide, name: '指南' },
+            { path: '/tbGoods', component: TbGoods, name: '淘宝客' },
             { path: '/comment', component: Comment, name: '评论' },
         ]
     },
