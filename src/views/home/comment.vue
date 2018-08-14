@@ -55,13 +55,15 @@ export default {
       this.$http.post(`${baseUrl}/yup-rest/manage/comment-list`, param)
       .then(res => {
         this.loading = false;
-        if(res.data.resultCode == 200){
+        if(res.data.resultCode == 200 && res.data.resultData){
           let r = res.data.resultData;
-          for(let v of r.list){
-            v.createTime = moment(new Date(v.createTime)).format('YYYY-MM-DD HH:mm:ss');
+          if(r.list && r.list.length > 0){
+            for(let v of r.list){
+              v.createTime = moment(new Date(v.createTime)).format('YYYY-MM-DD HH:mm:ss');
+            }
+            this.list = r.list;
+            this.total = r.total;
           }
-          this.list = r.list;
-          this.total = r.total;
         }else{
           if(res.data.resultMsg){
             this.$message.error(res.data.resultMsg);
@@ -70,9 +72,9 @@ export default {
           }
         }
       })
-      .catch(() => {
+      .catch(e => {
         this.loading = false;
-        this.$message.error('未知错误！');
+        this.$message.error('未知错误！' + e);
       })
     },
     curChange(idx) {
@@ -89,11 +91,15 @@ export default {
           this.$message.success('操作成功！');
           this.getList();
         }else{
-          this.$message.error(res.data.resultMsg);
+          if(res.data.resultMsg){
+            this.$message.error(res.data.resultMsg);
+          }else{
+            this.$message.error('服务器错误！');
+          }
         }
       })
-      .catch(() => {
-        this.$message.error('未知异常！');
+      .catch(e => {
+        this.$message.error('未知异常！' + e);
       })
     },
   },

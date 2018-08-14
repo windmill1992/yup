@@ -44,10 +44,12 @@ export default {
             })
             .then(res => {
                 this.loading = false;
-                if(res.data.resultCode == 200){
+                if(res.data.resultCode == 200 && res.data.resultData){
                     let r = res.data.resultData;
-                    this.list = r.list;
-                    this.total = r.total;
+                    if(r.list && r.list.length > 0){
+                        this.list = r.list;
+                        this.total = r.total;
+                    }
                 }else{
                     this.$message({
                         message: res.data.resultMsg,
@@ -57,9 +59,9 @@ export default {
                     })
                 }
             })
-            .catch(() => {
+            .catch(e => {
                 this.loading = false;
-                this.$message.error('未知错误！');
+                this.$message.error('未知错误！' + e);
             })
         }
     },
