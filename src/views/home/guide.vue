@@ -148,10 +148,10 @@ export default {
                     { required: true, message: '网址不能为空', trigger: 'blur' },
                 ],
                 labelId: [
-                    { required: true, message: '标签不能为空', trigger: 'blur' },
+                    { type: 'number', required: true, message: '标签不能为空', trigger: 'blur' },
                 ],
                 infoStatus: [
-                    { required: true, message: '状态不能为空', trigger: 'blur' },
+                    { type: 'number', required: true, message: '状态不能为空', trigger: 'blur' },
                 ],
             },
         }
@@ -236,7 +236,7 @@ export default {
                 infoSource: '',
                 infoAddress: '',
                 infoStatus: 0,
-                labelId: '',
+                labelId: 0,
                 relatedProIdList: [],
                 content: '',
                 infoId: 0,
@@ -325,6 +325,10 @@ export default {
         },
         save() {
             this.formdata.content = tinymce.activeEditor.getContent();
+            delete this.formdata.forwardNum;
+            delete this.formdata.likeNum;
+            delete this.formdata.commentNum;
+            
             this.formdata = Object.assign({}, this.formdata);
             this.$refs.form.validate((valid) => {
                 if(valid){
