@@ -213,9 +213,9 @@ export default {
                     })
                 }
             })
-            .catch(() => {
+            .catch(e => {
                 this.loading = false;
-                this.$message.error('未知错误！');
+                this.$message.error('未知错误----' + e);
             })
         },
         search() {
@@ -280,6 +280,9 @@ export default {
                     this.$message.error(res.data.resultMsg);
                 }
             })
+            .catch(e => {
+                this.$message.error('未知错误----' + e);
+            })
         },
         getGoodsList(query) {
             if(query != ''){
@@ -328,7 +331,7 @@ export default {
             delete this.formdata.forwardNum;
             delete this.formdata.likeNum;
             delete this.formdata.commentNum;
-            
+
             this.formdata = Object.assign({}, this.formdata);
             this.$refs.form.validate((valid) => {
                 if(valid){
@@ -340,10 +343,8 @@ export default {
         
                             if(this.formdata.infoId == 0){
                                 this.curPage = 1;
-                                this.getGuideList();
-                            }else{
-                                this.getGuideList();
                             }
+                            this.getGuideList();
                         }else{
                             if(res.data.resultMsg){
                                 this.$message.error(res.data.resultMsg);
@@ -352,8 +353,8 @@ export default {
                             }
                         }
                     })
-                    .catch(() => {
-                        this.$message.error('未知错误');
+                    .catch(e => {
+                        this.$message.error('未知错误----' + e);
                     })
                 }else{
                     this.$message.error('验证未通过');
