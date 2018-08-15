@@ -10,6 +10,10 @@ import routes from './routes'
 
 import axios from './http/http'
 
+axios.defaults.headers = {
+  'content-type': 'application/json',
+  'userId': 0,
+}
 Vue.prototype.$http = axios;
 
 Vue.use(ElementUI)
@@ -36,11 +40,8 @@ router.beforeEach((to, from, next) => {
 })
 
 new Vue({
-  //el: '#app',
-  //template: '<App/>',
   router,
   store,
-  //components: { App }
   render: h => h(App)
 }).$mount('#app')
 
