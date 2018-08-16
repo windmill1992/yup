@@ -22,7 +22,7 @@
                 <el-table-column prop="title" label="标题" min-width="180"></el-table-column>
                 <el-table-column prop="infoAddress" label="网址" min-width="180"></el-table-column>
                 <el-table-column prop="infoSource" label="来源" width="120"></el-table-column>
-                <el-table-column prop="labelNameList" label="类型" width="120">
+                <el-table-column prop="labelNameList" label="类型" width="200">
                     <template slot-scope="scope">
                         <p v-for="item in scope.row.labelNameList">{{item}}</p>
                     </template>
@@ -169,7 +169,7 @@ export default {
         getTags(pn, ps) {
             this.$http.post(`${baseUrl}/yup-rest/manage/label-list`, { pageIndex: pn, pageSize: ps })
             .then(res => {
-                if(res.data.resultCode == 200){
+                if(res.data.resultCode == 200 && res.data.resultData){
                     this.tagList = res.data.resultData.list;
                 }else{
                     if(res.data.resultMsg){
@@ -179,8 +179,8 @@ export default {
                     }
                 }
             })
-            .catch(() => {
-                this.$message.error('未知错误！');
+            .catch(e => {
+                this.$message.error('未知错误----'+ e);
             })
         },
         curChange(idx) {
@@ -200,17 +200,21 @@ export default {
             this.$http.post(`${baseUrl}/yup-rest/manage/info-list`, param)
             .then(res => {
                 this.loading = false;
-                if(res.data.resultCode == 200){
+                if(res.data.resultCode == 200 && res.data.resultData){
                     let r = res.data.resultData;
                     this.list = r.list;
                     this.total = r.total;
                 }else{
-                    this.$message({
-                        message: res.data.resultMsg,
-                        type: 'error',
-                        duration: 0,
-                        showClose: true,
-                    })
+                    if(res.data.resultMsg){
+                        this.$message({
+                            message: res.data.resultMsg,
+                            type: 'error',
+                            duration: 0,
+                            showClose: true,
+                        })
+                    }else{
+                        this.$message.error('服务器错误');
+                    }
                 }
             })
             .catch(e => {
