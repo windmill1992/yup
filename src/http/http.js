@@ -8,7 +8,7 @@
 import axios from 'axios'
 
 // axios 配置
-axios.defaults.timeout = 5000;
+axios.defaults.timeout = 10000;
 
 //添加请求拦截器
 
@@ -16,18 +16,11 @@ axios.defaults.timeout = 5000;
 axios.interceptors.request.use(
     config => {
 
-        // if(config.url.indexOf('-batch-delete')>0)
-        // {
-        //     config.headers['Content-Type'] = 'application/json';
-        // }else
         if(config.url.indexOf('-delete')>0){
             config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
         }else {
             config.headers['Content-Type'] = 'application/json';
         }
-
-        // config.headers.vAuthToken = sessionStorage.getItem("user");
-        // config.headers.client = `web`;
 
         return config;
     },
@@ -52,7 +45,6 @@ axios.interceptors.response.use(
                     })
             }
         }
-        // console.log(JSON.stringify(error));//console : Error: Request failed with status code 402
         return Promise.reject(error)
     });
 
